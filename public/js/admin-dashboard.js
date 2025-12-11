@@ -1623,6 +1623,12 @@ let contatoInterval = null;
 async function loadContato() {
     try {
         const token = localStorage.getItem('admin_token');
+        if (!token) {
+            console.error('Token não encontrado');
+            return;
+        }
+
+        console.log('📥 Carregando fichas de contato...');
         const response = await fetch(`${API_BASE}/contato`, {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -1630,10 +1636,13 @@ async function loadContato() {
         });
 
         if (!response.ok) {
-            throw new Error('Erro ao carregar fichas de contato');
+            const errorData = await response.json().catch(() => ({ error: 'Erro desconhecido' }));
+            console.error('Erro na resposta:', response.status, errorData);
+            throw new Error(errorData.error || 'Erro ao carregar fichas de contato');
         }
 
         const fichas = await response.json();
+        console.log(`✅ ${fichas.length} fichas carregadas`);
         displayContatoFichas(fichas);
 
         // Limpar intervalo anterior se existir
@@ -1651,9 +1660,14 @@ async function loadContato() {
             limparFichasExpiradas();
         }, 1000);
     } catch (error) {
-        console.error('Erro ao carregar fichas de contato:', error);
-        document.getElementById('contato-fichas-grid').innerHTML = 
-            '<p style="color: red;">Erro ao carregar fichas de contato. Tente novamente.</p>';
+        console.error('❌ Erro ao carregar fichas de contato:', error);
+        const grid = document.getElementById('contato-fichas-grid');
+        if (grid) {
+            grid.innerHTML = `<p style="color: red; grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                Erro ao carregar fichas de contato: ${error.message || 'Erro desconhecido'}<br>
+                <button onclick="loadContato()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #0e8d7f; color: white; border: none; border-radius: 5px; cursor: pointer;">Tentar Novamente</button>
+            </p>`;
+        }
     }
 }
 
@@ -1671,7 +1685,26 @@ function displayContatoFichas(fichas) {
 
 function createContatoCard(ficha) {
     const dataHora = formatDateTime(ficha.created_at);
-    const expiresAt = new Date(ficha.expires_at);
+    
+    // Verificar se expires_at existe e é válido
+    let expiresAt;
+    if (!ficha.expires_at) {
+        console.warn('Ficha sem expires_at:', ficha);
+        // Se não tiver expires_at, calcular agora (7 dias)
+        expiresAt = new Date();
+        expiresAt.setDate(expiresAt.getDate() + 7);
+        ficha.expires_at = expiresAt.toISOString().replace('T', ' ').substring(0, 19);
+    } else {
+        // Converter formato SQLite (YYYY-MM-DD HH:MM:SS) para Date
+        // Se já estiver em formato ISO, usar diretamente
+        if (ficha.expires_at.includes('T')) {
+            expiresAt = new Date(ficha.expires_at);
+        } else {
+            // Formato SQLite: YYYY-MM-DD HH:MM:SS -> converter para ISO
+            expiresAt = new Date(ficha.expires_at.replace(' ', 'T'));
+        }
+    }
+    
     const now = new Date();
     const timeLeft = expiresAt - now;
 
@@ -1709,7 +1742,28 @@ function updateContatoCounters() {
     const now = new Date();
 
     timers.forEach(timer => {
-        const expiresAt = new Date(timer.dataset.expires);
+        if (!timer.dataset.expires) {
+            timer.textContent = 'Data inválida';
+            return;
+        }
+        
+        let expiresAt;
+        const expiresStr = timer.dataset.expires;
+        
+        // Converter formato SQLite para Date
+        if (expiresStr.includes('T')) {
+            expiresAt = new Date(expiresStr);
+        } else {
+            // Formato SQLite: YYYY-MM-DD HH:MM:SS
+            expiresAt = new Date(expiresStr.replace(' ', 'T'));
+        }
+        
+        // Verificar se a data é válida
+        if (isNaN(expiresAt.getTime())) {
+            timer.textContent = 'Data inválida';
+            return;
+        }
+        
         const timeLeft = expiresAt - now;
 
         if (timeLeft <= 0) {

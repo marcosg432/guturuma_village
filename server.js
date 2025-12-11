@@ -162,15 +162,19 @@ function createTables() {
       message TEXT NOT NULL,
       read_status INTEGER DEFAULT 0,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-      expires_at DATETIME NOT NULL
+      expires_at DATETIME
     )
   `);
   
   // Adicionar coluna expires_at se não existir (para bancos antigos)
   try {
     db.run(`ALTER TABLE contact_messages ADD COLUMN expires_at DATETIME`);
+    console.log('✅ Coluna expires_at adicionada à tabela contact_messages');
   } catch (e) {
     // Coluna já existe, ignorar erro
+    if (!e.message || !e.message.includes('duplicate column')) {
+      console.log('ℹ️ Coluna expires_at já existe ou erro ao adicionar:', e.message);
+    }
   }
 
   // Tabela quartos
@@ -1533,28 +1537,67 @@ app.get('/api/reserva/:codigo', async (req, res) => {
 app.post('/api/contato', async (req, res) => {
   try {
     if (!db) {
+      console.error('❌ Banco de dados não disponível');
       return res.status(503).json({ error: 'Banco de dados não disponível' });
     }
 
     const { name, email, phone, message } = req.body;
+    console.log('📝 Recebendo ficha de contato:', { name, email, phone: phone || 'não informado' });
 
     if (!name || !email || !message) {
+      console.error('❌ Campos obrigatórios faltando');
       return res.status(400).json({ error: 'Campos obrigatórios: nome, email e mensagem' });
     }
 
     // Calcular data de expiração (7 dias a partir de agora)
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
+    // Formato SQLite: YYYY-MM-DD HH:MM:SS
     const expiresAtStr = expiresAt.toISOString().replace('T', ' ').substring(0, 19);
 
-    db.prepare(`
-      INSERT INTO contact_messages (name, email, phone, message, expires_at)
-      VALUES (?, ?, ?, ?, ?)
-    `).run(name, email, phone || null, message, expiresAtStr);
+    try {
+      // Verificar se a coluna expires_at existe, se não, adicionar
+      try {
+        const testStmt = db.prepare('SELECT expires_at FROM contact_messages LIMIT 1');
+        testStmt.step();
+        testStmt.free();
+      } catch (colError) {
+        if (colError.message && colError.message.includes('no such column')) {
+          console.log('⚠️ Coluna expires_at não existe, adicionando...');
+          try {
+            db.run(`ALTER TABLE contact_messages ADD COLUMN expires_at DATETIME`);
+            saveDatabase();
+            console.log('✅ Coluna expires_at adicionada com sucesso');
+          } catch (alterError) {
+            console.error('❌ Erro ao adicionar coluna:', alterError);
+          }
+        }
+      }
 
-    res.json({ success: true, message: 'Mensagem enviada com sucesso' });
+      // Inserir a ficha usando a função execute (já salva o banco automaticamente)
+      console.log('📝 Inserindo ficha:', { name, email, phone: phone || 'null', message: message.substring(0, 50) + '...', expiresAt: expiresAtStr });
+      
+      const result = execute(`
+        INSERT INTO contact_messages (name, email, phone, message, expires_at)
+        VALUES (?, ?, ?, ?, ?)
+      `, [name, email, phone || null, message, expiresAtStr]);
+      
+      console.log('✅ Ficha inserida com ID:', result.lastInsertRowid);
+      
+      console.log('✅ Ficha de contato salva com sucesso!');
+      
+      res.json({ success: true, message: 'Mensagem enviada com sucesso' });
+    } catch (dbError) {
+      console.error('❌ Erro ao salvar ficha de contato:', dbError);
+      console.error('Erro completo:', dbError.message);
+      if (dbError.stack) {
+        console.error('Stack:', dbError.stack);
+      }
+      res.status(500).json({ error: 'Erro ao salvar mensagem. Por favor, tente novamente.' });
+    }
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error('❌ Erro geral no endpoint /api/contato:', error);
+    res.status(500).json({ error: error.message || 'Erro desconhecido ao processar mensagem' });
   }
 });
 
@@ -1564,26 +1607,34 @@ app.post('/api/contato', async (req, res) => {
 app.get('/api/admin/contato', authenticateToken, async (req, res) => {
   try {
     if (!db) {
+      console.error('❌ Banco de dados não disponível');
       return res.status(503).json({ error: 'Banco de dados não disponível' });
     }
 
     // Apagar fichas expiradas antes de listar
     const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
-    db.prepare(`DELETE FROM contact_messages WHERE expires_at < ?`).run(now);
-    saveDatabase();
+    console.log('🧹 Limpando fichas expiradas antes de', now);
+    
+    try {
+      execute(`DELETE FROM contact_messages WHERE expires_at < ?`, [now]);
+    } catch (deleteError) {
+      console.error('⚠️ Erro ao limpar fichas expiradas (continuando):', deleteError.message);
+    }
 
     // Buscar todas as fichas não expiradas
+    console.log('📋 Buscando fichas de contato não expiradas...');
     const fichas = queryAll(`
       SELECT id, name, email, phone, message, created_at, expires_at
       FROM contact_messages
-      WHERE expires_at >= ?
+      WHERE expires_at >= ? OR expires_at IS NULL
       ORDER BY created_at DESC
     `, [now]);
 
-    res.json(fichas);
+    console.log(`✅ Encontradas ${fichas.length} fichas de contato`);
+    res.json(fichas || []);
   } catch (error) {
-    console.error('Erro ao listar fichas de contato:', error);
-    res.status(500).json({ error: error.message });
+    console.error('❌ Erro ao listar fichas de contato:', error);
+    res.status(500).json({ error: error.message || 'Erro desconhecido ao listar fichas' });
   }
 });
 
@@ -1595,12 +1646,18 @@ app.post('/api/admin/contato/limpar-expiradas', authenticateToken, async (req, r
     }
 
     const now = new Date().toISOString().replace('T', ' ').substring(0, 19);
-    const result = db.prepare(`DELETE FROM contact_messages WHERE expires_at < ?`).run(now);
-    saveDatabase();
+    
+    // Contar quantas fichas serão deletadas
+    const countBefore = queryAll(`SELECT COUNT(*) as count FROM contact_messages WHERE expires_at < ?`, [now]);
+    const countToDelete = countBefore[0]?.count || 0;
+    
+    // Deletar fichas expiradas
+    execute(`DELETE FROM contact_messages WHERE expires_at < ?`, [now]);
 
-    res.json({ success: true, deleted: result.changes });
+    console.log(`🗑️ ${countToDelete} fichas expiradas removidas`);
+    res.json({ success: true, deleted: countToDelete });
   } catch (error) {
-    console.error('Erro ao limpar fichas expiradas:', error);
+    console.error('❌ Erro ao limpar fichas expiradas:', error);
     res.status(500).json({ error: error.message });
   }
 });
