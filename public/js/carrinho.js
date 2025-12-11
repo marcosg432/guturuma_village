@@ -1,0 +1,420 @@
+// Sistema de Carrinho
+
+// Dados das suítes (mesmo do reserva-nova.js)
+const suites = [
+    {
+        id: 'casa-1',
+        nome: 'Casa Sobrado 2 – Conforto e Espaço com 3 Quartos',
+        preco: 250,
+        capacidadeAdultos: 8,
+        capacidadeCriancas: 4,
+        area: '100 m²',
+        vista: 'Condomínio',
+        descricao: 'Acomode-se nesta casa de temporada com 100 m², ar-condicionado e varanda. Possui 3 quartos separados, sala de estar, cozinha completa com geladeira e forno, além de 4 banheiros. Toalhas e roupa de cama fornecidas. Ótima opção para famílias que precisam de conforto e praticidade.',
+        comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV de tela plana', 'Utensílios de cozinha', 'Aceita pets', 'Estacionamento gratuito'],
+        imagens: [
+            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'casa-2',
+        nome: 'Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias',
+        preco: 250,
+        capacidadeAdultos: 8,
+        capacidadeCriancas: 4,
+        area: '100 m²',
+        vista: 'Condomínio',
+        descricao: 'Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila. Inclui roupas de cama e toalhas. Estacionamento no local e Wi-Fi gratuito.',
+        comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Cozinha equipada', 'Sala de estar', 'Ar-condicionado', 'TV', 'Wi-Fi gratuito', 'Estacionamento gratuito'],
+        imagens: [
+            'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'casa-3',
+        nome: 'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros',
+        preco: 250,
+        capacidadeAdultos: 10,
+        capacidadeCriancas: 5,
+        area: '100 m²',
+        vista: 'Condomínio',
+        descricao: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
+        comodidades: ['100 m²', '3 quartos', '5 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Recepção 24h'],
+        imagens: [
+            'https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'casa-4',
+        nome: 'Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos',
+        preco: 250,
+        capacidadeAdultos: 8,
+        capacidadeCriancas: 4,
+        area: '100 m²',
+        vista: 'Condomínio',
+        descricao: 'Casa completa com 100 m², ar-condicionado em todos ambientes, sala de estar, cozinha completa com geladeira e micro-ondas, além de 4 banheiros. Ideal para grupos e famílias que buscam conforto e privacidade. Inclui toalhas e roupa de cama.',
+        comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado individual', 'Cozinha completa', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Utensílios de cozinha'],
+        imagens: [
+            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'harmonia',
+        nome: 'Quarto Deluxe com Cama Queen-size',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '35 m²',
+        vista: 'Vista para o jardim',
+        descricao: 'Conforto e elegância em um ambiente acolhedor, perfeita para sua estadia. Ideal para casais ou pequenas famílias.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo'],
+        imagens: [
+            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'orquidea',
+        nome: 'Suíte Orquídea Premium',
+        preco: 150,
+        capacidadeAdultos: 4,
+        capacidadeCriancas: 2,
+        area: '45 m²',
+        vista: 'Vista para a piscina',
+        descricao: 'Luxo e funcionalidade combinados, com vista privilegiada e comodidades exclusivas. Perfeita para famílias.',
+        comodidades: ['Wi-Fi', 'TV 55"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
+        imagens: [
+            'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'imperial',
+        nome: 'Suíte Imperial Master',
+        preco: 150,
+        capacidadeAdultos: 6,
+        capacidadeCriancas: 3,
+        area: '80 m²',
+        vista: 'Vista para o mar',
+        descricao: 'O ápice do luxo, com vista panorâmica e todas as comodidades de um resort de primeira linha. Experiência única e inesquecível.',
+        comodidades: ['Wi-Fi', 'TV 65"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Hidromassagem', 'Minibar'],
+        imagens: [
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'premium-vista',
+        nome: 'Quarto Deluxe com Cama Queen-size',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '45 m²',
+        vista: 'Vista para o mar',
+        descricao: 'Vista privilegiada para o mar com todas as comodidades para uma estadia inesquecível.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
+        imagens: [
+            'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'deluxe',
+        nome: 'Suíte Deluxe com Cama Queen-size',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '48 m²',
+        vista: 'Vista para o jardim',
+        descricao: 'Elegância e sofisticação em um ambiente espaçoso com acabamentos de primeira linha.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
+        imagens: [
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'executiva',
+        nome: 'Suíte Executiva',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '42 m²',
+        vista: 'Vista para a piscina',
+        descricao: 'Perfeita para viagens de negócios, com espaço de trabalho e todas as comodidades necessárias.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Mesa de trabalho'],
+        imagens: [
+            'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'familia',
+        nome: 'Suíte Família',
+        preco: 150,
+        capacidadeAdultos: 4,
+        capacidadeCriancas: 2,
+        area: '65 m²',
+        vista: 'Vista para o mar',
+        descricao: 'Espaço amplo e confortável ideal para famílias, com múltiplos ambientes e comodidades especiais.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Cama extra'],
+        imagens: [
+            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+        ]
+    },
+    {
+        id: 'romantica',
+        nome: 'Suíte Romântica',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '40 m²',
+        vista: 'Vista para o jardim',
+        descricao: 'Ambiente especial para casais, com decoração elegante e atmosfera acolhedora para momentos únicos.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Decoração especial'],
+        imagens: [
+            'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+        ]
+    }
+];
+
+// Carregar dados do localStorage
+let carrinhoData = {
+    checkIn: null,
+    checkOut: null,
+    adultos: 2,
+    criancas: 0,
+    suiteSelecionada: null,
+    totalNoites: 0,
+    valorTotal: 0,
+    nomeCompleto: '',
+    telefone: '',
+    email: ''
+};
+
+// Inicialização
+document.addEventListener('DOMContentLoaded', function() {
+    carregarDadosCarrinho();
+    preencherCarrinho();
+    verificarBotaoReservar();
+    
+    // Event listener para o botão de reservar
+    document.getElementById('btn-reservar-agora').addEventListener('click', function() {
+        processarReserva();
+    });
+});
+
+function carregarDadosCarrinho() {
+    // Tentar carregar do localStorage
+    const dadosSalvos = localStorage.getItem('carrinhoData');
+    if (dadosSalvos) {
+        try {
+            const dados = JSON.parse(dadosSalvos);
+            carrinhoData = {
+                checkIn: dados.checkIn ? new Date(dados.checkIn) : null,
+                checkOut: dados.checkOut ? new Date(dados.checkOut) : null,
+                adultos: dados.adultos || 2,
+                criancas: dados.criancas || 0,
+                suiteSelecionada: dados.suiteSelecionada || null,
+                totalNoites: dados.totalNoites || 0,
+                valorTotal: dados.valorTotal || 0,
+                nomeCompleto: dados.nomeCompleto || '',
+                telefone: dados.telefone || '',
+                email: dados.email || ''
+            };
+        } catch (e) {
+            console.error('Erro ao carregar dados do carrinho:', e);
+        }
+    }
+}
+
+function preencherCarrinho() {
+    // Preencher cabeçalho
+    document.getElementById('carrinho-checkin-data').textContent = 
+        carrinhoData.checkIn ? formatarData(carrinhoData.checkIn) : '-';
+    document.getElementById('carrinho-checkout-data').textContent = 
+        carrinhoData.checkOut ? formatarData(carrinhoData.checkOut) : '-';
+    document.getElementById('carrinho-noites-total').textContent = 
+        carrinhoData.totalNoites > 0 ? `${carrinhoData.totalNoites} ${carrinhoData.totalNoites === 1 ? 'noite' : 'noites'}` : '-';
+    
+    // Preencher informações do hóspede
+    document.getElementById('carrinho-nome-hospede').textContent = 
+        carrinhoData.nomeCompleto || '-';
+    document.getElementById('carrinho-telefone-hospede').textContent = 
+        carrinhoData.telefone || '-';
+    document.getElementById('carrinho-email-hospede').textContent = 
+        carrinhoData.email || '-';
+    
+    // Preencher informações da suíte
+    if (carrinhoData.suiteSelecionada) {
+        const suite = suites.find(s => s.id === carrinhoData.suiteSelecionada);
+        if (suite) {
+            console.log('📸 Carregando suíte:', suite.nome, 'ID:', suite.id);
+            document.getElementById('suite-nome-carrinho').textContent = suite.nome;
+            document.getElementById('suite-ocupacao').textContent = 
+                `Máx: ${suite.capacidadeAdultos} adultos e ${suite.capacidadeCriancas} criança(s)`;
+            document.getElementById('suite-area').textContent = suite.area;
+            document.getElementById('suite-vista').textContent = suite.vista;
+            document.getElementById('suite-descricao').textContent = suite.descricao;
+            
+            // Preencher imagem
+            const imgElement = document.getElementById('suite-imagem-principal');
+            if (imgElement && suite.imagens && suite.imagens.length > 0) {
+                imgElement.src = suite.imagens[0];
+                imgElement.alt = suite.nome;
+                imgElement.style.display = 'block';
+                console.log('✅ Imagem carregada:', suite.imagens[0]);
+            } else {
+                console.error('❌ Elemento de imagem não encontrado ou sem imagens');
+            }
+        } else {
+            console.error('❌ Suíte não encontrada:', carrinhoData.suiteSelecionada);
+        }
+    } else {
+        document.getElementById('suite-nome-carrinho').textContent = '-';
+        document.getElementById('suite-ocupacao').textContent = '-';
+        document.getElementById('suite-area').textContent = '-';
+        document.getElementById('suite-vista').textContent = '-';
+        document.getElementById('suite-descricao').textContent = '-';
+    }
+    
+    // Preencher preços
+    if (carrinhoData.suiteSelecionada && carrinhoData.totalNoites > 0) {
+        const suite = suites.find(s => s.id === carrinhoData.suiteSelecionada);
+        if (suite) {
+            // Recalcular valor total se necessário
+            if (!carrinhoData.valorTotal || carrinhoData.valorTotal === 0) {
+                carrinhoData.valorTotal = suite.preco * carrinhoData.totalNoites;
+                console.log('💰 Valor recalculado:', carrinhoData.valorTotal, '(', suite.preco, 'x', carrinhoData.totalNoites, ')');
+            }
+            const precoPorNoite = suite.preco.toFixed(2).replace('.', ',');
+            const valorTotal = carrinhoData.valorTotal.toFixed(2).replace('.', ',');
+            
+            document.getElementById('preco-por-noite').textContent = `R$ ${precoPorNoite}`;
+            document.getElementById('total-estadia').textContent = `R$ ${valorTotal}`;
+            
+            console.log('✅ Preços atualizados - Por noite:', precoPorNoite, 'Total:', valorTotal);
+        } else {
+            console.error('❌ Suíte não encontrada para calcular preços');
+            document.getElementById('preco-por-noite').textContent = 'R$ 0,00';
+            document.getElementById('total-estadia').textContent = 'R$ 0,00';
+        }
+    } else {
+        console.log('⚠️ Dados incompletos - Suite:', carrinhoData.suiteSelecionada, 'Noites:', carrinhoData.totalNoites);
+        document.getElementById('preco-por-noite').textContent = 'R$ 0,00';
+        document.getElementById('total-estadia').textContent = 'R$ 0,00';
+    }
+    
+    // Preencher hóspedes
+    document.getElementById('info-adultos').textContent = carrinhoData.adultos;
+    document.getElementById('info-criancas').textContent = carrinhoData.criancas || 0;
+    
+    // Exibir hóspedes extras se existirem
+    const infoExtras = document.getElementById('info-hospedes-extras');
+    const infoExtrasValor = document.getElementById('info-hospedes-extras-valor');
+    if (infoExtras && infoExtrasValor && carrinhoData.hospedesExtras > 0) {
+        infoExtras.style.display = 'flex';
+        infoExtrasValor.textContent = `${carrinhoData.hospedesExtras} (R$ ${(carrinhoData.valorHospedesExtras || 0).toFixed(2).replace('.', ',')})`;
+    } else if (infoExtras) {
+        infoExtras.style.display = 'none';
+    }
+}
+
+function formatarData(data) {
+    return data.toLocaleDateString('pt-BR');
+}
+
+function verificarBotaoReservar() {
+    const btn = document.getElementById('btn-reservar-agora');
+    const valido = carrinhoData.checkIn && 
+                   carrinhoData.checkOut && 
+                   carrinhoData.suiteSelecionada &&
+                   carrinhoData.totalNoites > 0;
+    
+    btn.disabled = !valido;
+}
+
+async function processarReserva() {
+    if (!carrinhoData.checkIn || !carrinhoData.checkOut || !carrinhoData.suiteSelecionada || carrinhoData.totalNoites <= 0) {
+        alert('Por favor, complete todas as informações antes de reservar.');
+        return;
+    }
+    
+    if (!carrinhoData.nomeCompleto || !carrinhoData.email || !carrinhoData.telefone) {
+        alert('Por favor, preencha todas as informações do hóspede.');
+        return;
+    }
+    
+    const suite = suites.find(s => s.id === carrinhoData.suiteSelecionada);
+    const btnReservar = document.getElementById('btn-reservar-agora');
+    
+    // Desabilitar botão durante o processamento
+    btnReservar.disabled = true;
+    btnReservar.textContent = 'Processando...';
+    
+    try {
+        // 1. Criar reserva no backend
+        const dadosReserva = {
+            nome_completo: carrinhoData.nomeCompleto,
+            email: carrinhoData.email,
+            telefone: carrinhoData.telefone,
+            categoria: suite.nome,
+            check_in: carrinhoData.checkIn.toISOString().split('T')[0],
+            check_out: carrinhoData.checkOut.toISOString().split('T')[0],
+            num_hospedes: carrinhoData.adultos + carrinhoData.criancas + (carrinhoData.hospedesExtras || 0),
+            adultos: carrinhoData.adultos,
+            criancas: carrinhoData.criancas,
+            hospedes_extras: carrinhoData.hospedesExtras || 0,
+            valor_hospedes_extras: carrinhoData.valorHospedesExtras || 0,
+            total_noites: carrinhoData.totalNoites,
+            valor_total: carrinhoData.valorTotal,
+            valor_quarto: suite.preco,
+            metodo_pagamento: 'Pendente',
+            status: 'Pendente'
+        };
+        
+        const response = await fetch('/api/reserva', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dadosReserva)
+        });
+        
+        const result = await response.json();
+        
+        if (!response.ok || !result.success) {
+            alert(result.error || 'Erro ao processar reserva. Tente novamente.');
+            btnReservar.disabled = false;
+            btnReservar.textContent = 'Reservar Agora';
+            return;
+        }
+        
+        // 2. Redirecionar para a ficha da reserva
+        localStorage.removeItem('carrinhoData');
+        window.location.href = `/ficha/${result.codigo}`;
+        
+    } catch (error) {
+        console.error('Erro ao processar reserva:', error);
+        alert('Erro de conexão. Verifique sua internet e tente novamente.');
+        btnReservar.disabled = false;
+        btnReservar.textContent = 'Reservar Agora';
+    }
+}
+

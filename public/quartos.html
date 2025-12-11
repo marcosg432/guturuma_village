@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quartos - Guturuma Village</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/quartos.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#0e8d7f" stroke="#0e8d7f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" fill="#0e8d7f" stroke="#0e8d7f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" fill="#0e8d7f" stroke="#0e8d7f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Guturuma Village
+                </h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Início</a></li>
+                <li><a href="/quartos" class="active">Quartos</a></li>
+                <li><a href="/reserva">Reserva</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/contato">Contato</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Banner - GATURAMA VILLAGE -->
+    <section class="rooms-hero" style="background: #000000; min-height: 400px; display: flex; align-items: center; justify-content: center; padding: 4rem 2rem;">
+        <div class="container" style="text-align: center; color: #FFFFFF;">
+            <!-- Logo com duas casas -->
+            <div style="margin-bottom: 2rem; display: flex; justify-content: center; align-items: flex-end; gap: 15px;">
+                <svg width="200" height="120" viewBox="0 0 200 120" style="display: block;">
+                    <!-- Casa esquerda (maior, mais alta) -->
+                    <!-- Base da casa esquerda -->
+                    <rect x="20" y="70" width="50" height="30" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Telhado da casa esquerda -->
+                    <path d="M 15 70 L 45 40 L 75 70" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Janela da casa esquerda (dividida em 4) -->
+                    <rect x="32" y="78" width="26" height="18" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="45" y1="78" x2="45" y2="96" stroke="#FFFFFF" stroke-width="2"/>
+                    <line x1="32" y1="87" x2="58" y2="87" stroke="#FFFFFF" stroke-width="2"/>
+                    
+                    <!-- Linha curva conectando as casas -->
+                    <path d="M 70 100 Q 100 85 130 100" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round"/>
+                    
+                    <!-- Casa direita (menor, mais baixa) -->
+                    <!-- Base da casa direita -->
+                    <rect x="130" y="75" width="45" height="25" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Telhado da casa direita -->
+                    <path d="M 127 75 L 152.5 50 L 178 75" fill="none" stroke="#FFFFFF" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <!-- Janela da casa direita (dividida em 4) -->
+                    <rect x="138" y="82" width="22" height="15" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="149" y1="82" x2="149" y2="97" stroke="#FFFFFF" stroke-width="2"/>
+                    <line x1="138" y1="89.5" x2="160" y2="89.5" stroke="#FFFFFF" stroke-width="2"/>
+                </svg>
+            </div>
+            
+            <!-- Título GATURAMA -->
+            <h1 style="font-size: 4rem; font-weight: 300; letter-spacing: 4px; margin: 0 0 0.5rem 0; font-family: 'Georgia', 'Times New Roman', serif; color: #FFFFFF;">
+                GATURAMA
+            </h1>
+            
+            <!-- Subtítulo VILLAGE -->
+            <h2 style="font-size: 1.8rem; font-weight: 300; letter-spacing: 6px; margin: 0 0 3rem 0; font-family: 'Georgia', 'Times New Roman', serif; color: #FFFFFF;">
+                VILLAGE
+            </h2>
+            
+            <!-- Informações de contato -->
+            <p style="font-size: 1rem; font-weight: 400; letter-spacing: 1px; margin: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; color: #FFFFFF;">
+                Rua Número 1, nº200 (67)99228-2850
+            </p>
+        </div>
+    </section>
+
+    <!-- Casas Exclusivas -->
+    <section class="suites-grid-section">
+        <div class="container">
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #2c3e50;">Casas Exclusivas – Propriedade Secundária</h2>
+            <div class="suites-grid">
+                <!-- Casa 1 -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=1200&h=800&fit=crop" alt="Casa 1">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Casa Sobrado 2 – Conforto e Espaço com 3 Quartos</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">Acomode-se nesta casa de temporada com 100 m², ar-condicionado e varanda. Possui 3 quartos separados, sala de estar, cozinha completa com geladeira e forno, além de 4 banheiros. Toalhas e roupa de cama fornecidas. Ótima opção para famílias que precisam de conforto e praticidade.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">250</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=casa-1" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casa 2 -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1200&h=800&fit=crop" alt="Casa 2">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila. Inclui roupas de cama e toalhas. Estacionamento no local e Wi-Fi gratuito.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">250</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=casa-2" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casa 3 -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=1200&h=800&fit=crop" alt="Casa 3">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Casa Ampla e Confortável – 3 Quartos e 5 Banheiros</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">250</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=casa-3" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Casa 4 -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1200&h=800&fit=crop" alt="Casa 4">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">Casa completa com 100 m², ar-condicionado em todos ambientes, sala de estar, cozinha completa com geladeira e micro-ondas, além de 4 banheiros. Ideal para grupos e famílias que buscam conforto e privacidade. Inclui toalhas e roupa de cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">250</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=casa-4" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Suítes Grid -->
+    <section class="suites-grid-section">
+        <div class="container">
+            <div class="suites-grid">
+                <!-- Suíte Harmonia -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=1200&h=800&fit=crop" alt="Suíte Harmonia">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Quarto Deluxe com Cama Queen-size</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 21H16M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">60 m² • WiFi Gratuito • Banheiro privativo. Tamanho 60 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=harmonia" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Orquídea Premium -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=1200&h=800&fit=crop" alt="Suíte Orquídea Premium">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Suíte</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">30 m² • WiFi Gratuito • Banheiro privativo. Tamanho 30 m². 1 cama de solteiro e 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui 1 quarto e 1 banheiro com chuveiro walk-in. A suíte oferece um sofá. A unidade possui 2 camas.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=orquidea" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Imperial Master -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1200&h=800&fit=crop" alt="Suíte Imperial Master">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Suíte</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 21H16M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 10H22" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de solteiro e 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade tem 2 camas.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=imperial" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Premium Vista -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1200&h=800&fit=crop" alt="Suíte Premium Vista">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Quarto Deluxe com Cama Queen-size</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 10H22" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">60 m² • WiFi Gratuito • Banheiro privativo. Tamanho 60 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade tem 1 cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=premium-vista" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Deluxe -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1200&h=800&fit=crop" alt="Suíte Deluxe">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Suíte Deluxe com Cama Queen-size</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 21H16M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo. Área da Casa: 30 m². 1 cama de casal grande. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=deluxe" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Executiva -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1200&h=800&fit=crop" alt="Suíte Executiva">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Quarto Duplo</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 21H16M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=executiva" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Família -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=1200&h=800&fit=crop" alt="Suíte Família">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Suíte Deluxe com Cama Queen-size</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M2 10H22" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo. Área da Casa: 30 m². 1 cama de casal grande. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=familia" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Suíte Romântica -->
+                <div class="suite-card">
+                    <div class="suite-card-image">
+                        <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1200&h=800&fit=crop" alt="Suíte Romântica">
+                    </div>
+                    <div class="suite-card-content">
+                        <h2 class="suite-card-title">Suíte de 1 Quarto</h2>
+                        <div class="suite-card-icons">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.84 4.61C20.3292 4.099 19.7228 3.69364 19.0554 3.41708C18.3879 3.14052 17.6725 2.99817 16.95 2.99817C16.2275 2.99817 15.5121 3.14052 14.8446 3.41708C14.1772 3.69364 13.5708 4.099 13.06 4.61L12 5.67L10.94 4.61C9.9083 3.57831 8.50903 2.99871 7.05 2.99871C5.59096 2.99871 4.19169 3.57831 3.16 4.61C2.1283 5.64169 1.54871 7.04097 1.54871 8.5C1.54871 9.95903 2.1283 11.3583 3.16 12.39L4.22 13.45L12 21.23L19.78 13.45L20.84 12.39C21.351 11.8792 21.7564 11.2728 22.0329 10.6054C22.3095 9.93789 22.4518 9.22248 22.4518 8.5C22.4518 7.77752 22.3095 7.0621 22.0329 6.39464C21.7564 5.72718 21.351 5.12075 20.84 4.61Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5 12H19M5 12L2 9M5 12L2 15M19 12L22 9M19 12L22 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 21H16M12 17V21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <p class="suite-card-description">25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade oferece 1 cama.</p>
+                        <div class="suite-card-footer">
+                            <div class="suite-price">
+                                <span class="price-value">R$ <span class="price-amount">150</span> /noite</span>
+                            </div>
+                            <a href="/suite.html?tipo=romantica" class="suite-btn-details">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Premium -->
+    <footer class="footer-premium">
+        <div class="footer-premium-container">
+            <!-- Linha superior decorativa -->
+            <div class="footer-divider"></div>
+            
+            <div class="footer-premium-content">
+                <!-- Seção 1: Identidade do Resort -->
+                <div class="footer-premium-identity">
+                    <h3 class="footer-premium-title">Guturuma Village</h3>
+                    <p class="footer-premium-tagline">Seu refúgio exclusivo de luxo no em Corumbá</p>
+                </div>
+
+                <!-- Seção 2: Links Úteis -->
+                <div class="footer-premium-links">
+                    <div class="footer-links-column">
+                        <a href="/" class="footer-link">Início</a>
+                        <a href="/quartos" class="footer-link">Quartos</a>
+                        <a href="/sobre" class="footer-link">Estrutura</a>
+                    </div>
+                    <div class="footer-links-column">
+                        <a href="/reserva" class="footer-link">Reservas</a>
+                        <a href="/contato" class="footer-link">Contato</a>
+                    </div>
+                </div>
+
+                <!-- Seção 3: Contato Premium -->
+                <div class="footer-premium-contact">
+                    <div class="footer-contact-item">
+                        <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7292C21.7209 20.9842 21.5573 21.2126 21.3523 21.3992C21.1473 21.5857 20.9053 21.7262 20.6429 21.8117C20.3805 21.8971 20.1036 21.9256 19.83 21.895C16.7428 21.5356 13.787 20.5301 11.19 18.96C8.77382 17.5546 6.72533 15.5061 5.32 13.09C3.74996 10.4922 2.74449 7.53587 2.385 4.448C2.35441 4.17451 2.38284 3.89757 2.46821 3.63519C2.55359 3.37282 2.69398 3.1309 2.88043 2.926C3.06687 2.7211 3.29522 2.55757 3.55015 2.44607C3.80508 2.33457 4.08079 2.27766 4.36 2.279H7.36C7.96282 2.279 8.54113 2.51857 8.96351 2.94096C9.3859 3.36334 9.62547 3.94165 9.62547 4.544C9.62547 5.14635 9.3859 5.72466 8.96351 6.14704C8.54113 6.56943 7.96282 6.809 7.36 6.809C7.36 8.5 7.89 10.09 8.79 11.39C9.69 12.69 10.89 13.89 12.19 14.79C13.49 15.69 15.09 16.22 16.78 16.22C17.3824 16.22 17.9607 16.4596 18.3831 16.8819C18.8054 17.3043 19.045 17.8826 19.045 18.485V21.485C19.045 22.0874 18.8054 22.6657 18.3831 23.0881C17.9607 23.5104 17.3824 23.75 16.78 23.75H13.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>(71) 99845-3271</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="L22 6L12 13L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>contato.brisaresort@gmail.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Corumbá — Brasil</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 4: Redes Sociais -->
+            <div class="footer-premium-social">
+                <a href="#" class="footer-social-link" aria-label="Instagram">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M16 11.37C16.1234 12.2022 15.9813 13.0522 15.5938 13.799C15.2063 14.5458 14.5932 15.1514 13.8416 15.5297C13.0901 15.9079 12.2384 16.0396 11.4078 15.9059C10.5771 15.7723 9.80976 15.3801 9.21484 14.7852C8.61993 14.1902 8.22768 13.4229 8.09402 12.5922C7.96035 11.7616 8.09202 10.9099 8.47029 10.1584C8.84856 9.40685 9.45414 8.79374 10.2009 8.40624C10.9477 8.01874 11.7978 7.87659 12.63 8C13.4789 8.12588 14.2649 8.52146 14.8717 9.1283C15.4785 9.73514 15.8741 10.5211 16 11.37Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M17.5 6.5H17.51" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="#" class="footer-social-link" aria-label="Facebook">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M18 2H15C13.6739 2 12.4021 2.52678 11.4645 3.46447C10.5268 4.40215 10 5.67392 10 7V10H7V14H10V22H14V14H17L18 10H14V7C14 6.73478 14.1054 6.48043 14.2929 6.29289C14.4804 6.10536 14.7348 6 15 6H18V2Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+                <a href="https://wa.me/5571998453271" class="footer-social-link" aria-label="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382C17.382 14.282 15.388 12.651 15.038 12.382C14.698 12.113 14.458 12.023 14.178 12.293C13.908 12.563 12.978 13.413 12.748 13.673C12.518 13.933 12.288 13.993 11.968 13.723C11.648 13.453 10.598 12.923 9.348 11.833C8.398 10.983 7.708 9.983 7.478 9.653C7.248 9.323 7.418 9.153 7.598 8.973C7.768 8.793 7.938 8.543 8.108 8.333C8.278 8.123 8.348 7.963 8.478 7.723C8.608 7.483 8.548 7.273 8.458 7.093C8.368 6.913 7.508 5.203 7.258 4.593C7.018 3.993 6.768 4.073 6.578 4.063C6.388 4.053 6.168 4.053 5.958 4.053C5.748 4.053 5.478 4.123 5.238 4.383C4.998 4.643 4.428 5.193 4.428 6.183C4.428 7.173 5.208 8.123 5.318 8.293C5.428 8.463 6.788 10.893 9.138 12.143C10.558 12.873 11.678 13.273 12.498 13.563C13.118 13.783 13.678 13.963 14.078 14.103C14.508 14.253 14.888 14.213 15.198 14.143C15.508 14.073 16.478 13.473 16.698 12.823C16.918 12.173 16.918 11.583 16.828 11.423C16.738 11.263 16.648 11.273 16.468 11.333C16.288 11.393 14.828 11.893 14.528 11.983C14.228 12.073 14.008 12.113 13.908 12.283C13.808 12.453 13.878 12.633 13.968 12.783C14.058 12.933 14.148 13.073 14.238 13.213C14.328 13.353 14.418 13.493 14.528 13.643C14.638 13.793 14.728 13.923 14.848 14.103C14.968 14.283 15.058 14.363 15.198 14.393C15.338 14.423 15.508 14.393 15.668 14.323C15.828 14.253 16.688 13.823 16.978 13.363C17.278 12.893 17.478 12.423 17.538 12.003C17.598 11.583 17.598 11.213 17.558 11.093C17.518 10.973 17.472 10.923 17.472 10.883L17.472 14.382Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Linha final de direitos autorais -->
+            <div class="footer-premium-copyright">
+                <p>&copy; 2024 Guturuma Village. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Carregar preços dinamicamente
+        document.addEventListener('DOMContentLoaded', async function() {
+            try {
+                const response = await fetch('/api/precos');
+                if (response.ok) {
+                    const precos = await response.json();
+                    const cards = document.querySelectorAll('.suite-card');
+                    
+                    cards.forEach(card => {
+                        const title = card.querySelector('.suite-card-title').textContent.trim();
+                        const priceElement = card.querySelector('.price-amount');
+                        
+                        if (precos[title] && priceElement) {
+                            priceElement.textContent = precos[title].toFixed(0);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error('Erro ao carregar preços:', error);
+            }
+        });
+    </script>
+</body>
+</html>
