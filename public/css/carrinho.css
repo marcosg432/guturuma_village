@@ -206,7 +206,7 @@
 }
 
 .preco-item:last-of-type {
-    border-bottom: 2px solid #40E0D0;
+    border-bottom: 2px solid #0F1F4B;
     margin-bottom: 1rem;
 }
 
@@ -222,7 +222,7 @@
 }
 
 .preco-valor-grande {
-    color: #40E0D0;
+    color: #0F1F4B;
     font-size: 1.8rem;
     font-weight: 700;
 }
@@ -261,7 +261,7 @@
 .btn-reservar-agora {
     width: 100%;
     padding: 1.2rem;
-    background: #40E0D0;
+    background: #0F1F4B;
     color: white;
     border: none;
     border-radius: 10px;
@@ -273,7 +273,7 @@
 }
 
 .btn-reservar-agora:hover:not(:disabled) {
-    background: #20B2AA;
+    background: #0F1F4B;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(64, 224, 208, 0.4);
 }

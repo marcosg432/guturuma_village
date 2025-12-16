@@ -789,7 +789,7 @@ function updateResumo() {
     if (document.getElementById('suite-img-summary')) {
         document.getElementById('suite-img-summary').src = suite.image;
         document.getElementById('suite-name-summary').textContent = reservaData.categoria;
-        document.getElementById('suite-category-summary').textContent = 'Guturuma Village';
+        document.getElementById('suite-category-summary').textContent = 'village Residences';
         document.getElementById('checkin-summary').textContent = formatDate(reservaData.check_in);
         document.getElementById('checkout-summary').textContent = formatDate(reservaData.check_out);
         document.getElementById('nights-summary').textContent = `${noites} ${noites === 1 ? 'noite' : 'noites'}`;

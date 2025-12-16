@@ -455,7 +455,7 @@ function mostrarFichaQuarto(quarto, reservas) {
             return `
                 <div class="reserva-ficha-item" style="background: white; padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <div class="reserva-ficha-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e0e0e0;">
-                        <span class="reserva-ficha-codigo" style="font-weight: 600; color: #40E0D0;">Reserva #${reserva.codigo}</span>
+                        <span class="reserva-ficha-codigo" style="font-weight: 600; color: #0F1F4B;">Reserva #${reserva.codigo}</span>
                         <span class="reserva-status ${statusClass}">${statusDisplay}</span>
                     </div>
                     <div class="reserva-ficha-info" style="display: flex; flex-direction: column; gap: 0.5rem;">
@@ -605,7 +605,7 @@ function createQuartoListaCard(quarto) {
                     <h3 style="margin: 0 0 0.5rem 0; color: #2c3e50; font-size: 1.2rem;">${quarto.categoria}</h3>
                     <p style="margin: 0; color: #666; font-size: 0.9rem;">ID: ${quarto.id}</p>
                 </div>
-                <div style="color: #40E0D0; font-weight: 600;">
+                <div style="color: #0F1F4B; font-weight: 600;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M9 18L15 12L9 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -677,7 +677,7 @@ function mostrarFichaQuartoLista(quarto, reservas) {
             hospedesHTML += '</div>';
             
             return `
-                <div class="reserva-ficha-item" style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid #40E0D0;">
+                <div class="reserva-ficha-item" style="background: #f8f9fa; padding: 1.5rem; border-radius: 10px; margin-bottom: 1rem; border-left: 4px solid #0F1F4B;">
                     <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
                         <div>
                             <div style="font-weight: 600; color: #2c3e50; margin-bottom: 0.5rem;">${reserva.nome_completo || 'Não informado'}</div>
@@ -700,7 +700,7 @@ function mostrarFichaQuartoLista(quarto, reservas) {
                         </div>
                         <div>
                             <div style="font-size: 0.85rem; color: #999; margin-bottom: 0.25rem;">Valor</div>
-                            <div style="font-weight: 600; color: #40E0D0;">R$ ${parseFloat(reserva.valor_total || 0).toFixed(2)}</div>
+                            <div style="font-weight: 600; color: #0F1F4B;">R$ ${parseFloat(reserva.valor_total || 0).toFixed(2)}</div>
                         </div>
                     </div>
                 </div>
@@ -1665,7 +1665,7 @@ async function loadContato() {
         if (grid) {
             grid.innerHTML = `<p style="color: red; grid-column: 1 / -1; text-align: center; padding: 2rem;">
                 Erro ao carregar fichas de contato: ${error.message || 'Erro desconhecido'}<br>
-                <button onclick="loadContato()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #0e8d7f; color: white; border: none; border-radius: 5px; cursor: pointer;">Tentar Novamente</button>
+                <button onclick="loadContato()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: #0F1F4B; color: white; border: none; border-radius: 5px; cursor: pointer;">Tentar Novamente</button>
             </p>`;
         }
     }
@@ -1716,11 +1716,11 @@ function createContatoCard(ficha) {
             </div>
             <div style="margin-bottom: 1rem;">
                 <p style="margin: 0.5rem 0; color: #555;">
-                    <strong>Email:</strong> <a href="mailto:${escapeHtml(ficha.email)}" style="color: #0e8d7f;">${escapeHtml(ficha.email)}</a>
+                    <strong>Email:</strong> <a href="mailto:${escapeHtml(ficha.email)}" style="color: #0F1F4B;">${escapeHtml(ficha.email)}</a>
                 </p>
                 ${ficha.phone ? `
                     <p style="margin: 0.5rem 0; color: #555;">
-                        <strong>Telefone:</strong> <a href="tel:${escapeHtml(ficha.phone)}" style="color: #0e8d7f;">${escapeHtml(ficha.phone)}</a>
+                        <strong>Telefone:</strong> <a href="tel:${escapeHtml(ficha.phone)}" style="color: #0F1F4B;">${escapeHtml(ficha.phone)}</a>
                     </p>
                 ` : ''}
                 <p style="margin: 0.5rem 0; color: #555;">

@@ -317,13 +317,13 @@ function createTables() {
 
 function insertDefaultData() {
   // Criar usuário administrador principal (Murilo Dias)
-  const emailMurilo = 'murilodiasms15@gmail.com';
+  const emailMurilo = 'luizmarcosramires@hotmail.com';
   const muriloUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailMurilo.toLowerCase()]);
   if (!muriloUser) {
     const hashedPassword = bcrypt.hashSync('Boob.08.', 10);
     const result = execute('INSERT INTO users_admin (name, email, password) VALUES (?, ?, ?)', 
       ['Murilo Dias', emailMurilo, hashedPassword]);
-    console.log('👤 Usuário admin criado: murilodiasms15@gmail.com / Boob.08.');
+    console.log('👤 Usuário admin criado: luizmarcosramires@hotmail.com / Boob.08.');
     console.log('📝 ID do usuário criado:', result.lastInsertRowid);
     
     // Verificar se foi criado corretamente
@@ -338,7 +338,7 @@ function insertDefaultData() {
     const hashedPassword = bcrypt.hashSync('Boob.08.', 10);
     execute('UPDATE users_admin SET name = ?, password = ? WHERE LOWER(email) = ?', 
       ['Murilo Dias', hashedPassword, emailMurilo.toLowerCase()]);
-    console.log('👤 Usuário admin atualizado: murilodiasms15@gmail.com');
+    console.log('👤 Usuário admin atualizado: luizmarcosramires@hotmail.com');
     
     // Verificar se foi atualizado corretamente
     const verifyUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailMurilo.toLowerCase()]);
@@ -348,13 +348,13 @@ function insertDefaultData() {
   }
 
   // Criar usuário admin padrão (backup) se não existir
-  const emailAdmin = 'admin@brisaimperial.com';
+  const emailAdmin = 'luizmarcosramires@hotmail.com';
   const adminResult = queryOne('SELECT COUNT(*) as count FROM users_admin WHERE LOWER(email) = ?', [emailAdmin.toLowerCase()]);
   if (adminResult && adminResult.count === 0) {
     const hashedPassword = bcrypt.hashSync('admin123', 10);
     execute('INSERT INTO users_admin (name, email, password) VALUES (?, ?, ?)', 
       ['Administrador', emailAdmin, hashedPassword]);
-    console.log('👤 Usuário admin backup criado: admin@brisaimperial.com / admin123');
+    console.log('👤 Usuário admin backup criado: luizmarcosramires@hotmail.com / admin123');
   }
 
   // Apagar todas as reservas antigas para o novo sistema funcionar corretamente
@@ -1363,7 +1363,7 @@ app.post('/api/reserva', async (req, res) => {
     if (transporter) {
     try {
       await transporter.sendMail({
-        from: 'murilodiasms15@gmail.com',
+        from: 'luizmarcosramires@hotmail.com',
         to: email,
         subject: `Confirmação de Reserva - ${codigo}`,
         html: `

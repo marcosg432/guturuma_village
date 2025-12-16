@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     
                     // Feedback visual
                     e.target.textContent = '✓ Selecionado';
-                    e.target.style.backgroundColor = '#40E0D0';
+                    e.target.style.backgroundColor = '#0F1F4B';
                     e.target.style.cursor = 'default';
                     
                     console.log('Suíte selecionada com sucesso (delegation)!');
@@ -820,7 +820,7 @@ function criarCardSuite(suite) {
             
             // Feedback visual
             btnEscolher.textContent = '✓ Selecionado';
-            btnEscolher.style.backgroundColor = '#40E0D0';
+            btnEscolher.style.backgroundColor = '#0F1F4B';
             btnEscolher.style.cursor = 'default';
             
             console.log('Suíte selecionada com sucesso!');
@@ -1168,7 +1168,7 @@ function atualizarModalHospedesExtras() {
 const style = document.createElement('style');
 style.textContent = `
     .suite-card.selecionado {
-        border: 3px solid #40E0D0;
+        border: 3px solid #0F1F4B;
         box-shadow: 0 8px 30px rgba(64, 224, 208, 0.3);
     }
     

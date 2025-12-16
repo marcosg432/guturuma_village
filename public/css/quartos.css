@@ -117,6 +117,7 @@
     margin: 0 0 0.75rem 0;
     line-height: 1.3;
     letter-spacing: -0.01em;
+    font-family: 'Playfair Display', serif;
 }
 
 /* Suite Card Icons */
@@ -161,7 +162,7 @@
 .price-value {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #1a1a1a;
+    color: #0F1F4B;
     line-height: 1.2;
     white-space: nowrap;
 }
@@ -169,13 +170,13 @@
 .price-amount {
     font-size: 1.5rem;
     font-weight: 700;
-    color: #0e8d7f;
+    color: #0F1F4B;
     letter-spacing: -0.02em;
 }
 
 /* Button */
 .suite-btn-details {
-    background: #0e8d7f;
+    background: #0F1F4B;
     color: #ffffff;
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
@@ -484,7 +485,7 @@
 }
 
 .carousel-indicator.active {
-    background: #0e8d7f;
+    background: #0F1F4B;
 }
 
 /* Responsividade para Página Individual de Suíte */

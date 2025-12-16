@@ -6,8 +6,8 @@
 }
 
 :root {
-    --azul-turquesa: #40E0D0;
-    --azul-turquesa-escuro: #20B2AA;
+    --azul-turquesa: #0F1F4B;
+    --azul-turquesa-escuro: #0F1F4B;
     --dourado: #D4AF37;
     --dourado-claro: #F0E68C;
     --branco: #FFFFFF;
@@ -101,7 +101,7 @@ img {
     left: 0;
     width: 0;
     height: 2px;
-    background: var(--dourado);
+    background: var(--azul-turquesa-escuro);
     transition: width 0.3s ease;
 }
 
@@ -1428,7 +1428,7 @@ section {
 .btn-agendar-agora {
     display: inline-block;
     padding: 0.85rem 2.5rem;
-    background: #40E0D0;
+    background: #0F1F4B;
     color: white;
     text-decoration: none;
     border-radius: 8px;
@@ -1440,7 +1440,7 @@ section {
 }
 
 .btn-agendar-agora:hover {
-    background: #20B2AA;
+    background: #0F1F4B;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(64, 224, 208, 0.4);
 }
