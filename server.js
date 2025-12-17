@@ -404,16 +404,8 @@ function insertDefaultData() {
     console.log('👤 Usuário admin backup criado: luizmarcosramires@hotmail.com / admin123');
   }
 
-  // Apagar todas as reservas antigas para o novo sistema funcionar corretamente
-  try {
-    const reservasAntigas = queryAll('SELECT COUNT(*) as count FROM reservas');
-    if (reservasAntigas && reservasAntigas.length > 0) {
-      execute('DELETE FROM reservas');
-      console.log('🗑️ Todas as reservas antigas foram removidas');
-    }
-  } catch (error) {
-    console.error('Erro ao remover reservas antigas:', error);
-  }
+  // Código removido: Não apagar reservas automaticamente ao iniciar o servidor
+  // As reservas devem ser gerenciadas pelo sistema de status automático
 
   // Garantir que temos apenas 1 quarto por categoria (remover duplicatas)
   try {
