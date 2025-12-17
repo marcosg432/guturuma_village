@@ -58,13 +58,19 @@ let SQL; // Será inicializado em initDatabase
 // MIDDLEWARES DE SEGURANÇA
 // ==========================================
 
+// Servir arquivos estáticos PRIMEIRO - antes de qualquer middleware
+app.use(express.static('public', {
+  etag: false,
+  lastModified: false
+}));
+
 // Trust proxy para rate limiting funcionar corretamente atrás de proxies
 app.set('trust proxy', 1);
 
-// Headers de Segurança (Helmet)
-app.use(securityHeaders);
+// Headers de Segurança (Helmet) - DESABILITADO TEMPORARIAMENTE para corrigir o site
+// app.use(securityHeaders);
 
-// CORS configurável via ambiente (por padrão ainda permite todas as origens, mas pode ser configurado)
+// CORS configurável via ambiente
 const corsOrigin = process.env.CORS_ORIGIN || '*';
 app.use(cors({
   origin: corsOrigin === '*' ? '*' : corsOrigin.split(','),
@@ -77,8 +83,14 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
-// Sanitização de inputs (prevenir XSS)
-app.use(sanitizeRequest);
+// Sanitização de inputs DESABILITADA TEMPORARIAMENTE para arquivos estáticos funcionarem
+// app.use((req, res, next) => {
+//   if (req.path.startsWith('/css/') || req.path.startsWith('/js/') || 
+//       req.path.startsWith('/images/') || req.path.match(/\.(css|js|jpg|jpeg|png|gif|svg|ico|woff|woff2|ttf|eot)$/i)) {
+//     return next();
+//   }
+//   sanitizeRequest(req, res, next);
+// });
 
 // Headers anti-cache para atualização automática (apenas para desenvolvimento)
 if (process.env.NODE_ENV !== 'production') {
@@ -89,11 +101,6 @@ if (process.env.NODE_ENV !== 'production') {
     next();
   });
 }
-
-app.use(express.static('public', {
-  etag: false,
-  lastModified: false
-}));
 
 // Inicializar banco de dados SQLite
 async function initDatabase() {
@@ -690,13 +697,23 @@ let transporter = null;
 
 // ROTAS ESTÁTICAS
 
-// Home - sempre servir o arquivo estático index.html
+// Home - com suporte a páginas dinâmicas
 app.get('/', async (req, res) => {
   try {
-    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    if (!db) {
+      return res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    }
+
+    const page = queryOne('SELECT html_content FROM pages WHERE page_name = ?', ['home']);
+
+    if (page && page.html_content) {
+      res.setHeader('Content-Type', 'text/html');
+      res.send(page.html_content);
+    } else {
+      res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    }
   } catch (error) {
-    console.error('Erro ao servir index.html:', error);
-    res.status(500).send('Erro ao carregar página');
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
   }
 });
 

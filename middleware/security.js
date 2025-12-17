@@ -58,24 +58,15 @@ const adminApiLimiter = rateLimit ? rateLimit({
 
 /**
  * Headers de Segurança com Helmet
+ * Configuração mínima para não interferir com o site
  */
 const securityHeaders = helmet ? helmet({
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'"],
-      styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
-      fontSrc: ["'self'", "https://fonts.gstatic.com"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-      imgSrc: ["'self'", "data:", "https:"],
-      connectSrc: ["'self'"],
-    },
-  },
-  crossOriginEmbedderPolicy: false, // Permite recursos externos se necessário
-  hsts: {
-    maxAge: 31536000, // 1 ano
-    includeSubDomains: true,
-    preload: true
-  }
+  contentSecurityPolicy: false, // Desabilitado para evitar conflitos
+  crossOriginEmbedderPolicy: false,
+  hsts: false,
+  noSniff: true,
+  xssFilter: true,
+  frameguard: { action: 'deny' }
 }) : ((req, res, next) => {
   // Fallback básico de headers de segurança
   res.setHeader('X-Content-Type-Options', 'nosniff');
