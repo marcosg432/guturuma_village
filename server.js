@@ -690,23 +690,13 @@ let transporter = null;
 
 // ROTAS ESTÁTICAS
 
-// Home - com suporte a páginas dinâmicas
+// Home - sempre servir o arquivo estático index.html
 app.get('/', async (req, res) => {
   try {
-    if (!db) {
-      return res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    }
-
-    const page = queryOne('SELECT html_content FROM pages WHERE page_name = ?', ['home']);
-
-    if (page && page.html_content) {
-      res.setHeader('Content-Type', 'text/html');
-      res.send(page.html_content);
-    } else {
-      res.sendFile(path.join(__dirname, 'public', 'index.html'));
-    }
-  } catch (error) {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  } catch (error) {
+    console.error('Erro ao servir index.html:', error);
+    res.status(500).send('Erro ao carregar página');
   }
 });
 
