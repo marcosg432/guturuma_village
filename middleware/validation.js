@@ -133,7 +133,8 @@ function validateLogin(req, res, next) {
  */
 function validateReserva(req, res, next) {
   // Usar nome_completo que é o campo usado no server.js, mas aceitar também 'nome' para compatibilidade
-  const { nome_completo, nome, email, telefone, check_in, checkin, checkout, check_out, adultos, criancas, quarto_id } = req.body;
+  // Aceitar categoria OU quarto_id (o sistema usa categoria para buscar o quarto)
+  const { nome_completo, nome, email, telefone, check_in, checkin, checkout, check_out, adultos, criancas, quarto_id, categoria } = req.body;
   const reservaNome = nome_completo || nome;
   const reservaCheckIn = check_in || checkin;
   const reservaCheckOut = check_out || checkout;
@@ -171,7 +172,8 @@ function validateReserva(req, res, next) {
     errors.push('Número de crianças inválido');
   }
   
-  if (!quarto_id || typeof quarto_id !== 'string') {
+  // Aceitar categoria OU quarto_id (o carrinho envia categoria)
+  if ((!quarto_id || typeof quarto_id !== 'string') && (!categoria || typeof categoria !== 'string')) {
     errors.push('Quarto é obrigatório');
   }
   
