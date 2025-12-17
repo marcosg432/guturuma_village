@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo - village Residences Resort</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body class="admin-page">
+    <div class="admin-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#0F1F4B" stroke="#0F1F4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" fill="#0F1F4B" stroke="#0F1F4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" fill="#0F1F4B" stroke="#0F1F4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    village Residences
+                </h2>
+                <p>Painel Administrativo</p>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-tab="reservas">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span> Reservas
+                </a>
+                <a href="#" class="nav-item" data-tab="quartos">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span> Quartos Reservados
+                </a>
+                <a href="#" class="nav-item" data-tab="historico">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 20V10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 20V4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M6 20V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span> Histórico
+                </a>
+                <a href="#" class="nav-item" data-tab="usuarios">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 11C11.2091 11 13 9.20914 13 7C13 4.79086 11.2091 3 9 3C6.79086 3 5 4.79086 5 7C5 9.20914 6.79086 11 9 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M23 21V19C22.9993 18.1137 22.7044 17.2528 22.1614 16.5523C21.6184 15.8519 20.8581 15.3516 20 15.13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M16 3.13C16.8604 3.35031 17.623 3.85071 18.1676 4.55232C18.7122 5.25392 19.0078 6.11683 19.0078 7.005C19.0078 7.89318 18.7122 8.75608 18.1676 9.45769C17.623 10.1593 16.8604 10.6597 16 10.88" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span> Gerenciar Acesso
+                </a>
+                <a href="#" class="nav-item" data-tab="agendar">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                    </span> Agendar Manualmente
+                </a>
+                <a href="#" class="nav-item" data-tab="renda">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M3 3V21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M7 16L12 11L16 15L21 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M21 10V3H14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span> Renda do Mês
+                </a>
+                <a href="#" class="nav-item" data-tab="contato">
+                    <span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="L22 6L12 13L2 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span> Contato
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="btn-logout" class="btn-logout">Sair</button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="page-title">Reservas</h1>
+                <div class="user-info">
+                    <span id="user-name">Admin</span>
+                </div>
+            </header>
+
+            <!-- Tab: Reservas -->
+            <div id="tab-reservas" class="tab-content active">
+                <div class="filters">
+                    <div class="filter-group">
+                        <label>Status:</label>
+                        <select id="filter-status">
+                            <option value="">Todos</option>
+                            <option value="Paga">Paga</option>
+                            <option value="Pendente">Pendente</option>
+                        </select>
+                    </div>
+                    <button id="btn-refresh-reservas" class="btn-refresh">Atualizar</button>
+                </div>
+                <div class="reservas-grid" id="reservas-grid">
+                    <!-- Reservas serão carregadas aqui -->
+                </div>
+            </div>
+
+            <!-- Tab: Quartos Reservados -->
+            <div id="tab-quartos" class="tab-content">
+                <div class="quartos-container" id="quartos-container">
+                    <!-- Quartos serão carregados aqui -->
+                </div>
+            </div>
+
+            <!-- Tab: Histórico -->
+            <div id="tab-historico" class="tab-content">
+                <div class="historico-search" style="margin-bottom: 1.5rem;">
+                    <input type="text" id="input-busca-historico" placeholder="Buscar por código, telefone ou e-mail..." style="padding: 10px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 14px; width: 100%; max-width: 500px; margin-right: 10px;">
+                    <button id="btn-buscar-historico" class="btn-primary" style="padding: 10px 20px;">Buscar</button>
+                </div>
+                <div class="historico-container" id="historico-container">
+                    <!-- Histórico será carregado aqui -->
+                </div>
+            </div>
+
+            <!-- Tab: Gerenciar Acesso -->
+            <div id="tab-usuarios" class="tab-content">
+                <div class="usuarios-header">
+                    <h2>Usuários do Painel</h2>
+                    <button id="btn-add-usuario" class="btn-primary">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 6px;">
+                            <path d="M12 5V19M5 12H19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        </svg>
+                        Adicionar Usuário
+                    </button>
+                </div>
+                <div class="usuarios-list" id="usuarios-list">
+                    <!-- Usuários serão carregados aqui -->
+                </div>
+            </div>
+
+            <!-- Tab: Agendar Manualmente -->
+            <div id="tab-agendar" class="tab-content">
+                <div class="agendar-form-container">
+                    <h2>Agendar Hospedagem Manualmente</h2>
+                    <form id="form-agendar" class="form-agendar">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Nome Completo *</label>
+                                <input type="text" id="agendar-nome" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Telefone *</label>
+                                <input type="tel" id="agendar-telefone" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>E-mail *</label>
+                                <input type="email" id="agendar-email" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Suíte *</label>
+                                <select id="agendar-suite" required>
+                                    <option value="">Selecione...</option>
+                                    <option value="casa-1">Casa Sobrado 2 – Conforto e Espaço com 3 Quartos</option>
+                                    <option value="casa-2">Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias</option>
+                                    <option value="casa-3">Casa Ampla e Confortável – 3 Quartos e 5 Banheiros</option>
+                                    <option value="casa-4">Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos</option>
+                                    <option value="harmonia">Quarto Deluxe com Cama Queen-size</option>
+                                    <option value="orquidea">Suíte Orquídea Premium</option>
+                                    <option value="imperial">Suíte Imperial Master</option>
+                                    <option value="premium-vista">Quarto Deluxe com Cama Queen-size (Premium Vista)</option>
+                                    <option value="deluxe">Suíte Deluxe com Cama Queen-size</option>
+                                    <option value="executiva">Suíte Executiva</option>
+                                    <option value="familia">Suíte Família</option>
+                                    <option value="romantica">Suíte Romântica</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Check-in *</label>
+                                <input type="date" id="agendar-checkin" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Check-out *</label>
+                                <input type="date" id="agendar-checkout" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Adultos *</label>
+                                <input type="number" id="agendar-adultos" min="1" value="2" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Crianças</label>
+                                <input type="number" id="agendar-criancas" min="0" value="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Valor Total *</label>
+                                <input type="number" id="agendar-valor" step="0.01" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Forma de Pagamento</label>
+                                <select id="agendar-pagamento">
+                                    <option value="Dinheiro">Dinheiro</option>
+                                    <option value="Cartão">Cartão</option>
+                                    <option value="PIX">PIX</option>
+                                    <option value="Transferência">Transferência</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">💾 Salvar Reserva</button>
+                            <button type="reset" class="btn-secondary">Limpar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Tab: Renda do Mês -->
+            <div id="tab-renda" class="tab-content">
+                <div class="renda-container">
+                    <div class="renda-filters">
+                        <label>Mês:</label>
+                        <input type="month" id="renda-mes" value="">
+                        <button id="btn-atualizar-renda" class="btn-primary">Atualizar</button>
+                    </div>
+                    <div class="renda-stats" id="renda-stats">
+                        <!-- Estatísticas serão carregadas aqui -->
+                    </div>
+                    <div class="renda-historico" id="renda-historico">
+                        <!-- Histórico mensal será carregado aqui -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab: Contato -->
+            <div id="tab-contato" class="tab-content">
+                <div class="contato-container">
+                    <div class="contato-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+                        <h2 style="margin: 0;">Fichas de Contato</h2>
+                        <button id="btn-refresh-contato" class="btn-refresh">Atualizar</button>
+                    </div>
+                    <div class="contato-fichas-grid" id="contato-fichas-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 1.5rem;">
+                        <!-- Fichas serão carregadas aqui -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal de Detalhes da Reserva -->
+    <div id="modal-reserva" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2>Detalhes da Reserva</h2>
+            <form id="form-editar-reserva">
+                <input type="hidden" id="reserva-id">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nome Completo *</label>
+                        <input type="text" id="edit-nome" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone *</label>
+                        <input type="tel" id="edit-telefone" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>E-mail *</label>
+                        <input type="email" id="edit-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Status *</label>
+                        <select id="edit-status" required>
+                            <option value="Paga">Paga</option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Cancelada">Cancelada</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Check-in *</label>
+                        <input type="date" id="edit-checkin" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Check-out *</label>
+                        <input type="date" id="edit-checkout" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Suíte *</label>
+                        <input type="text" id="edit-suite" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Noites</label>
+                        <input type="number" id="edit-noites" readonly>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Adultos</label>
+                        <input type="number" id="edit-adultos" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label>Crianças</label>
+                        <input type="number" id="edit-criancas" min="0">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Valor Total *</label>
+                        <input type="number" id="edit-valor" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Forma de Pagamento</label>
+                        <select id="edit-pagamento">
+                            <option value="Dinheiro">Dinheiro</option>
+                            <option value="Cartão">Cartão</option>
+                            <option value="PIX">PIX</option>
+                            <option value="Transferência">Transferência</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group" id="motivo-cancelamento-group" style="display: none;">
+                    <label>Motivo do Cancelamento</label>
+                    <textarea id="edit-motivo-cancelamento" rows="3"></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Salvar Alterações</button>
+                    <button type="button" id="btn-cancelar-reserva" class="btn-secondary">Cancelar Reserva</button>
+                    <button type="button" class="btn-secondary modal-close">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de Adicionar Usuário -->
+    <div id="modal-usuario" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <h2 id="modal-usuario-title">Adicionar Usuário</h2>
+            <form id="form-usuario">
+                <input type="hidden" id="usuario-id">
+                <div class="form-group">
+                    <label>Nome Completo *</label>
+                    <input type="text" id="usuario-nome" required>
+                </div>
+                <div class="form-group">
+                    <label>E-mail *</label>
+                    <input type="email" id="usuario-email" required>
+                </div>
+                <div class="form-group">
+                    <label>Senha *</label>
+                    <input type="password" id="usuario-senha" required>
+                    <small>Deixe em branco para manter a senha atual (ao editar)</small>
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Salvar</button>
+                    <button type="button" class="btn-secondary modal-close">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="/js/admin-dashboard.js"></script>
+</body>
+</html>
+

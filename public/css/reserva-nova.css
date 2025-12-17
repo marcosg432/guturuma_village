@@ -1,0 +1,790 @@
+/* Estilos da Nova Página de Reserva */
+
+.reserva-nova-section {
+    background: #f8f9fa;
+    padding-bottom: 3rem;
+    position: relative;
+}
+
+.container-reserva {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    position: relative;
+}
+
+/* Bloco Calendário */
+.bloco-calendario {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.bloco-titulo {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.campos-datas {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.campo-data {
+    display: flex;
+    flex-direction: column;
+}
+
+.campo-data label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.campo-data input {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+}
+
+.campo-data input:focus {
+    outline: none;
+    border-color: #40E0D0;
+    box-shadow: 0 0 0 3px rgba(64, 224, 208, 0.1);
+}
+
+/* Calendário */
+.calendario-container {
+    margin-top: 2rem;
+    display: none; /* Escondido por padrão */
+}
+
+.calendario-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.btn-mes {
+    background: #40E0D0;
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-mes:hover {
+    background: #20B2AA;
+    transform: scale(1.1);
+}
+
+.meses-titulos {
+    display: flex;
+    gap: 3rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.calendario-meses {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.calendario-mes {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 0.5rem;
+}
+
+.dia-semana {
+    text-align: center;
+    font-weight: 600;
+    color: #7f8c8d;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.dia-calendario {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #2c3e50;
+    background: white;
+    min-height: 40px;
+}
+
+.dia-calendario:hover:not(.dia-desabilitado):not(.dia-selecionado) {
+    background: #f0f0f0;
+    border-color: #40E0D0;
+}
+
+.dia-desabilitado {
+    color: #ccc;
+    cursor: not-allowed;
+    background: #f8f9fa;
+}
+
+.dia-selecionado {
+    background: #40E0D0;
+    color: white;
+    border-color: #40E0D0;
+    font-weight: 700;
+}
+
+.dia-faixa {
+    background: rgba(64, 224, 208, 0.2);
+    border-color: #40E0D0;
+}
+
+.dia-hoje {
+    border-color: #20B2AA;
+    font-weight: 700;
+}
+
+/* Bloco Hóspedes */
+.bloco-hospedes {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.hospedes-selecao {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+}
+
+.hospede-item {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.hospede-item label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 1rem;
+}
+
+.campo-hospede {
+    padding: 1rem;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    width: 100%;
+}
+
+.campo-hospede:focus {
+    outline: none;
+    border-color: #40E0D0;
+    box-shadow: 0 0 0 3px rgba(64, 224, 208, 0.1);
+}
+
+.campo-hospede:invalid:not(:placeholder-shown) {
+    border-color: #e74c3c;
+}
+
+.campo-hospede:valid:not(:placeholder-shown) {
+    border-color: #27ae60;
+}
+
+.mensagem-erro {
+    color: #e74c3c;
+    font-size: 0.85rem;
+    display: none;
+    margin-top: 0.25rem;
+}
+
+.mensagem-erro.ativo {
+    display: block;
+}
+
+.contador {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.btn-contador {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #40E0D0;
+    background: white;
+    color: #40E0D0;
+    border-radius: 8px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    pointer-events: auto;
+    position: relative;
+    z-index: 10;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-contador:hover:not(:disabled) {
+    background: #40E0D0;
+    color: white;
+}
+
+.btn-contador:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.contador-valor {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    min-width: 50px;
+    text-align: center;
+}
+
+.mensagem-capacidade {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    border-radius: 10px;
+    display: none;
+    font-weight: 500;
+}
+
+.mensagem-capacidade.erro {
+    background: #fee;
+    color: #c33;
+    border: 1px solid #fcc;
+    display: block;
+}
+
+.mensagem-capacidade.sucesso {
+    background: #efe;
+    color: #3c3;
+    border: 1px solid #cfc;
+    display: block;
+}
+
+/* Bloco Suítes */
+.bloco-suites {
+    background: white;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.suites-lista {
+    display: grid;
+    gap: 2rem;
+}
+
+.suite-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    gap: 0;
+}
+
+.suite-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.suite-imagens {
+    position: relative;
+    height: 100%;
+    min-height: 300px;
+}
+
+.suite-imagem-principal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.suite-miniaturas {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.suite-miniatura {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.suite-miniatura:hover,
+.suite-miniatura.ativa {
+    border-color: #40E0D0;
+    transform: scale(1.1);
+}
+
+.suite-conteudo {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.suite-nome {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    font-weight: 700;
+    margin: 0;
+}
+
+.suite-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    color: #7f8c8d;
+    font-size: 0.95rem;
+}
+
+.suite-info-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.suite-descricao {
+    color: #555;
+    line-height: 1.6;
+    flex-grow: 1;
+}
+
+.suite-comodidades {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.comodidade-tag {
+    background: #f0f0f0;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    color: #2c3e50;
+}
+
+.suite-preco {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #40E0D0;
+    margin: 0.5rem 0;
+}
+
+.suite-preco span {
+    font-size: 1rem;
+    color: #7f8c8d;
+    font-weight: 400;
+}
+
+.btn-escolher {
+    padding: 1rem 2rem;
+    background: #40E0D0;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.btn-escolher:hover {
+    background: #20B2AA;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(64, 224, 208, 0.4);
+}
+
+/* Estilos do carrinho lateral removidos - não são mais necessários */
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .suite-card {
+        grid-template-columns: 1fr;
+    }
+
+    .suite-imagens {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .reserva-nova-section {
+        padding-top: 80px;
+    }
+
+    .container-reserva {
+        padding: 1rem;
+    }
+
+    .bloco-calendario,
+    .bloco-hospedes,
+    .bloco-suites {
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+
+    .bloco-titulo {
+        font-size: clamp(1.5rem, 5vw, 1.8rem);
+        margin-bottom: 1.5rem;
+    }
+
+    .campos-datas {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .campo-data input {
+        padding: 0.85rem;
+        font-size: clamp(0.95rem, 3.5vw, 1rem);
+    }
+
+    .calendario-meses {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .calendario-header {
+        margin-bottom: 1rem;
+    }
+
+    .meses-titulos {
+        gap: 1rem;
+        font-size: clamp(0.95rem, 3.5vw, 1.2rem);
+        flex-direction: column;
+    }
+
+    .btn-mes {
+        width: 35px;
+        height: 35px;
+        font-size: 1.25rem;
+    }
+
+    .dia-calendario {
+        min-height: 35px;
+        font-size: clamp(0.85rem, 3vw, 0.95rem);
+    }
+
+    .hospedes-selecao {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .hospede-item label {
+        font-size: clamp(0.95rem, 3.5vw, 1rem);
+    }
+
+    .campo-hospede {
+        padding: 0.85rem;
+        font-size: clamp(0.95rem, 3.5vw, 1rem);
+    }
+
+    .btn-contador {
+        width: 35px;
+        height: 35px;
+        font-size: 1.25rem;
+    }
+
+    .contador-valor {
+        font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+    }
+
+    .suite-card {
+        grid-template-columns: 1fr;
+    }
+
+    .suite-imagens {
+        height: 250px;
+        min-height: 250px;
+    }
+
+    .suite-imagem-principal {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+
+    .suite-conteudo {
+        padding: 1.5rem;
+    }
+
+    .suite-nome {
+        font-size: clamp(1.5rem, 5vw, 1.8rem);
+    }
+
+    .suite-info {
+        font-size: clamp(0.85rem, 3vw, 0.95rem);
+        gap: 1rem;
+    }
+
+    .suite-descricao {
+        font-size: clamp(0.9rem, 3.5vw, 1rem);
+    }
+
+    .suite-preco {
+        font-size: clamp(1.25rem, 4.5vw, 1.5rem);
+    }
+
+    .btn-escolher {
+        padding: 0.85rem 1.5rem;
+        font-size: clamp(0.95rem, 3.5vw, 1rem);
+    }
+
+    .btn-finalizar {
+        padding: 0.85rem 2rem;
+        font-size: clamp(0.95rem, 3.5vw, 1rem);
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-reserva {
+        padding: 0.75rem;
+    }
+
+    .bloco-calendario,
+    .bloco-hospedes,
+    .bloco-suites {
+        padding: 1.25rem;
+        border-radius: 12px;
+    }
+
+    .bloco-titulo {
+        font-size: clamp(1.35rem, 4.5vw, 1.5rem);
+        margin-bottom: 1.25rem;
+    }
+
+    .campo-data input {
+        padding: 0.75rem;
+        font-size: clamp(0.9rem, 3vw, 0.95rem);
+    }
+
+    .dia-calendario {
+        min-height: 32px;
+        font-size: clamp(0.8rem, 2.5vw, 0.85rem);
+        padding: 0.25rem;
+    }
+
+    .btn-mes {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+    }
+
+    .hospede-item {
+        gap: 0.75rem;
+    }
+
+    .campo-hospede {
+        padding: 0.75rem;
+        font-size: clamp(0.9rem, 3vw, 0.95rem);
+    }
+
+    .btn-contador {
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+    }
+
+    .suite-card {
+        border-radius: 12px;
+    }
+
+    .suite-imagens {
+        height: 220px;
+        min-height: 220px;
+    }
+
+    .suite-conteudo {
+        padding: 1.25rem;
+    }
+
+    .suite-nome {
+        font-size: clamp(1.35rem, 4.5vw, 1.5rem);
+    }
+
+    .suite-info {
+        font-size: clamp(0.8rem, 2.5vw, 0.85rem);
+    }
+
+    .suite-descricao {
+        font-size: clamp(0.85rem, 3vw, 0.9rem);
+    }
+
+    .suite-preco {
+        font-size: clamp(1.15rem, 4vw, 1.25rem);
+    }
+
+    .btn-escolher {
+        padding: 0.75rem 1.25rem;
+        font-size: clamp(0.9rem, 3vw, 0.95rem);
+    }
+
+    .btn-finalizar {
+        padding: 0.75rem 1.5rem;
+        font-size: clamp(0.9rem, 3vw, 0.95rem);
+    }
+}
+
+/* Estilos dos campos de informações do hóspede já estão dentro de .hospede-item */
+
+/* Bloco Resumo */
+.bloco-resumo {
+    background: transparent;
+    border-radius: 0;
+    padding: 2.5rem 0;
+    box-shadow: none;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.btn-finalizar {
+    display: inline-block;
+    padding: 0.85rem 2.5rem;
+    background: linear-gradient(135deg, #40E0D0 0%, #20B2AA 100%);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(64, 224, 208, 0.3), 
+                0 0 20px rgba(64, 224, 208, 0.1);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-finalizar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.btn-finalizar:hover::before {
+    left: 100%;
+}
+
+.btn-finalizar:hover {
+    background: linear-gradient(135deg, #20B2AA 0%, #40E0D0 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(64, 224, 208, 0.4), 
+                0 0 30px rgba(64, 224, 208, 0.2);
+}
+
+.btn-finalizar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 10px rgba(64, 224, 208, 0.3);
+}
+
+.btn-finalizar:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+    opacity: 0.6;
+}
+
+.btn-finalizar:disabled::before {
+    display: none;
+}
+
+/* Botão Ir ao Carrinho */
+.bloco-botao-carrinho {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.btn-ir-carrinho {
+    padding: 1.2rem 3rem;
+    background: #40E0D0;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(64, 224, 208, 0.4);
+}
+
+.btn-ir-carrinho:hover:not(:disabled) {
+    background: #20B2AA;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(64, 224, 208, 0.5);
+}
+
+.btn-ir-carrinho:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+

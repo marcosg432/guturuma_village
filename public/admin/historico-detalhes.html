@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha Completa - village Residences</title>
+    <link rel="stylesheet" href="/css/admin.css">
+    <style>
+        .ficha-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        .ficha-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        .ficha-header h1 {
+            margin: 0;
+            color: #2c3e50;
+        }
+        .btn-voltar {
+            padding: 10px 20px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+        }
+        .btn-voltar:hover {
+            background: #2980b9;
+        }
+        .ficha-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 1.5rem;
+        }
+        .ficha-section {
+            margin-bottom: 2rem;
+        }
+        .ficha-section:last-child {
+            margin-bottom: 0;
+        }
+        .ficha-section-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .ficha-row {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 1rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .ficha-row:last-child {
+            border-bottom: none;
+        }
+        .ficha-label {
+            font-weight: 600;
+            color: #555;
+        }
+        .ficha-value {
+            color: #2c3e50;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .status-concluido {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-cancelada {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #666;
+        }
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+        }
+        @media (max-width: 768px) {
+            .ficha-row {
+                grid-template-columns: 1fr;
+            }
+            .ficha-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="admin-page">
+    <div class="admin-container">
+        <main class="main-content" style="width: 100%;">
+            <div class="ficha-container">
+                <div class="ficha-header">
+                    <h1>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                            <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M14 2V8H20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Ficha Completa da Reserva
+                    </h1>
+                    <a href="/admin/dashboard#historico" class="btn-voltar">← Voltar ao Histórico</a>
+                </div>
+                
+                <div id="ficha-content">
+                    <div class="loading">Carregando dados da reserva...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script>
+        const API_BASE = '/api/admin';
+        
+        // Obter ID da URL
+        const pathParts = window.location.pathname.split('/');
+        const reservaId = pathParts[pathParts.length - 1];
+        
+        // Função para fazer requisições autenticadas
+        async function apiRequest(url) {
+            const token = localStorage.getItem('admin_token');
+            if (!token) {
+                window.location.href = '/admin/login';
+                return null;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}${url}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.status === 401 || response.status === 403) {
+                    localStorage.removeItem('admin_token');
+                    window.location.href = '/admin/login';
+                    return null;
+                }
+                
+                return response;
+            } catch (error) {
+                console.error('Erro na requisição:', error);
+                return null;
+            }
+        }
+        
+        // Função para formatar data
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR');
+        }
+        
+        // Função para formatar valor monetário
+        function formatCurrency(value) {
+            if (!value) return 'R$ 0,00';
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(parseFloat(value));
+        }
+        
+        // Carregar dados da reserva
+        async function loadFicha() {
+            const container = document.getElementById('ficha-content');
+            
+            if (!reservaId || isNaN(reservaId)) {
+                container.innerHTML = '<div class="error-message">ID da reserva inválido</div>';
+                return;
+            }
+            
+            try {
+                const response = await apiRequest(`/historico/${reservaId}`);
+                
+                if (!response) {
+                    container.innerHTML = '<div class="error-message">Erro: Não foi possível conectar ao servidor</div>';
+                    return;
+                }
+                
+                if (response.status === 404) {
+                    container.innerHTML = '<div class="error-message">Reserva não encontrada no histórico</div>';
+                    return;
+                }
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    container.innerHTML = `<div class="error-message">Erro: ${error.error || 'Erro desconhecido'}</div>`;
+                    return;
+                }
+                
+                const reserva = await response.json();
+                
+                if (!reserva) {
+                    container.innerHTML = '<div class="error-message">Reserva não encontrada</div>';
+                    return;
+                }
+                
+                // Renderizar ficha completa
+                const statusClass = reserva.status.toLowerCase() === 'concluído' ? 'concluido' : 'cancelada';
+                const statusText = reserva.status === 'Concluído' ? 'Concluída' : 'Cancelada';
+                
+                container.innerHTML = `
+                    <div class="ficha-card">
+                        <div class="ficha-section">
+                            <div class="ficha-section-title">👤 Dados do Cliente</div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Nome Completo:</div>
+                                <div class="ficha-value">${reserva.nome_completo || 'N/A'}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Telefone:</div>
+                                <div class="ficha-value">${reserva.telefone || 'N/A'}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">E-mail:</div>
+                                <div class="ficha-value">${reserva.email || 'N/A'}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ficha-section">
+                            <div class="ficha-section-title">📅 Informações da Reserva</div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Código da Reserva:</div>
+                                <div class="ficha-value"><strong>${reserva.codigo || 'N/A'}</strong></div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Suite:</div>
+                                <div class="ficha-value">${reserva.categoria || 'N/A'}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Check-in:</div>
+                                <div class="ficha-value">${formatDate(reserva.check_in)}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Check-out:</div>
+                                <div class="ficha-value">${formatDate(reserva.check_out)}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Status:</div>
+                                <div class="ficha-value">
+                                    <span class="status-badge status-${statusClass}">${statusText}</span>
+                                </div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Data da Reserva:</div>
+                                <div class="ficha-value">${formatDate(reserva.data_reserva)}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="ficha-section">
+                            <div class="ficha-section-title">💰 Valores e Pagamento</div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Valor Total:</div>
+                                <div class="ficha-value"><strong style="font-size: 1.2rem; color: #27ae60;">${formatCurrency(reserva.valor_total)}</strong></div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Método de Pagamento:</div>
+                                <div class="ficha-value">${reserva.metodo_pagamento || 'N/A'}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Adultos:</div>
+                                <div class="ficha-value">${reserva.adultos || 0}</div>
+                            </div>
+                            <div class="ficha-row">
+                                <div class="ficha-label">Crianças:</div>
+                                <div class="ficha-value">${reserva.criancas || 0}</div>
+                            </div>
+                        </div>
+                        ${reserva.motivo_cancelamento ? `
+                        <div class="ficha-section">
+                            <div class="ficha-section-title">❌ Motivo do Cancelamento</div>
+                            <div class="ficha-row">
+                                <div class="ficha-value" style="grid-column: 1 / -1; padding: 1rem; background: #fff3cd; border-radius: 5px; color: #856404;">
+                                    ${reserva.motivo_cancelamento}
+                                </div>
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                `;
+            } catch (error) {
+                console.error('Erro ao carregar ficha:', error);
+                container.innerHTML = `<div class="error-message">Erro ao carregar dados: ${error.message || 'Erro desconhecido'}</div>`;
+            }
+        }
+        
+        // Carregar ficha ao carregar a página
+        document.addEventListener('DOMContentLoaded', loadFicha);
+    </script>
+</body>
+</html>
+

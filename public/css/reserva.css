@@ -1,0 +1,563 @@
+/* NOVO LAYOUT DE RESERVA */
+
+.reserva-section {
+    background: #0f172a;
+    padding: 3rem 0 5rem;
+}
+
+.reserva-form {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
+    padding: 4rem;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.form-step {
+    display: none;
+}
+
+.form-step.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+    margin-bottom: 3rem;
+}
+
+.form-step h2 {
+    font-size: 2rem;
+    color: var(--azul-turquesa-escuro);
+    margin-bottom: 3rem;
+    text-align: center;
+}
+
+.reserva-section .section-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.reserva-section .section-subtitle {
+    font-size: 1.3rem;
+    color: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Seleção de Quartos */
+.room-selection {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.room-option {
+    position: relative;
+}
+
+.room-option input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.room-option label {
+    display: flex;
+    padding: 0;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    min-height: 300px;
+}
+
+.room-option input[type="radio"]:checked + label {
+    border-color: var(--azul-turquesa);
+    background: linear-gradient(135deg, rgba(64, 224, 208, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+    box-shadow: 0 5px 20px rgba(64, 224, 208, 0.3);
+}
+
+.room-option-content {
+    padding: 2rem;
+}
+
+.room-option-content h3 {
+    font-size: 1.5rem;
+    color: var(--azul-turquesa-escuro);
+    margin-bottom: 0.5rem;
+}
+
+.room-option-content p {
+    color: var(--cinza);
+    margin-bottom: 0.5rem;
+}
+
+.room-option-content .price {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.6rem 1.5rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 25px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    position: relative;
+}
+
+.room-option-content .price::before {
+    content: '💰';
+    margin-right: 0.5rem;
+}
+
+/* Carrossel nos cards de reserva */
+.room-carousel-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 0 20px 20px 0;
+}
+
+.room-carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.room-carousel-slide {
+    min-width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.room-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.room-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: #2c3e50;
+}
+
+.room-carousel-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.room-carousel-prev {
+    left: 10px;
+}
+
+.room-carousel-next {
+    right: 10px;
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--azul-turquesa-escuro);
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--bege-areia);
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--azul-turquesa);
+    box-shadow: 0 0 0 3px rgba(64, 224, 208, 0.1);
+}
+
+/* Nomes dos hóspedes */
+.guest-names-container {
+    display: grid;
+    gap: 0.75rem;
+}
+
+.guest-name-item input {
+    width: 100%;
+}
+
+.availability-check {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    border-radius: 10px;
+    display: none;
+}
+
+.availability-check.available {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.availability-check.unavailable {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+/* Adicionais */
+.adicionais-grid {
+    display: grid;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.adicional-option {
+    position: relative;
+}
+
+.adicional-option input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.adicional-option label {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border: 2px solid var(--bege-areia);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: var(--branco);
+}
+
+.adicional-option input[type="checkbox"]:checked + label {
+    border-color: var(--azul-turquesa);
+    background: linear-gradient(135deg, rgba(64, 224, 208, 0.1) 0%, rgba(212, 175, 55, 0.05) 100%);
+}
+
+.adicional-icon {
+    font-size: 2rem;
+}
+
+.adicional-text {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adicional-text strong {
+    color: var(--azul-turquesa-escuro);
+    font-size: 1.1rem;
+}
+
+.adicional-text small {
+    color: var(--cinza);
+    font-weight: 600;
+}
+
+/* Resumo */
+.resumo-reserva {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 18px;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.resumo-reserva h3 {
+    color: var(--azul-turquesa-escuro);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+#resumo-content {
+    color: var(--preto);
+    line-height: 1.8;
+}
+
+.resumo-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 0;
+}
+
+.resumo-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(102, 126, 234, 0.1);
+    border-radius: 10px;
+    flex-shrink: 0;
+}
+
+.resumo-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.resumo-label {
+    font-size: 0.85rem;
+    color: #7f8c8d;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.resumo-value {
+    font-size: 1.1rem;
+    color: var(--azul-turquesa-escuro);
+    font-weight: 600;
+}
+
+.resumo-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    margin: 0.5rem 0;
+}
+
+.resumo-total {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.resumo-total-label {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.resumo-total-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--azul-turquesa-escuro);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.cupom-input {
+    display: flex;
+    gap: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cupom-input input {
+    flex: 1;
+}
+
+/* Métodos de Pagamento */
+
+/* Total Box */
+.total-box {
+    background: rgba(245, 230, 211, 0.9);
+    padding: 2rem;
+    border-radius: 20px;
+    margin: 2rem auto;
+    max-width: 600px;
+}
+
+.total-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.total-item:last-child {
+    border-bottom: none;
+}
+
+.total-item.discount {
+    color: #28a745;
+}
+
+.total-item.final {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--azul-turquesa-escuro);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--azul-turquesa);
+}
+
+/* Navegação */
+.form-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.form-navigation .btn {
+    flex: 1;
+    max-width: 200px;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: var(--branco);
+    margin: 10% auto;
+    padding: 3rem;
+    border-radius: 20px;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+}
+
+.close-modal {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    font-size: 2rem;
+    font-weight: bold;
+    cursor: pointer;
+    color: var(--cinza);
+}
+
+.close-modal:hover {
+    color: var(--azul-turquesa-escuro);
+}
+
+/* Estilos para o novo layout de pagamento */
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .payment-layout {
+        grid-template-columns: 1fr 350px !important;
+    }
+}
+
+@media (max-width: 968px) {
+    .payment-layout {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .payment-cart {
+        position: relative !important;
+        top: 0 !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .reserva-form {
+        padding: 2rem 1.5rem;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .cupom-input {
+        flex-direction: column;
+    }
+
+    .form-navigation {
+        flex-direction: column;
+    }
+
+    .form-navigation .btn {
+        max-width: 100%;
+    }
+}
+
+
+
+
+

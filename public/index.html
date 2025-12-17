@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>village Residences - Início</title>
+    <link rel="preconnect" href="https://drive.google.com">
+    <link rel="dns-prefetch" href="https://drive.google.com">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tipografia Premium - Luxo e Sofisticação */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Títulos principais e de seções - Fonte elegante */
+        h1, h2, h3, h4, h5, h6,
+        .section-title,
+        .suites-premium-title,
+        .why-choose-title,
+        .about-modern-text h2,
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Navbar */
+        .navbar h1,
+        .nav-brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .nav-menu a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+        
+        /* Botões */
+        .btn,
+        .btn-modern,
+        .suite-premium-btn,
+        .cta-btn {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+        }
+        
+        /* Cards e textos */
+        .suite-premium-content h3,
+        .why-choose-card h3 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .suite-premium-content p,
+        .why-choose-card p,
+        .about-modern-text p {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            line-height: 1.7;
+        }
+        
+        /* Footer */
+        .footer h3,
+        .footer h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+        }
+        
+        .footer p,
+        .footer a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+        }
+        
+        /* Ícones SVG minimalistas */
+        .icon-svg {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1.5rem;
+            fill: #333;
+            stroke: #333;
+        }
+        
+        .icon-svg-white {
+            fill: white;
+        }
+        
+        /* Seção Sobre Nós Moderna */
+        .about-modern {
+            padding: 100px 0;
+            background: #e8e8e8;
+        }
+        
+        .about-modern-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .about-modern-text h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--azul-turquesa-escuro);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        
+        .about-modern-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-modern-image {
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-modern-image:hover {
+            transform: translateY(-5px);
+        }
+        
+        .about-modern-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .btn-modern {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: linear-gradient(135deg, var(--azul-turquesa) 0%, var(--azul-turquesa-escuro) 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 20px rgba(64, 224, 208, 0.4);
+        }
+        
+        .btn-modern:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(64, 224, 208, 0.6);
+        }
+        
+        /* Seção Nossas Suítes - Novo Modelo com Imagem de Fundo */
+        .suites-premium {
+            padding: 120px 0;
+            background-image: url('images/ponte.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            position: relative;
+        }
+        
+        .suites-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+        
+        .suites-premium .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .suites-premium-title {
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 4rem;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .suites-premium-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .suite-premium-card {
+            background: #ffffff;
+            border-radius: 22px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .suite-premium-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        }
+        
+        .suite-premium-image {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .suite-premium-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .suite-premium-card:hover .suite-premium-image img {
+            transform: scale(1.05);
+        }
+        
+        .suite-premium-content {
+            padding: 28px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        
+        .suite-premium-content h3 {
+            font-size: 1.4rem;
+            color: #0F1F4B;
+            margin-bottom: 12px;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.3;
+        }
+        
+        .suite-premium-content p {
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 24px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+            flex: 1;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .suite-premium-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: linear-gradient(135deg, #0F1F4B, #0F1F4B);
+            color: #fff;
+            font-weight: 600;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.95rem;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(14, 141, 127, 0.25);
+        }
+        
+        .suite-premium-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(14, 141, 127, 0.35);
+            opacity: 0.95;
+        }
+        
+        /* Seção Por que Escolher - Design Moderno */
+        .why-choose-section {
+            padding: 100px 0;
+            background: #e8e8e8;
+        }
+        
+        .why-choose-title {
+            text-align: center;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--azul-turquesa-escuro);
+            margin-bottom: 4rem;
+        }
+        
+        .why-choose-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .why-choose-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 24px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .why-choose-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: conic-gradient(from var(--angle, 0deg), transparent 0deg, transparent 35deg, #0F1F4B 45deg, #0F1F4B 55deg, #0F1F4B 65deg, transparent 75deg, transparent 360deg);
+            border-radius: 24px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 0;
+            pointer-events: none;
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            padding: 2px;
+        }
+        
+        .why-choose-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            border-radius: 22px;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .why-choose-card > * {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .why-choose-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+        }
+        
+        .why-choose-card:hover::before {
+            opacity: 1;
+        }
+        
+        .why-choose-card .icon-svg {
+            fill: none;
+            stroke: #8A8A8A;
+            margin-bottom: 1.8rem;
+        }
+        
+        .why-choose-card .icon-svg path {
+            fill: none;
+            stroke: #8A8A8A;
+        }
+        
+        .why-choose-card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--azul-turquesa-escuro);
+            margin-bottom: 1.2rem;
+        }
+        
+        .why-choose-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #666;
+        }
+        
+        /* Seção CTA Final */
+        .cta-section {
+            padding: 100px 0;
+            background-image: url('images/barco.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+        
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        
+        .cta-section .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .cta-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .cta-subtitle {
+            font-size: 1.3rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 1.2rem 3.5rem;
+            background: white;
+            color: var(--azul-turquesa-escuro);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        /* Responsivo Tablet */
+        @media (max-width: 1024px) and (min-width: 769px) {
+            .suites-premium-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+        }
+        
+        /* Responsivo */
+        @media (max-width: 768px) {
+            .suites-premium-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                max-width: 500px;
+            }
+            
+            .suite-premium-image {
+                height: 220px;
+            }
+        }
+        
+        @media (max-width: 968px) {
+            .about-modern-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .about-modern-image {
+                order: -1;
+            }
+            
+            .suites-premium-title {
+                font-size: 2.2rem;
+            }
+            
+            .why-choose-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .cta-title {
+                font-size: 2.2rem;
+            }
+        }
+        
+        /* Garantir que suites mantenha 3 colunas até 1024px */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .suites-premium-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .about-modern-text h2,
+            .suites-premium-title,
+            .why-choose-title {
+                font-size: 1.8rem;
+            }
+            
+            .suite-premium-image {
+                height: 200px;
+            }
+            
+            .suite-premium-content {
+                padding: 22px;
+            }
+            
+            .suite-premium-content h3 {
+                font-size: 1.2rem;
+            }
+            
+            .suite-premium-content p {
+                font-size: 0.9rem;
+            }
+            
+            .why-choose-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-title {
+                font-size: 1.8rem;
+            }
+            
+            .cta-subtitle {
+                font-size: 1.1rem;
+            }
+        }
+        
+        /* Banner Desktop e Mobile - Ocultar/Mostrar */
+        .banner-desktop {
+            display: block;
+        }
+        
+        .banner-mobile {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .banner-desktop {
+                display: none;
+            }
+            
+            .banner-mobile {
+                display: block;
+            }
+            
+            .banner-mobile .scroll-expand-hero {
+                min-height: 60vh !important;
+            }
+            
+            .banner-mobile .scroll-expand-container {
+                min-height: 60vh !important;
+            }
+            
+            .banner-mobile .scroll-expand-bg {
+                height: 60vh !important;
+            }
+            
+            .banner-mobile .scroll-expand-bg img {
+                height: 60vh !important;
+            }
+            
+            .banner-mobile .container > div {
+                height: 60vh !important;
+            }
+        }
+        
+        /* Seção Nossas Suítes Desktop e Mobile - Ocultar/Mostrar */
+        .suites-desktop {
+            display: block;
+        }
+        
+        .suites-mobile {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .suites-desktop {
+                display: none;
+            }
+            
+            .suites-mobile {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <h1>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="display: inline-block; vertical-align: middle; margin-right: 8px;">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="#0F1F4B" stroke="#0F1F4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" fill="#0F1F4B" stroke="#0F1F4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" fill="#0F1F4B" stroke="#0F1F4B" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    village Residences
+                </h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">Início</a></li>
+                <li><a href="/quartos">Quartos</a></li>
+                <li><a href="/reserva">Reserva</a></li>
+                <li><a href="/sobre">Sobre</a></li>
+                <li><a href="/contato">Contato</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scroll Expand Banner Desktop (MANTIDO INTACTO) -->
+    <div id="scroll-expand-section" class="scroll-expand-section banner-desktop" style="overflow-x: hidden; margin: 0; padding: 0; position: relative; top: 0;">
+        <section class="scroll-expand-hero" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 100vh; margin: 0; padding: 0; top: 0;">
+            <div class="scroll-expand-container" style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; min-height: 100vh;">
+                <!-- Background Image -->
+                <div id="scroll-expand-bg" class="scroll-expand-bg" style="position: absolute; inset: 0; z-index: 0; height: 100vh; transition: opacity 0.1s ease;">
+                    <img src="images/ponte.jpg" alt="Background" style="width: 100vw; height: 100vh; object-fit: cover; object-position: center;">
+                    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+                </div>
+
+                <!-- Content Container -->
+                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; z-index: 10;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 100vh; position: relative;">
+                        <!-- Media Container -->
+                        <div id="scroll-expand-media" class="scroll-expand-media" style="position: absolute; z-index: 0; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: none; border-radius: 16px; box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.3); width: 300px; height: 400px; max-width: 95vw; max-height: 85vh; overflow: hidden;">
+                            <!-- Image -->
+                            <div style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+                                <img 
+                                    src="images/barco.jpg" 
+                                    alt="village Residences" 
+                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;">
+                                <div class="media-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.3); border-radius: 12px; transition: opacity 0.2s ease;"></div>
+                            </div>
+                            
+                            <!-- Scroll Hint -->
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 10; margin-top: 16px; transition: none;">
+                                <p id="scroll-hint" style="color: #bfdbfe; font-weight: 500; text-align: center; margin: 0; transition: none;">Role para expandir</p>
+                            </div>
+                        </div>
+
+                        <!-- Title -->
+                        <div style="display: flex; align-items: center; justify-content: center; text-align: center; gap: 16px; width: 100%; position: relative; z-index: 10; flex-direction: column; mix-blend-mode: normal;">
+                            <h2 id="title-first" class="scroll-expand-title" style="font-size: 2.5rem; font-weight: 700; color: #bfdbfe; transition: none; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);">
+                                village
+                            </h2>
+                            <h2 id="title-rest" class="scroll-expand-title" style="font-size: 2.5rem; font-weight: 700; text-align: center; color: #bfdbfe; transition: none; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);">
+                                Residences
+                            </h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scroll Expand Banner Mobile (Altura Reduzida) -->
+    <div id="scroll-expand-section-mobile" class="scroll-expand-section banner-mobile" style="overflow-x: hidden; margin: 0; padding: 0; position: relative; top: 0;">
+        <section class="scroll-expand-hero" style="position: relative; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 60vh; margin: 0; padding: 0; top: 0;">
+            <div class="scroll-expand-container" style="position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; min-height: 60vh;">
+                <!-- Background Image -->
+                <div id="scroll-expand-bg-mobile" class="scroll-expand-bg" style="position: absolute; inset: 0; z-index: 0; height: 60vh; transition: opacity 0.1s ease;">
+                    <img src="images/ponte.jpg" alt="Background" style="width: 100vw; height: 60vh; object-fit: cover; object-position: center;">
+                    <div style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+                </div>
+
+                <!-- Content Container -->
+                <div class="container" style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; position: relative; z-index: 10;">
+                    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; height: 60vh; position: relative;">
+                        <!-- Media Container -->
+                        <div id="scroll-expand-media-mobile" class="scroll-expand-media" style="position: absolute; z-index: 0; top: 50%; left: 50%; transform: translate(-50%, -50%); transition: none; border-radius: 16px; box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.3); width: 250px; height: 300px; max-width: 90vw; max-height: 70vh; overflow: hidden;">
+                            <!-- Image -->
+                            <div style="position: relative; width: 100%; height: 100%; pointer-events: none;">
+                                <img 
+                                    src="images/barco.jpg" 
+                                    alt="village Residences" 
+                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px; display: block;">
+                                <div class="media-overlay" style="position: absolute; inset: 0; background: rgba(0, 0, 0, 0.3); border-radius: 12px; transition: opacity 0.2s ease;"></div>
+                            </div>
+                            
+                            <!-- Scroll Hint -->
+                            <div style="display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 10; margin-top: 12px; transition: none;">
+                                <p id="scroll-hint-mobile" style="color: #bfdbfe; font-weight: 500; text-align: center; margin: 0; transition: none; font-size: 0.9rem;">Role para expandir</p>
+                            </div>
+                        </div>
+
+                        <!-- Title -->
+                        <div style="display: flex; align-items: center; justify-content: center; text-align: center; gap: 12px; width: 100%; position: relative; z-index: 10; flex-direction: column; mix-blend-mode: normal;">
+                            <h2 id="title-first-mobile" class="scroll-expand-title" style="font-size: 1.8rem; font-weight: 700; color: #bfdbfe; transition: none; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);">
+                                village
+                            </h2>
+                            <h2 id="title-rest-mobile" class="scroll-expand-title" style="font-size: 1.8rem; font-weight: 700; text-align: center; color: #bfdbfe; transition: none; margin: 0; text-shadow: 2px 2px 10px rgba(0,0,0,0.3);">
+                                Residences
+                            </h2>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 1. Seção Sobre Nós Moderna -->
+    <section class="about-modern">
+        <div class="container">
+            <div class="about-modern-grid">
+                <div class="about-modern-text">
+                    <h2>Sobre Nós</h2>
+                    <p>No village Residences, transformamos cada estadia em uma experiência única de luxo tropical. Localizado em um cenário paradisíaco, nosso resort combina elegância, conforto e harmonia com a natureza.</p>
+                    <p>Cada detalhe foi pensado para proporcionar momentos inesquecíveis, desde acomodações sofisticadas até espaços que refletem a tranquilidade e beleza do ambiente ao redor.</p>
+                    <a href="/sobre" class="btn-modern">Saiba mais sobre nós</a>
+                </div>
+                <div class="about-modern-image">
+                    <img src="https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&h=600&fit=crop" alt="village Residences">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Nossas Suítes Premium Desktop -->
+    <section class="suites-premium suites-desktop">
+        <div class="container">
+            <h2 class="suites-premium-title">Nossas Suítes</h2>
+            <div class="suites-premium-grid">
+                <div class="suite-premium-card">
+                    <div class="suite-premium-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&h=600&fit=crop" alt="Quarto Deluxe com Cama Queen-size">
+                    </div>
+                    <div class="suite-premium-content">
+                        <h3>Quarto Deluxe com Cama Queen-size</h3>
+                        <p>Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.</p>
+                        <a href="/suite.html?tipo=harmonia" class="suite-premium-btn">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="suite-premium-card">
+                    <div class="suite-premium-image">
+                        <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&h=600&fit=crop" alt="Suíte">
+                    </div>
+                    <div class="suite-premium-content">
+                        <h3>Suíte</h3>
+                        <p>Esta suíte possui 1 quarto e 1 banheiro com chuveiro walk-in. A suíte oferece um sofá. A unidade possui 2 camas.</p>
+                        <a href="/suite.html?tipo=orquidea" class="suite-premium-btn">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="suite-premium-card">
+                    <div class="suite-premium-image">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop" alt="Suíte">
+                    </div>
+                    <div class="suite-premium-content">
+                        <h3>Suíte</h3>
+                        <p>Esta suíte possui banheiro privativo e área para refeições. A unidade tem 2 camas.</p>
+                        <a href="/suite.html?tipo=imperial" class="suite-premium-btn">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/quartos" class="suite-premium-btn" style="display: inline-block; padding: 1.5rem 3rem; font-size: 1.2rem; text-decoration: none;">Ver todos os quartos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Nossas Suítes Premium Mobile -->
+    <section class="suites-premium suites-mobile" style="background-image: url('images/mobile.jpg');">
+        <div class="container">
+            <h2 class="suites-premium-title">Nossas Suítes</h2>
+            <div class="suites-premium-grid">
+                <div class="suite-premium-card">
+                    <div class="suite-premium-image">
+                        <img src="https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&h=600&fit=crop" alt="Quarto Deluxe com Cama Queen-size">
+                    </div>
+                    <div class="suite-premium-content">
+                        <h3>Quarto Deluxe com Cama Queen-size</h3>
+                        <p>Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.</p>
+                        <a href="/suite.html?tipo=harmonia" class="suite-premium-btn">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="suite-premium-card">
+                    <div class="suite-premium-image">
+                        <img src="https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&h=600&fit=crop" alt="Suíte">
+                    </div>
+                    <div class="suite-premium-content">
+                        <h3>Suíte</h3>
+                        <p>Esta suíte possui 1 quarto e 1 banheiro com chuveiro walk-in. A suíte oferece um sofá. A unidade possui 2 camas.</p>
+                        <a href="/suite.html?tipo=orquidea" class="suite-premium-btn">Saiba Mais</a>
+                    </div>
+                </div>
+                <div class="suite-premium-card">
+                    <div class="suite-premium-image">
+                        <img src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&h=600&fit=crop" alt="Suíte">
+                    </div>
+                    <div class="suite-premium-content">
+                        <h3>Suíte</h3>
+                        <p>Esta suíte possui banheiro privativo e área para refeições. A unidade tem 2 camas.</p>
+                        <a href="/suite.html?tipo=imperial" class="suite-premium-btn">Saiba Mais</a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="/quartos" class="suite-premium-btn" style="display: inline-block; padding: 1.5rem 3rem; font-size: 1.2rem; text-decoration: none;">Ver todos os quartos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Seção Por que Escolher Refatorada -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2 class="why-choose-title">Por que escolher o village Residences?</h2>
+            <div class="why-choose-grid">
+                <div class="why-choose-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M21 16V8C20.9996 7.64928 20.9071 7.30481 20.7315 7.00116C20.556 6.69751 20.3037 6.44536 20 6.27L13 2.27C12.696 2.09446 12.3511 2.00205 12 2.00205C11.6489 2.00205 11.304 2.09446 11 2.27L4 6.27C3.69626 6.44536 3.44398 6.69751 3.26846 7.00116C3.09294 7.30481 3.00036 7.64928 3 8V16C3.00036 16.3507 3.09294 16.6952 3.26846 16.9988C3.44398 17.3025 3.69626 17.5546 4 17.73L11 21.73C11.304 21.9055 11.6489 21.9979 12 21.9979C12.3511 21.9979 12.696 21.9055 13 21.73L20 17.73C20.3037 17.5546 20.556 17.3025 20.7315 16.9988C20.9071 16.6952 20.9996 16.3507 21 16Z" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M3.27002 6.96L12 12.01L20.73 6.96" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 22.08V12" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>Praia Exclusiva</h3>
+                    <p>Acesso direto à praia com areias brancas e águas cristalinas, reservado exclusivamente para nossos hóspedes.</p>
+                </div>
+                <div class="why-choose-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 2L2 7L12 12L22 7L12 2Z" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 17L12 22L22 17" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M2 12L12 17L22 12" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>Natureza Preservada</h3>
+                    <p>Ambiente natural cuidadosamente preservado, oferecendo tranquilidade e conexão com a natureza ao seu redor.</p>
+                </div>
+                <div class="why-choose-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M9 22V12H15V22" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>Conforto & Modernidade</h3>
+                    <p>Suítes equipadas com tecnologia moderna e design contemporâneo, garantindo conforto e praticidade.</p>
+                </div>
+                <div class="why-choose-card">
+                    <svg class="icon-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 6V12L16 14" fill="none" stroke="#8A8A8A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <h3>Atendimento 24h</h3>
+                    <p>Equipe dedicada disponível 24 horas para garantir que sua estadia seja perfeita em todos os momentos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Seção CTA Final -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="cta-title">Garanta sua estadia no village Residences</h2>
+            <p class="cta-subtitle">Viva uma experiência única de luxo tropical</p>
+            <a href="/reserva" class="cta-btn">Fazer Reserva</a>
+        </div>
+    </section>
+
+    <!-- Footer Premium -->
+    <footer class="footer-premium">
+        <div class="footer-premium-container">
+            <!-- Linha superior decorativa -->
+            <div class="footer-divider"></div>
+            
+            <div class="footer-premium-content">
+                <!-- Seção 1: Identidade do Resort -->
+                <div class="footer-premium-identity">
+                    <h3 class="footer-premium-title">village Residences</h3>
+                    <p class="footer-premium-tagline">Seu refúgio exclusivo de luxo no em Corumbá</p>
+                </div>
+
+                <!-- Seção 2: Links Úteis -->
+                <div class="footer-premium-links">
+                    <div class="footer-links-column">
+                        <a href="/" class="footer-link">Início</a>
+                        <a href="/quartos" class="footer-link">Quartos</a>
+                        <a href="/sobre" class="footer-link">Estrutura</a>
+                    </div>
+                    <div class="footer-links-column">
+                        <a href="/reserva" class="footer-link">Reservas</a>
+                        <a href="/contato" class="footer-link">Contato</a>
+                    </div>
+                </div>
+
+                <!-- Seção 3: Contato Premium -->
+                <div class="footer-premium-contact">
+                    <div class="footer-contact-item">
+                        <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M22 16.92V19.92C22.0011 20.1985 21.9441 20.4742 21.8325 20.7292C21.7209 20.9842 21.5573 21.2126 21.3523 21.3992C21.1473 21.5857 20.9053 21.7262 20.6429 21.8117C20.3805 21.8971 20.1036 21.9256 19.83 21.895C16.7428 21.5356 13.787 20.5301 11.19 18.96C8.77382 17.5546 6.72533 15.5061 5.32 13.09C3.74996 10.4922 2.74449 7.53587 2.385 4.448C2.35441 4.17451 2.38284 3.89757 2.46821 3.63519C2.55359 3.37282 2.69398 3.1309 2.88043 2.926C3.06687 2.7211 3.29522 2.55757 3.55015 2.44607C3.80508 2.33457 4.08079 2.27766 4.36 2.279H7.36C7.96282 2.279 8.54113 2.51857 8.96351 2.94096C9.3859 3.36334 9.62547 3.94165 9.62547 4.544C9.62547 5.14635 9.3859 5.72466 8.96351 6.14704C8.54113 6.56943 7.96282 6.809 7.36 6.809C7.36 8.5 7.89 10.09 8.79 11.39C9.69 12.69 10.89 13.89 12.19 14.79C13.49 15.69 15.09 16.22 16.78 16.22C17.3824 16.22 17.9607 16.4596 18.3831 16.8819C18.8054 17.3043 19.045 17.8826 19.045 18.485V21.485C19.045 22.0874 18.8054 22.6657 18.3831 23.0881C17.9607 23.5104 17.3824 23.75 16.78 23.75H13.78" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>67 992282850</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M4 4H20C21.1 4 22 4.9 22 6V18C22 19.1 21.1 20 20 20H4C2.9 20 2 19.1 2 18V6C2 4.9 2.9 4 4 4Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="L22 6L12 13L2 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>luizmarcosramires@hotmail.com</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <svg class="footer-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 13C13.6569 13 15 11.6569 15 10C15 8.34315 13.6569 7 12 7C10.3431 7 9 8.34315 9 10C9 11.6569 10.3431 13 12 13Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span>Corumbá — Brasil</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seção 4: Redes Sociais -->
+            <div class="footer-premium-social">
+                <a href="https://wa.me/5567992282850" class="footer-social-link" aria-label="WhatsApp">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M17.472 14.382C17.382 14.282 15.388 12.651 15.038 12.382C14.698 12.113 14.458 12.023 14.178 12.293C13.908 12.563 12.978 13.413 12.748 13.673C12.518 13.933 12.288 13.993 11.968 13.723C11.648 13.453 10.598 12.923 9.348 11.833C8.398 10.983 7.708 9.983 7.478 9.653C7.248 9.323 7.418 9.153 7.598 8.973C7.768 8.793 7.938 8.543 8.108 8.333C8.278 8.123 8.348 7.963 8.478 7.723C8.608 7.483 8.548 7.273 8.458 7.093C8.368 6.913 7.508 5.203 7.258 4.593C7.018 3.993 6.768 4.073 6.578 4.063C6.388 4.053 6.168 4.053 5.958 4.053C5.748 4.053 5.478 4.123 5.238 4.383C4.998 4.643 4.428 5.193 4.428 6.183C4.428 7.173 5.208 8.123 5.318 8.293C5.428 8.463 6.788 10.893 9.138 12.143C10.558 12.873 11.678 13.273 12.498 13.563C13.118 13.783 13.678 13.963 14.078 14.103C14.508 14.253 14.888 14.213 15.198 14.143C15.508 14.073 16.478 13.473 16.698 12.823C16.918 12.173 16.918 11.583 16.828 11.423C16.738 11.263 16.648 11.273 16.468 11.333C16.288 11.393 14.828 11.893 14.528 11.983C14.228 12.073 14.008 12.113 13.908 12.283C13.808 12.453 13.878 12.633 13.968 12.783C14.058 12.933 14.148 13.073 14.238 13.213C14.328 13.353 14.418 13.493 14.528 13.643C14.638 13.793 14.728 13.923 14.848 14.103C14.968 14.283 15.058 14.363 15.198 14.393C15.338 14.423 15.508 14.393 15.668 14.323C15.828 14.253 16.688 13.823 16.978 13.363C17.278 12.893 17.478 12.423 17.538 12.003C17.598 11.583 17.598 11.213 17.558 11.093C17.518 10.973 17.472 10.923 17.472 10.883L17.472 14.382Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Linha final de direitos autorais -->
+            <div class="footer-premium-copyright">
+                <p>&copy; 2024 village Residences. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/scroll-expand.js"></script>
+    <script>
+        // Efeito de borda que segue o mouse nos cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.why-choose-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    // Calcular o ângulo baseado na posição do mouse relativo ao centro
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    let angle = Math.atan2(y - centerY, x - centerX) * (180 / Math.PI) + 90;
+                    
+                    // Normalizar o ângulo para 0-360
+                    if (angle < 0) angle += 360;
+                    
+                    // Atualizar o ângulo do gradiente para seguir o mouse
+                    card.style.setProperty('--angle', angle + 'deg');
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    // Resetar quando o mouse sair
+                    card.style.setProperty('--angle', '0deg');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

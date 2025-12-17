@@ -1,0 +1,226 @@
+.contato-hero {
+    background-image: url('https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=1920&h=800&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    color: var(--branco);
+    padding: 8rem 0 4rem;
+    margin-top: 70px;
+    text-align: center;
+}
+
+.contato-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.contato-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.contato-hero .section-title {
+    color: var(--branco);
+    margin-bottom: 1rem;
+}
+
+.contato-hero .section-subtitle {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.contato-section {
+    padding: 5rem 0;
+    background: linear-gradient(135deg, var(--bege-areia) 0%, var(--branco) 100%);
+}
+
+.contato-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contato-info {
+    display: grid;
+    gap: 2rem;
+}
+
+.info-card {
+    background: var(--branco);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--sombra);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(64, 224, 208, 0.3);
+}
+
+.info-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.info-card h3 {
+    color: var(--azul-turquesa-escuro);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.info-card p {
+    color: var(--preto);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.info-card a {
+    color: var(--azul-turquesa);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.info-card a:hover {
+    color: var(--azul-turquesa-escuro);
+}
+
+.info-card small {
+    color: var(--cinza);
+    font-size: 0.9rem;
+}
+
+.contato-form-container {
+    background: var(--branco);
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px var(--sombra);
+}
+
+.contato-form-container h2 {
+    color: var(--azul-turquesa-escuro);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.contato-form .form-group {
+    margin-bottom: 1.5rem;
+}
+
+.contato-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--azul-turquesa-escuro);
+    font-weight: 600;
+}
+
+.contato-form input,
+.contato-form select,
+.contato-form textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid var(--bege-areia);
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.contato-form input:focus,
+.contato-form select:focus,
+.contato-form textarea:focus {
+    outline: none;
+    border-color: var(--azul-turquesa);
+    box-shadow: 0 0 0 3px rgba(64, 224, 208, 0.1);
+}
+
+.contato-form textarea {
+    resize: vertical;
+}
+
+.contato-form .btn {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .contato-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .contato-hero {
+        padding: 6rem 0 3rem;
+    }
+
+    .contato-section {
+        padding: 3rem 0;
+    }
+
+    .contato-form-container {
+        padding: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contato-hero {
+        padding: 5rem 0 2rem;
+    }
+
+    .contato-hero .section-title {
+        font-size: 2rem;
+    }
+
+    .contato-section {
+        padding: 2rem 0;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .info-icon {
+        font-size: 2.5rem;
+    }
+
+    .contato-form-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contato-hero {
+        padding: 4rem 0 1.5rem;
+    }
+
+    .contato-hero .section-title {
+        font-size: 1.75rem;
+    }
+
+    .info-card {
+        padding: 1.25rem;
+    }
+
+    .info-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .info-card p {
+        font-size: 1rem;
+    }
+}
+
+
+
+
+

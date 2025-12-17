@@ -1,0 +1,719 @@
+/* Hero Banner */
+.rooms-hero {
+    position: relative;
+    padding: 10rem 0 6rem;
+    margin-top: 70px;
+    text-align: center;
+    overflow: hidden;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rooms-hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.rooms-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.rooms-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 1;
+}
+
+.rooms-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.rooms-hero-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    letter-spacing: -0.02em;
+}
+
+.rooms-hero-subtitle {
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.95);
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.01em;
+}
+
+/* Suítes Grid Section */
+.suites-grid-section {
+    padding: 5rem 0;
+    background: #f8f9fa;
+}
+
+.suites-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Suite Card */
+.suite-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.suite-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.suite-card-image {
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+    position: relative;
+}
+
+.suite-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    transition: transform 0.5s ease;
+}
+
+.suite-card:hover .suite-card-image img {
+    transform: scale(1.05);
+}
+
+.suite-card-content {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 1rem;
+}
+
+.suite-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    font-family: 'Playfair Display', serif;
+}
+
+/* Suite Card Icons */
+.suite-card-icons {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.suite-card-icons svg {
+    width: 18px;
+    height: 18px;
+    color: #666666;
+    flex-shrink: 0;
+}
+
+.suite-card-description {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #666666;
+    margin: 0;
+    flex: 1;
+}
+
+/* Card Footer */
+.suite-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+    margin-top: auto;
+    border-top: 1px solid #f0f0f0;
+}
+
+.suite-price {
+    display: flex;
+    align-items: center;
+}
+
+.price-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0F1F4B;
+    line-height: 1.2;
+    white-space: nowrap;
+}
+
+.price-amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #0F1F4B;
+    letter-spacing: -0.02em;
+}
+
+/* Button */
+.suite-btn-details {
+    background: #0F1F4B;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    letter-spacing: 0.01em;
+}
+
+.suite-btn-details:hover {
+    background: #0a6b5f;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(14, 141, 127, 0.3);
+}
+
+.suite-btn-details:active {
+    transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .suites-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .suites-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .rooms-hero {
+        padding: 6rem 0 3rem;
+        min-height: 280px;
+        margin-top: 60px;
+    }
+
+    .rooms-hero-title {
+        font-size: clamp(2rem, 8vw, 2.5rem);
+        margin-bottom: 0.75rem;
+    }
+
+    .rooms-hero-subtitle {
+        font-size: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .suites-grid-section {
+        padding: 2.5rem 0;
+    }
+
+    .suites-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+
+    .suite-card {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .suite-card-image {
+        height: 240px;
+    }
+
+    .suite-card-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .suite-card-content {
+        padding: 1.25rem;
+        gap: 0.75rem;
+    }
+
+    .suite-card-title {
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
+        margin-bottom: 0.5rem;
+    }
+
+    .suite-card-icons {
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .suite-card-icons svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .suite-card-description {
+        font-size: clamp(0.9rem, 3.5vw, 0.95rem);
+        line-height: 1.5;
+    }
+
+    .suite-card-footer {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding-top: 0.75rem;
+    }
+
+    .suite-price {
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .price-value {
+        font-size: clamp(1rem, 4vw, 1.25rem);
+    }
+
+    .price-amount {
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
+    }
+
+    .suite-btn-details {
+        width: 100%;
+        padding: 0.85rem 1.25rem;
+        font-size: clamp(0.9rem, 3.5vw, 0.95rem);
+    }
+}
+
+@media (max-width: 480px) {
+    .rooms-hero {
+        padding: 5rem 0 2.5rem;
+        min-height: 250px;
+    }
+
+    .rooms-hero-title {
+        font-size: clamp(1.75rem, 7vw, 2rem);
+        margin-bottom: 0.5rem;
+    }
+
+    .rooms-hero-subtitle {
+        font-size: clamp(0.95rem, 3.5vw, 1.1rem);
+    }
+
+    .suites-grid-section {
+        padding: 2rem 0;
+    }
+
+    .suites-grid {
+        gap: 1.25rem;
+        padding: 0 0.75rem;
+    }
+
+    .suite-card-image {
+        height: 200px;
+    }
+
+    .suite-card-content {
+        padding: 1rem;
+        gap: 0.5rem;
+    }
+
+    .suite-card-title {
+        font-size: clamp(1.15rem, 4.5vw, 1.35rem);
+    }
+
+    .suite-card-description {
+        font-size: clamp(0.85rem, 3vw, 0.9rem);
+    }
+
+    .price-value {
+        font-size: clamp(0.95rem, 3.5vw, 1.25rem);
+    }
+
+    .price-amount {
+        font-size: clamp(1.15rem, 4.5vw, 1.5rem);
+    }
+
+    .suite-btn-details {
+        padding: 0.75rem 1rem;
+        font-size: clamp(0.85rem, 3vw, 0.9rem);
+    }
+}
+
+/* Carrossel de Imagens */
+.room-carousel-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.room-carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+    width: 100%;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    flex-shrink: 0;
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+@media (max-width: 768px) {
+    .carousel-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.25rem;
+    }
+
+    .carousel-btn.prev {
+        left: 5px;
+    }
+
+    .carousel-btn.next {
+        right: 5px;
+    }
+
+    .carousel-indicators {
+        margin-top: 15px;
+        gap: 8px;
+    }
+
+    .carousel-indicator {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1.1rem;
+    }
+
+    .carousel-btn.prev {
+        left: 3px;
+    }
+
+    .carousel-btn.next {
+        right: 3px;
+    }
+
+    .carousel-indicators {
+        margin-top: 12px;
+        gap: 6px;
+    }
+
+    .carousel-indicator {
+        width: 8px;
+        height: 8px;
+    }
+}
+
+.carousel-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.carousel-btn.prev {
+    left: 10px;
+}
+
+.carousel-btn.next {
+    right: 10px;
+}
+
+.carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.carousel-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.carousel-indicator.active {
+    background: #0F1F4B;
+}
+
+/* Responsividade para Página Individual de Suíte */
+.room-detail-section {
+    padding: 2rem 0;
+    margin-top: 70px;
+}
+
+@media (max-width: 768px) {
+    .room-detail-section {
+        padding: 1.5rem 0;
+        margin-top: 60px;
+    }
+
+    /* Banner Principal */
+    .suite-banner {
+        height: 300px !important;
+        margin-bottom: 2rem !important;
+        margin-top: 1rem !important;
+        border-radius: 15px !important;
+    }
+
+    .room-title {
+        font-size: clamp(2rem, 8vw, 2.5rem) !important;
+        padding: 0 1rem;
+    }
+
+    /* Carrossel */
+    .suite-carousel-section {
+        margin-bottom: 2.5rem !important;
+    }
+
+    .suite-carousel-section h2 {
+        font-size: clamp(1.5rem, 6vw, 2rem) !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .carousel-slide {
+        height: 350px !important;
+    }
+
+    .carousel-slide img {
+        border-radius: 12px !important;
+    }
+
+    /* Seção Sobre */
+    .suite-about-section {
+        padding: 2rem 1.5rem !important;
+        margin-bottom: 2.5rem !important;
+        border-radius: 15px !important;
+    }
+
+    .suite-about-section h2 {
+        font-size: clamp(1.5rem, 6vw, 2rem) !important;
+        margin-bottom: 1.25rem !important;
+    }
+
+    .suite-about-section p {
+        font-size: clamp(1rem, 4vw, 1.1rem) !important;
+        line-height: 1.6 !important;
+    }
+
+    /* Comodidades */
+    .suite-amenities {
+        margin-bottom: 2.5rem !important;
+    }
+
+    .suite-amenities h2 {
+        font-size: clamp(1.5rem, 6vw, 2rem) !important;
+        margin-bottom: 1.5rem !important;
+    }
+
+    .amenities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)) !important;
+        gap: 1rem !important;
+        padding: 0 1rem !important;
+    }
+
+    .amenities-grid > div {
+        padding: 1.25rem !important;
+        border-radius: 12px !important;
+        flex-direction: column !important;
+        gap: 0.5rem !important;
+    }
+
+    .amenities-grid > div span {
+        font-size: clamp(0.9rem, 3.5vw, 1rem) !important;
+        text-align: center !important;
+    }
+
+    /* Cards de Informações */
+    .suite-info-cards {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+        margin-bottom: 2.5rem !important;
+        padding: 0 1rem !important;
+    }
+
+    .suite-info-cards > div {
+        padding: 1.5rem !important;
+        border-radius: 12px !important;
+    }
+
+    .suite-info-cards > div > div {
+        width: 45px !important;
+        height: 45px !important;
+        margin-bottom: 0.75rem !important;
+    }
+
+    .suite-info-cards > div > div svg {
+        width: 22px !important;
+        height: 22px !important;
+    }
+
+    .suite-info-cards > div > p:first-of-type {
+        font-size: clamp(0.85rem, 3vw, 0.9rem) !important;
+    }
+
+    .suite-info-cards > div > p:last-of-type {
+        font-size: clamp(1.15rem, 4.5vw, 1.3rem) !important;
+    }
+
+    /* Regras */
+    .suite-rules {
+        padding: 1.5rem !important;
+        margin-bottom: 2rem !important;
+        border-radius: 12px !important;
+    }
+
+    .suite-rules h3 {
+        font-size: clamp(1.25rem, 5vw, 1.5rem) !important;
+    }
+
+    .suite-rules p {
+        font-size: clamp(0.95rem, 3.5vw, 1rem) !important;
+        line-height: 1.6 !important;
+    }
+
+    /* Botão Reserva */
+    .room-detail-section .btn {
+        padding: 1rem 2rem !important;
+        font-size: clamp(1rem, 4vw, 1.2rem) !important;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .room-detail-section {
+        padding: 1rem 0;
+    }
+
+    /* Banner Principal */
+    .suite-banner {
+        height: 250px !important;
+        margin-bottom: 1.5rem !important;
+        border-radius: 12px !important;
+    }
+
+    .room-title {
+        font-size: clamp(1.75rem, 7vw, 2rem) !important;
+    }
+
+    /* Carrossel */
+    .suite-carousel-section h2 {
+        font-size: clamp(1.35rem, 5.5vw, 1.5rem) !important;
+        margin-bottom: 1.25rem !important;
+    }
+
+    .carousel-slide {
+        height: 280px !important;
+    }
+
+    /* Seção Sobre */
+    .suite-about-section {
+        padding: 1.5rem 1rem !important;
+        margin-bottom: 2rem !important;
+        border-radius: 12px !important;
+    }
+
+    .suite-about-section h2 {
+        font-size: clamp(1.35rem, 5.5vw, 1.5rem) !important;
+    }
+
+    .suite-about-section p {
+        font-size: clamp(0.95rem, 3.5vw, 1rem) !important;
+    }
+
+    /* Comodidades */
+    .suite-amenities h2 {
+        font-size: clamp(1.35rem, 5.5vw, 1.5rem) !important;
+    }
+
+    .amenities-grid {
+        grid-template-columns: 1fr !important;
+        gap: 0.75rem !important;
+        padding: 0 0.5rem !important;
+    }
+
+    .amenities-grid > div {
+        padding: 1rem !important;
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+    }
+
+    /* Cards de Informações */
+    .suite-info-cards {
+        gap: 1.25rem !important;
+        padding: 0 0.5rem !important;
+    }
+
+    .suite-info-cards > div {
+        padding: 1.25rem !important;
+    }
+
+    /* Regras */
+    .suite-rules {
+        padding: 1.25rem !important;
+    }
+
+    .suite-rules h3 {
+        font-size: clamp(1.15rem, 4.5vw, 1.25rem) !important;
+    }
+
+    /* Botão Reserva */
+    .room-detail-section .btn {
+        padding: 0.9rem 1.5rem !important;
+        font-size: clamp(0.95rem, 3.5vw, 1rem) !important;
+    }
+}
+
