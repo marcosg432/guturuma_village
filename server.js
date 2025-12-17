@@ -1,3 +1,6 @@
+// Carregar variáveis de ambiente
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
@@ -7,11 +10,36 @@ const cors = require('cors');
 const crypto = require('crypto');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
+
+// Middlewares de Segurança
+const { 
+  loginLimiter, 
+  apiLimiter, 
+  adminApiLimiter, 
+  securityHeaders, 
+  sanitizeRequest 
+} = require('./middleware/security');
+const { 
+  validateLogin, 
+  validateReserva, 
+  validateContato 
+} = require('./middleware/validation');
+const { 
+  authenticateToken, 
+  generateAccessToken,
+  generateRefreshToken,
+  verifyRefreshToken,
+  requireAdmin 
+} = require('./middleware/auth');
+const { 
+  logLoginAttempt, 
+  logAdminRequests,
+  logUnauthorizedAccess 
+} = require('./middleware/logger');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
-const JWT_SECRET = process.env.JWT_SECRET || 'brisa_imperial_secret_key_2024_secure';
+const JWT_SECRET = process.env.JWT_SECRET || 'brisa_imperial_secret_key_2024_secure'; // ⚠️ USAR VARIÁVEL DE AMBIENTE EM PRODUÇÃO
 
 // Configuração SQLite - banco embutido
 const dbPath = path.join(__dirname, 'database', 'brisa_imperial.db');
@@ -26,22 +54,41 @@ if (!fs.existsSync(dbDir)) {
 let db;
 let SQL; // Será inicializado em initDatabase
 
-// Middleware
+// ==========================================
+// MIDDLEWARES DE SEGURANÇA
+// ==========================================
+
+// Trust proxy para rate limiting funcionar corretamente atrás de proxies
+app.set('trust proxy', 1);
+
+// Headers de Segurança (Helmet)
+app.use(securityHeaders);
+
+// CORS configurável via ambiente (por padrão ainda permite todas as origens, mas pode ser configurado)
+const corsOrigin = process.env.CORS_ORIGIN || '*';
 app.use(cors({
-  origin: '*', // Permitir todas as origens em produção
+  origin: corsOrigin === '*' ? '*' : corsOrigin.split(','),
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true
 }));
+
+// Body parser com limites
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
-// Headers anti-cache para atualização automática
-app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
-  res.setHeader('Pragma', 'no-cache');
-  res.setHeader('Expires', '0');
-  next();
-});
+// Sanitização de inputs (prevenir XSS)
+app.use(sanitizeRequest);
+
+// Headers anti-cache para atualização automática (apenas para desenvolvimento)
+if (process.env.NODE_ENV !== 'production') {
+  app.use((req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, private');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+    next();
+  });
+}
 
 app.use(express.static('public', {
   etag: false,
@@ -1225,8 +1272,8 @@ app.get('/api/quartos/:categoria/datas-livres', async (req, res) => {
   }
 });
 
-// API - Criar reserva
-app.post('/api/reserva', async (req, res) => {
+// API - Criar reserva (com rate limiting e validação)
+app.post('/api/reserva', apiLimiter, validateReserva, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -1580,8 +1627,8 @@ app.get('/api/reserva/:codigo', async (req, res) => {
   }
 });
 
-// API - Enviar mensagem de contato
-app.post('/api/contato', async (req, res) => {
+// API - Enviar mensagem de contato (com rate limiting e validação)
+app.post('/api/contato', apiLimiter, validateContato, async (req, res) => {
   try {
     if (!db) {
       console.error('❌ Banco de dados não disponível');
@@ -1651,7 +1698,7 @@ app.post('/api/contato', async (req, res) => {
 // Rotas administrativas removidas completamente
 
 // API - Listar fichas de contato (admin)
-app.get('/api/admin/contato', authenticateToken, async (req, res) => {
+app.get('/api/admin/contato', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('❌ Banco de dados não disponível');
@@ -1686,7 +1733,7 @@ app.get('/api/admin/contato', authenticateToken, async (req, res) => {
 });
 
 // API - Apagar fichas de contato expiradas (executar periodicamente)
-app.post('/api/admin/contato/limpar-expiradas', authenticateToken, async (req, res) => {
+app.post('/api/admin/contato/limpar-expiradas', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -1772,36 +1819,13 @@ app.get('/api/whatsapp/:codigo', async (req, res) => {
 // ========== PAINEL ADMINISTRATIVO ==========
 
 // Middleware de autenticação
-function authenticateToken(req, res, next) {
-  try {
-    console.log('🔐 Middleware authenticateToken chamado para:', req.method, req.path);
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];
-
-  if (!token) {
-      console.error('❌ Token não fornecido para:', req.method, req.path);
-    return res.status(401).json({ error: 'Token não fornecido' });
-  }
-
-  jwt.verify(token, JWT_SECRET, (err, user) => {
-    if (err) {
-        console.error('❌ Erro ao verificar token:', err.message, 'para:', req.method, req.path);
-        return res.status(403).json({ error: 'Token inválido ou expirado' });
-    }
-      console.log('✅ Token válido para:', req.method, req.path);
-    req.user = user;
-    next();
-  });
-  } catch (error) {
-    console.error('❌ Erro no middleware de autenticação:', error);
-    return res.status(500).json({ error: 'Erro ao processar autenticação' });
-  }
-}
+// Middleware de autenticação agora usa o middleware de segurança
+// authenticateToken já está importado de middleware/auth.js
 
 // Rotas estáticas do painel já movidas para antes da rota genérica
 
-// API - Login
-app.post('/api/admin/login', async (req, res) => {
+// API - Login (com rate limiting e validação)
+app.post('/api/admin/login', loginLimiter, validateLogin, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -1809,29 +1833,30 @@ app.post('/api/admin/login', async (req, res) => {
 
     const { email, password } = req.body;
 
-    if (!email || !password) {
-      return res.status(400).json({ error: 'E-mail e senha são obrigatórios' });
-    }
-
+    // Validação já feita pelo middleware validateLogin
     const user = queryOne('SELECT * FROM users_admin WHERE email = ?', [email.toLowerCase()]);
 
     if (!user) {
+      logLoginAttempt(req, false, email, 'Usuário não encontrado');
+      // Mesma mensagem para não expor se o email existe ou não (segurança)
       return res.status(401).json({ error: 'E-mail ou senha inválidos' });
     }
 
     const validPassword = await bcrypt.compare(password, user.password);
     if (!validPassword) {
+      logLoginAttempt(req, false, email, 'Senha incorreta');
       return res.status(401).json({ error: 'E-mail ou senha inválidos' });
     }
 
-    const token = jwt.sign(
-      { id: user.id, email: user.email, name: user.name },
-      JWT_SECRET,
-      { expiresIn: '24h' }
-    );
+    // Gerar tokens de acesso e refresh
+    const accessToken = generateAccessToken(user);
+    const refreshToken = generateRefreshToken(user);
+
+    logLoginAttempt(req, true, email);
 
     res.json({
-      token,
+      token: accessToken,
+      refreshToken: refreshToken,
       user: {
         id: user.id,
         name: user.name,
@@ -1839,17 +1864,47 @@ app.post('/api/admin/login', async (req, res) => {
       }
     });
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    logLoginAttempt(req, false, req.body.email, error.message);
+    res.status(500).json({ error: 'Erro ao processar login' });
   }
 });
 
-// API - Verificar token
-app.get('/api/admin/verify', authenticateToken, (req, res) => {
-  res.json({ valid: true, user: req.user });
+// API - Refresh Token
+app.post('/api/admin/refresh', async (req, res) => {
+  try {
+    const { refreshToken } = req.body;
+
+    if (!refreshToken) {
+      return res.status(401).json({ error: 'Refresh token não fornecido' });
+    }
+
+    const decoded = await verifyRefreshToken(refreshToken);
+    
+    // Buscar usuário no banco
+    const user = queryOne('SELECT * FROM users_admin WHERE id = ?', [decoded.id]);
+    
+    if (!user) {
+      return res.status(401).json({ error: 'Usuário não encontrado' });
+    }
+
+    // Gerar novo token de acesso
+    const newAccessToken = generateAccessToken(user);
+
+    res.json({
+      token: newAccessToken
+    });
+  } catch (error) {
+    return res.status(403).json({ error: 'Refresh token inválido ou expirado' });
+  }
 });
 
-// API - Listar reservas
-app.get('/api/admin/reservas', authenticateToken, async (req, res) => {
+// API - Verificar token (com rate limiting)
+app.get('/api/admin/verify', adminApiLimiter, authenticateToken, (req, res) => {
+  res.json({ valid: true, user: { id: req.user.id, email: req.user.email, name: req.user.name } });
+});
+
+// API - Listar reservas (com rate limiting e logging)
+app.get('/api/admin/reservas', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -1957,7 +2012,7 @@ function processarRegrasAutomaticas() {
 }
 
 // API - Buscar reserva por ID
-app.get('/api/admin/reservas/:id', authenticateToken, async (req, res) => {
+app.get('/api/admin/reservas/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -1985,7 +2040,7 @@ app.get('/api/admin/reservas/:id', authenticateToken, async (req, res) => {
 });
 
 // API - Criar reserva manual
-app.post('/api/admin/reservas', authenticateToken, async (req, res) => {
+app.post('/api/admin/reservas', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -2063,7 +2118,7 @@ app.post('/api/admin/reservas', authenticateToken, async (req, res) => {
 });
 
 // API - Atualizar reserva
-app.put('/api/admin/reservas/:id', authenticateToken, async (req, res) => {
+app.put('/api/admin/reservas/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -2155,7 +2210,7 @@ app.put('/api/admin/reservas/:id', authenticateToken, async (req, res) => {
 });
 
 // API - Quartos reservados
-app.get('/api/admin/quartos-reservados', authenticateToken, async (req, res) => {
+app.get('/api/admin/quartos-reservados', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -2217,7 +2272,7 @@ app.get('/api/admin/quartos-reservados', authenticateToken, async (req, res) => 
 });
 
 // API - Buscar todas as reservas de um quarto específico
-app.get('/api/admin/quartos/:id/reservas', authenticateToken, async (req, res) => {
+app.get('/api/admin/quartos/:id/reservas', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -2367,7 +2422,7 @@ app.get('/api/admin/quartos/:id/reservas', authenticateToken, async (req, res) =
 });
 
 // API - Histórico
-app.get('/api/admin/historico', authenticateToken, async (req, res) => {
+app.get('/api/admin/historico', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -2388,7 +2443,7 @@ app.get('/api/admin/historico', authenticateToken, async (req, res) => {
 });
 
 // API - Buscar histórico
-app.get('/api/admin/historico/buscar', authenticateToken, async (req, res) => {
+app.get('/api/admin/historico/buscar', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -2446,7 +2501,7 @@ app.get('/api/admin/historico/buscar', authenticateToken, async (req, res) => {
 });
 
 // API - Buscar reserva específica do histórico por ID
-app.get('/api/admin/historico/:id', authenticateToken, async (req, res) => {
+app.get('/api/admin/historico/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -2482,7 +2537,7 @@ app.options('/api/admin/historico/:id', (req, res) => {
   res.sendStatus(200);
 });
 
-app.delete('/api/admin/historico/:id', authenticateToken, async (req, res) => {
+app.delete('/api/admin/historico/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     console.log('=== TENTATIVA DE EXCLUSÃO DE FICHA ===');
     console.log('Método:', req.method);
@@ -2569,7 +2624,7 @@ app.delete('/api/admin/historico/:id', authenticateToken, async (req, res) => {
 });
 
 // API - Usuários
-app.get('/api/admin/usuarios', authenticateToken, async (req, res) => {
+app.get('/api/admin/usuarios', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -2583,7 +2638,7 @@ app.get('/api/admin/usuarios', authenticateToken, async (req, res) => {
   }
 });
 
-app.get('/api/admin/usuarios/:id', authenticateToken, async (req, res) => {
+app.get('/api/admin/usuarios/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -2602,7 +2657,7 @@ app.get('/api/admin/usuarios/:id', authenticateToken, async (req, res) => {
   }
 });
 
-app.post('/api/admin/usuarios', authenticateToken, async (req, res) => {
+app.post('/api/admin/usuarios', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -2631,7 +2686,7 @@ app.post('/api/admin/usuarios', authenticateToken, async (req, res) => {
   }
 });
 
-app.put('/api/admin/usuarios/:id', authenticateToken, async (req, res) => {
+app.put('/api/admin/usuarios/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       return res.status(503).json({ error: 'Banco de dados não disponível' });
@@ -2675,7 +2730,7 @@ app.options('/api/admin/usuarios/:id', (req, res) => {
   res.sendStatus(200);
 });
 
-app.delete('/api/admin/usuarios/:id', authenticateToken, async (req, res) => {
+app.delete('/api/admin/usuarios/:id', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     console.log('=== TENTATIVA DE EXCLUSÃO DE USUÁRIO ===');
     console.log('Método:', req.method);
@@ -2797,7 +2852,7 @@ app.get('/api/valores-suites', async (req, res) => {
 });
 
 // API - Renda do mês (formato simplificado para gráfico)
-app.get('/api/admin/renda-mes', authenticateToken, async (req, res) => {
+app.get('/api/admin/renda-mes', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     console.log('📊 Rota /api/admin/renda-mes chamada');
     console.log('Query params:', req.query);
@@ -2877,7 +2932,7 @@ app.get('/api/admin/renda-mes', authenticateToken, async (req, res) => {
 });
 
 // ===== ROTA: RENDA MENSAL =====
-app.get('/api/renda-mensal', authenticateToken, async (req, res) => {
+app.get('/api/renda-mensal', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');
@@ -2946,7 +3001,7 @@ app.get('/api/renda-mensal', authenticateToken, async (req, res) => {
   }
 });
 
-app.get('/api/admin/renda', authenticateToken, async (req, res) => {
+app.get('/api/admin/renda', adminApiLimiter, authenticateToken, requireAdmin, logAdminRequests, async (req, res) => {
   try {
     if (!db) {
       console.error('Banco de dados não disponível');

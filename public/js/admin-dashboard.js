@@ -41,6 +41,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configurar eventos
     setupEvents();
     
+    // Configurar menu mobile
+    setupMobileMenu();
+    
     // Carregar dados iniciais
     loadReservas();
     
@@ -107,6 +110,58 @@ function setupNavigation() {
 }
 
 // Configurar eventos
+// Configurar menu mobile
+function setupMobileMenu() {
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    
+    if (mobileMenuToggle && sidebar) {
+        function toggleMenu() {
+            sidebar.classList.toggle('active');
+            if (overlay) {
+                overlay.classList.toggle('active');
+            }
+        }
+        
+        mobileMenuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMenu();
+        });
+        
+        // Fechar menu ao clicar no overlay
+        if (overlay) {
+            overlay.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        }
+        
+        // Fechar menu ao clicar em um item do menu
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('active');
+                    if (overlay) {
+                        overlay.classList.remove('active');
+                    }
+                }
+            });
+        });
+        
+        // Fechar menu ao redimensionar para desktop
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                sidebar.classList.remove('active');
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            }
+        });
+    }
+}
+
 function setupEvents() {
     // Logout
     document.getElementById('btn-logout').addEventListener('click', function() {

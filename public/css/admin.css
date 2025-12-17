@@ -121,16 +121,23 @@ body {
     position: fixed;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
+    z-index: 1000;
 }
 
 .sidebar-header {
     padding: 30px 20px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: auto;
+    flex-shrink: 0;
 }
 
 .sidebar-header h2 {
     font-size: 22px;
     margin-bottom: 5px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .sidebar-header p {
@@ -141,6 +148,9 @@ body {
 .sidebar-nav {
     flex: 1;
     padding: 20px 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    min-height: 0;
 }
 
 .nav-item {
@@ -756,24 +766,356 @@ body {
     border-bottom: none;
 }
 
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-toggle svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Sidebar Overlay para mobile */
+.sidebar-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    display: block;
+    opacity: 1;
+}
+
 /* Responsive */
+@media (max-width: 1024px) {
+    .reservas-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+    
+    .quartos-container {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .filters {
+        flex-wrap: wrap;
+    }
+    
+    .content-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .renda-stats {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+}
+
 @media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: block;
+    }
+
     .sidebar {
-        width: 100%;
-        position: relative;
-        height: auto;
+        width: 280px;
+        max-width: 85vw;
+        position: fixed;
+        left: -100%;
+        top: 0;
+        height: 100vh;
+        z-index: 1000;
+        transition: left 0.3s ease;
+        box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+    
+    .sidebar-overlay {
+        display: block;
+    }
+    
+    .sidebar-header {
+        padding: 20px 15px;
+    }
+    
+    .sidebar-header h2 {
+        font-size: 18px;
+        line-height: 1.3;
+    }
+    
+    .sidebar-header p {
+        font-size: 11px;
+    }
+    
+    .nav-item {
+        padding: 12px 15px;
+        font-size: 14px;
+    }
+    
+    .nav-item span {
+        font-size: 16px;
+        margin-right: 10px;
     }
 
     .main-content {
         margin-left: 0;
+        padding: 20px 15px;
+        padding-top: 70px;
+    }
+    
+    .content-header {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+    }
+    
+    .content-header h1 {
+        font-size: 24px;
     }
 
     .form-row {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .reservas-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .quartos-container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .filters {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    
+    .filter-group label {
+        margin-bottom: 0;
+    }
+    
+    .filter-group select {
+        width: 100%;
+    }
+    
+    .btn-refresh {
+        width: 100%;
+    }
+    
+    .renda-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .renda-stats {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .stat-value {
+        font-size: 28px;
+    }
+    
+    .renda-chart {
+        height: 300px;
+        padding: 15px;
+    }
+    
+    .usuarios-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .usuarios-header h2 {
+        margin-bottom: 0;
+    }
+    
+    #btn-add-usuario {
+        width: 100%;
+    }
+    
+    .usuario-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .usuario-actions {
+        width: 100%;
+        justify-content: stretch;
+    }
+    
+    .usuario-actions button {
+        flex: 1;
+    }
+    
+    .valor-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+    
+    .valor-input-group {
+        width: 100%;
+        flex-direction: column;
+    }
+    
+    .valor-input {
+        width: 100%;
+    }
+    
+    .btn-save-valor {
+        width: 100%;
+    }
+    
+    .historico-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .historico-mensal-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .form-actions {
+        flex-direction: column;
+    }
+    
+    .form-actions button {
+        width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding: 20px;
+        margin: 10px;
+    }
+    
+    .modal-close {
+        right: 15px;
+        top: 15px;
+        font-size: 24px;
+    }
+    
+    .login-box {
+        padding: 30px 20px;
+    }
+    
+    .login-header h1 {
+        font-size: 24px;
+    }
+    
+    .reserva-card {
+        padding: 15px;
+    }
+    
+    .quarto-card {
+        padding: 15px;
+    }
+    
+    .sidebar-header {
+        padding: 20px 15px;
+    }
+    
+    .sidebar-header h2 {
+        font-size: 20px;
+    }
+    
+    .sidebar-nav {
+        padding: 15px 0;
+    }
+    
+    .nav-item {
+        padding: 12px 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px 10px;
+        padding-top: 70px;
+    }
+    
+    .content-header h1 {
+        font-size: 20px;
+    }
+    
+    .reserva-card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .quarto-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .stat-value {
+        font-size: 24px;
+    }
+    
+    .renda-chart {
+        height: 250px;
+        padding: 10px;
+    }
+    
+    .sidebar {
+        width: 100%;
+        max-width: 100%;
+        left: -100%;
+    }
+    
+    .sidebar-header h2 {
+        font-size: 16px;
+    }
+    
+    .nav-item {
+        padding: 14px 15px;
+        font-size: 15px;
+    }
+    
+    .form-agendar,
+    .form-editar-reserva {
+        padding: 20px 15px;
     }
 }
 
