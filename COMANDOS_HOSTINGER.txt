@@ -1,0 +1,24 @@
+# Comandos para executar na Hostinger (copie e cole um por vez)
+
+# 1. Navegar até o diretório do projeto
+cd /var/www/gururuma-village
+
+# 2. Atualizar código do repositório
+git pull origin main
+
+# 3. Instalar dependências de segurança (IMPORTANTE!)
+npm install express-rate-limit helmet
+
+# Ou instalar todas as dependências:
+npm install
+
+# 4. Reiniciar o PM2
+pm2 restart gururuma-village
+
+# 5. Verificar status
+pm2 status
+
+# 6. Ver logs (verificar se iniciou corretamente)
+pm2 logs gururuma-village --lines 30
+
+

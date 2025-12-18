@@ -597,8 +597,8 @@ function inicializarHospedes() {
             if (suite) {
                 // Só incrementa se não ultrapassar o limite
                 if (reservaData.adultos < suite.capacidadeAdultos) {
-                    reservaData.adultos++;
-                    atualizarHospedes();
+        reservaData.adultos++;
+        atualizarHospedes();
                 }
                 // Se atingiu o limite, o botão já estará desabilitado visualmente
             } else {

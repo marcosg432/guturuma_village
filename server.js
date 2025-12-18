@@ -58,17 +58,18 @@ let SQL; // Será inicializado em initDatabase
 // MIDDLEWARES DE SEGURANÇA
 // ==========================================
 
-// Servir arquivos estáticos PRIMEIRO - antes de qualquer middleware
+// Trust proxy para rate limiting funcionar corretamente atrás de proxies
+app.set('trust proxy', 1);
+
+// Headers de Segurança (Helmet) - Aplicado ANTES de static para que funcione em todas as rotas
+// Helmet apenas adiciona headers, não interfere no conteúdo dos arquivos estáticos
+app.use(securityHeaders);
+
+// Servir arquivos estáticos
 app.use(express.static('public', {
   etag: false,
   lastModified: false
 }));
-
-// Trust proxy para rate limiting funcionar corretamente atrás de proxies
-app.set('trust proxy', 1);
-
-// Headers de Segurança (Helmet) - DESABILITADO TEMPORARIAMENTE para corrigir o site
-// app.use(securityHeaders);
 
 // CORS configurável via ambiente
 const corsOrigin = process.env.CORS_ORIGIN || '*';
@@ -83,14 +84,9 @@ app.use(cors({
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
 
-// Sanitização de inputs DESABILITADA TEMPORARIAMENTE para arquivos estáticos funcionarem
-// app.use((req, res, next) => {
-//   if (req.path.startsWith('/css/') || req.path.startsWith('/js/') || 
-//       req.path.startsWith('/images/') || req.path.match(/\.(css|js|jpg|jpeg|png|gif|svg|ico|woff|woff2|ttf|eot)$/i)) {
-//     return next();
-//   }
-//   sanitizeRequest(req, res, next);
-// });
+// Sanitização de inputs - REATIVADA com exceções para arquivos estáticos
+// A função sanitizeRequest já tem lógica interna para pular arquivos estáticos
+app.use(sanitizeRequest);
 
 // Headers anti-cache para atualização automática (apenas para desenvolvimento)
 if (process.env.NODE_ENV !== 'production') {

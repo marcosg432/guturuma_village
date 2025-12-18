@@ -53,6 +53,34 @@
 }
 
 /* Suítes Grid Section */
+/* Banner Divisória */
+.banner-divisoria-section {
+    padding: 0;
+    background: #ffffff;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    overflow: hidden;
+}
+
+.banner-divisoria-section .container {
+    padding: 0;
+    max-width: 100%;
+}
+
+.banner-divisoria-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: fill;
+    max-width: 100%;
+    max-height: 500px;
+    min-height: 450px;
+}
+
 .suites-grid-section {
     padding: 5rem 0;
     background: #f8f9fa;
@@ -90,7 +118,7 @@
     position: relative;
 }
 
-.suite-card-image img {
+.suite-imagem-principal {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -98,8 +126,68 @@
     transition: transform 0.5s ease;
 }
 
-.suite-card:hover .suite-card-image img {
+.suite-card:hover .suite-imagem-principal {
     transform: scale(1.05);
+}
+
+.suite-miniaturas {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.4rem;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 0.5rem;
+    border-radius: 10px;
+    z-index: 10;
+    flex-wrap: wrap;
+    max-width: calc(100% - 2rem);
+    justify-content: center;
+}
+
+.suite-miniatura {
+    width: 45px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.suite-miniatura:hover,
+.suite-miniatura.ativa {
+    border-color: #40E0D0;
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* Variações visuais para criar diversidade nos cards */
+.suite-imagem-variacao-1 {
+    filter: hue-rotate(15deg) brightness(1.05) saturate(1.1);
+}
+
+.suite-imagem-variacao-2 {
+    filter: hue-rotate(-10deg) brightness(0.98) contrast(1.05);
+}
+
+.suite-imagem-variacao-3 {
+    filter: sepia(0.08) saturate(1.15) brightness(1.02);
+}
+
+.suite-imagem-variacao-4 {
+    filter: hue-rotate(25deg) brightness(1.08) saturate(1.2);
+}
+
+.suite-imagem-variacao-5 {
+    filter: brightness(0.95) contrast(1.1) saturate(1.05);
+}
+
+.suite-imagem-variacao-6 {
+    filter: hue-rotate(-15deg) brightness(1.03) saturate(1.18);
 }
 
 .suite-card-content {
@@ -337,6 +425,141 @@
 
     .suite-card-image {
         height: 200px;
+    }
+}
+
+/* Modal Lightbox para Imagens */
+.image-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.modal-content {
+    max-width: 90%;
+    max-height: 90vh;
+    object-fit: contain;
+    animation: zoom 0.3s;
+}
+
+@keyframes zoom {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    transition: color 0.3s;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.modal-prev,
+.modal-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #f1f1f1;
+    font-size: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10000;
+    padding: 20px;
+    user-select: none;
+    transition: color 0.3s, background-color 0.3s;
+    border-radius: 5px;
+}
+
+.modal-prev {
+    left: 20px;
+}
+
+.modal-next {
+    right: 20px;
+}
+
+.modal-prev:hover,
+.modal-next:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-counter {
+    position: absolute;
+    bottom: 30px;
+    color: #f1f1f1;
+    font-size: 18px;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 20px;
+    border-radius: 5px;
+    z-index: 10000;
+}
+
+/* Cursor pointer para imagens clicáveis */
+.suite-imagem-principal,
+.suite-miniatura {
+    cursor: pointer;
+}
+
+.suite-miniatura:hover {
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    .modal-content {
+        max-width: 95%;
+        max-height: 85vh;
+    }
+
+    .modal-close {
+        top: 10px;
+        right: 20px;
+        font-size: 35px;
+    }
+
+    .modal-prev,
+    .modal-next {
+        font-size: 35px;
+        padding: 15px;
+    }
+
+    .modal-prev {
+        left: 10px;
+    }
+
+    .modal-next {
+        right: 10px;
+    }
+
+    .modal-counter {
+        bottom: 20px;
+        font-size: 16px;
+        padding: 8px 15px;
     }
 
     .suite-card-content {
