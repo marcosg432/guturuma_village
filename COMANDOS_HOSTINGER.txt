@@ -22,3 +22,5 @@ pm2 status
 pm2 logs gururuma-village --lines 30
 
 
+
+
