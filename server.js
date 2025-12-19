@@ -65,6 +65,17 @@ app.set('trust proxy', 1);
 // Helmet apenas adiciona headers, não interfere no conteúdo dos arquivos estáticos
 app.use(securityHeaders);
 
+// Middleware para forçar atualização de arquivos CSS e JS (evitar cache)
+app.use((req, res, next) => {
+  // Se for arquivo CSS ou JS, adicionar headers para evitar cache
+  if (req.path.match(/\.(css|js)$/)) {
+    res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.setHeader('Pragma', 'no-cache');
+    res.setHeader('Expires', '0');
+  }
+  next();
+});
+
 // Servir arquivos estáticos
 app.use(express.static('public', {
   etag: false,
