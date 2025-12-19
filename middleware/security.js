@@ -61,9 +61,25 @@ const adminApiLimiter = rateLimit ? rateLimit({
  * Configuração balanceada: segurança sem quebrar o site
  */
 const securityHeaders = helmet ? helmet({
-  // Content Security Policy DESABILITADO TEMPORARIAMENTE para diagnóstico
-  // TODO: Reativar após identificar o problema
-  contentSecurityPolicy: false,
+  // Content Security Policy - Configuração permissiva para não bloquear recursos
+  // Permite recursos do mesmo domínio e inline, mantendo segurança básica
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "http:", "https:", "data:", "blob:"],
+      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "http:", "https:", "data:", "blob:"],
+      styleSrc: ["'self'", "'unsafe-inline'", "http:", "https:", "data:"],
+      fontSrc: ["'self'", "http:", "https:", "data:"],
+      imgSrc: ["'self'", "http:", "https:", "data:", "blob:"],
+      connectSrc: ["'self'", "http:", "https:", "ws:", "wss:"],
+      frameSrc: ["'self'", "http:", "https:"],
+      objectSrc: ["'none'"],
+      baseUri: ["'self'"],
+      mediaSrc: ["'self'", "http:", "https:", "data:"],
+      workerSrc: ["'self'", "blob:"],
+      manifestSrc: ["'self'"],
+      formAction: ["'self'"],
+    },
+  },
   // Outras proteções
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" },
