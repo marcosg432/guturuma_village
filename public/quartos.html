@@ -328,12 +328,12 @@
                 <!-- Suíte Orquídea Premium -->
                 <div class="suite-card">
                     <div class="suite-card-image">
-                        <img src="images/suite-2-img-4.jpeg" alt="Quarto - Orquídea Premium" class="suite-imagem-principal suite-imagem-variacao-5" id="img-principal-suite-2">
+                        <img src="images/suite-2-img-1.jpeg" alt="Quarto - Orquídea Premium" class="suite-imagem-principal suite-imagem-variacao-5" id="img-principal-suite-2">
                         <div class="suite-miniaturas">
-                            <img src="images/suite-2-img-4.jpeg" alt="Imagem 1" class="suite-miniatura ativa" data-index="0" data-quarto="suite-2">
-                            <img src="images/suite-2-img-1.jpeg" alt="Imagem 2" class="suite-miniatura" data-index="1" data-quarto="suite-2">
-                            <img src="images/suite-2-img-2.jpeg" alt="Imagem 3" class="suite-miniatura" data-index="2" data-quarto="suite-2">
-                            <img src="images/suite-2-img-3.jpeg" alt="Imagem 4" class="suite-miniatura" data-index="3" data-quarto="suite-2">
+                            <img src="images/suite-2-img-1.jpeg" alt="Imagem 1" class="suite-miniatura ativa" data-index="0" data-quarto="suite-2">
+                            <img src="images/suite-2-img-2.jpeg" alt="Imagem 2" class="suite-miniatura" data-index="1" data-quarto="suite-2">
+                            <img src="images/suite-2-img-3.jpeg" alt="Imagem 3" class="suite-miniatura" data-index="2" data-quarto="suite-2">
+                            <img src="images/suite-2-img-4.jpeg" alt="Imagem 4" class="suite-miniatura" data-index="3" data-quarto="suite-2">
                         </div>
                     </div>
                     <div class="suite-card-content">
@@ -683,25 +683,104 @@
                 console.error('Erro ao carregar preços:', error);
             }
 
-            // Sistema de galeria de imagens - trocar imagem principal ao clicar nas miniaturas
-            const miniaturas = document.querySelectorAll('.suite-miniatura');
-            miniaturas.forEach(miniatura => {
-                miniatura.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    const quartoId = this.getAttribute('data-quarto');
-                    const imagemSrc = this.getAttribute('src');
-                    
-                    // Atualizar imagem principal
-                    const imgPrincipal = document.getElementById(`img-principal-${quartoId}`);
-                    if (imgPrincipal) {
-                        imgPrincipal.src = imagemSrc;
-                    }
-                    
-                    // Atualizar classe ativa nas miniaturas do mesmo quarto
-                    const todasMiniaturas = document.querySelectorAll(`.suite-miniatura[data-quarto="${quartoId}"]`);
-                    todasMiniaturas.forEach(min => min.classList.remove('ativa'));
-                    this.classList.add('ativa');
+            // Converter estrutura de miniaturas em carrossel
+            function initCarrossel(cardImageContainer) {
+                const imgPrincipal = cardImageContainer.querySelector('.suite-imagem-principal');
+                const miniaturasContainer = cardImageContainer.querySelector('.suite-miniaturas');
+                
+                if (!miniaturasContainer || !imgPrincipal) return;
+                
+                const quartoId = imgPrincipal.id.replace('img-principal-', '');
+                const miniaturas = Array.from(miniaturasContainer.querySelectorAll('.suite-miniatura'));
+                
+                if (miniaturas.length === 0) return;
+                
+                // Criar estrutura do carrossel
+                const carouselWrapper = document.createElement('div');
+                carouselWrapper.className = 'suite-carousel-wrapper';
+                
+                const carouselTrack = document.createElement('div');
+                carouselTrack.className = 'suite-carousel-track';
+                carouselTrack.setAttribute('data-quarto', quartoId);
+                
+                // Criar slides para cada imagem
+                miniaturas.forEach((miniatura, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'suite-carousel-slide';
+                    const img = document.createElement('img');
+                    img.src = miniatura.src;
+                    img.alt = miniatura.alt;
+                    img.style.transition = 'transform 0.5s ease';
+                    slide.appendChild(img);
+                    carouselTrack.appendChild(slide);
                 });
+                
+                // Criar botões de navegação
+                const btnPrev = document.createElement('button');
+                btnPrev.className = 'suite-carousel-btn prev';
+                btnPrev.innerHTML = '‹';
+                btnPrev.setAttribute('aria-label', 'Imagem anterior');
+                
+                const btnNext = document.createElement('button');
+                btnNext.className = 'suite-carousel-btn next';
+                btnNext.innerHTML = '›';
+                btnNext.setAttribute('aria-label', 'Próxima imagem');
+                
+                carouselWrapper.appendChild(carouselTrack);
+                carouselWrapper.appendChild(btnPrev);
+                carouselWrapper.appendChild(btnNext);
+                
+                // Substituir conteúdo antigo pelo carrossel
+                cardImageContainer.innerHTML = '';
+                cardImageContainer.appendChild(carouselWrapper);
+                
+                // Inicializar carrossel
+                let currentSlide = 0;
+                const slides = carouselTrack.querySelectorAll('.suite-carousel-slide');
+                const totalSlides = slides.length;
+                
+                function updateCarousel() {
+                    carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+                }
+                
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    updateCarousel();
+                }
+                
+                function prevSlide() {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    updateCarousel();
+                }
+                
+                btnNext.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    nextSlide();
+                });
+                
+                btnPrev.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    prevSlide();
+                });
+                
+                // Auto-play opcional (pausa ao passar o mouse)
+                let autoPlayInterval;
+                function startAutoPlay() {
+                    autoPlayInterval = setInterval(nextSlide, 5000);
+                }
+                
+                function stopAutoPlay() {
+                    clearInterval(autoPlayInterval);
+                }
+                
+                carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
+                carouselWrapper.addEventListener('mouseleave', startAutoPlay);
+                startAutoPlay();
+            }
+            
+            // Inicializar carrosséis para todos os cards
+            document.querySelectorAll('.suite-card-image').forEach(container => {
+                initCarrossel(container);
             });
 
             // Sistema de modal para abrir imagens
@@ -732,44 +811,19 @@
                 }
             }
 
-            // Adicionar evento de clique nas imagens principais
-            document.querySelectorAll('.suite-imagem-principal').forEach(img => {
+            // Adicionar evento de clique nas imagens do carrossel para abrir modal
+            document.querySelectorAll('.suite-carousel-slide img').forEach(img => {
                 img.style.cursor = 'pointer';
                 img.addEventListener('click', function() {
-                    const quartoId = this.id.replace('img-principal-', '');
-                    const todasImagens = Array.from(document.querySelectorAll(`.suite-miniatura[data-quarto="${quartoId}"]`));
-                    const imagemAtual = todasImagens.find(img => img.classList.contains('ativa')) || todasImagens[0];
-                    const indexInicial = todasImagens.indexOf(imagemAtual);
+                    const carouselTrack = this.closest('.suite-carousel-track');
+                    if (!carouselTrack) return;
+                    const quartoId = carouselTrack.getAttribute('data-quarto');
+                    const todasImagens = Array.from(carouselTrack.querySelectorAll('img'));
+                    const indexInicial = todasImagens.indexOf(this);
                     openModal(todasImagens, indexInicial >= 0 ? indexInicial : 0);
                 });
             });
 
-            // Adicionar evento de clique nas miniaturas para abrir modal
-            miniaturas.forEach(miniatura => {
-                miniatura.addEventListener('click', function(e) {
-                    // Se clicar com Ctrl ou botão do meio do mouse, abre o modal
-                    if (e.ctrlKey || e.button === 1) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        const quartoId = this.getAttribute('data-quarto');
-                        const todasImagens = Array.from(document.querySelectorAll(`.suite-miniatura[data-quarto="${quartoId}"]`));
-                        const indexInicial = Array.from(todasImagens).indexOf(this);
-                        openModal(todasImagens, indexInicial >= 0 ? indexInicial : 0);
-                    }
-                });
-            });
-
-            // Adicionar evento de clique duplo nas miniaturas para abrir modal
-            miniaturas.forEach(miniatura => {
-                miniatura.addEventListener('dblclick', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const quartoId = this.getAttribute('data-quarto');
-                    const todasImagens = Array.from(document.querySelectorAll(`.suite-miniatura[data-quarto="${quartoId}"]`));
-                    const indexInicial = Array.from(todasImagens).indexOf(this);
-                    openModal(todasImagens, indexInicial >= 0 ? indexInicial : 0);
-                });
-            });
 
             // Fechar modal
             closeBtn.addEventListener('click', function() {

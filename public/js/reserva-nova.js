@@ -29,9 +29,22 @@ const suites = [
         descricao: 'Acomode-se nesta casa de temporada com 100 m², ar-condicionado e varanda. Possui 3 quartos separados, sala de estar, cozinha completa com geladeira e forno, além de 4 banheiros. Toalhas e roupa de cama fornecidas. Ótima opção para famílias que precisam de conforto e praticidade.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV de tela plana', 'Utensílios de cozinha', 'Aceita pets', 'Estacionamento gratuito'],
         imagens: [
-            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop'
+            'images/casa-1-img-1.jpg',
+            'images/casa-1-img-2.jpg',
+            'images/casa-1-img-3.jpg',
+            'images/casa-1-img-4.jpg',
+            'images/casa-1-img-5.jpg',
+            'images/casa-1-img-6.jpg',
+            'images/casa-1-img-7.jpg',
+            'images/casa-1-img-8.jpg',
+            'images/casa-1-img-9.jpg',
+            'images/casa-1-img-10.jpg',
+            'images/casa-1-img-11.jpg',
+            'images/casa-1-img-12.jpg',
+            'images/casa-1-img-13.jpg',
+            'images/casa-1-img-14.jpg',
+            'images/casa-1-img-15.jpg',
+            'images/casa-1-img-16.jpg'
         ]
     },
     {
@@ -45,9 +58,31 @@ const suites = [
         descricao: 'Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila. Inclui roupas de cama e toalhas. Estacionamento no local e Wi-Fi gratuito.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Cozinha equipada', 'Sala de estar', 'Ar-condicionado', 'TV', 'Wi-Fi gratuito', 'Estacionamento gratuito'],
         imagens: [
-            'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=400&fit=crop'
+            'images/casa-2-img-1.jpg',
+            'images/casa-2-img-2.jpg',
+            'images/casa-2-img-3.jpg',
+            'images/casa-2-img-4.jpg',
+            'images/casa-2-img-5.jpg',
+            'images/casa-2-img-6.jpg',
+            'images/casa-2-img-7.jpg',
+            'images/casa-2-img-8.jpg',
+            'images/casa-2-img-9.jpg',
+            'images/casa-2-img-10.jpg',
+            'images/casa-2-img-11.jpg',
+            'images/casa-2-img-12.jpg',
+            'images/casa-2-img-13.jpg',
+            'images/casa-2-img-14.jpg',
+            'images/casa-2-img-15.jpg',
+            'images/casa-2-img-16.jpg',
+            'images/casa-2-img-17.jpg',
+            'images/casa-2-img-18.jpg',
+            'images/casa-2-img-19.jpg',
+            'images/casa-2-img-20.jpg',
+            'images/casa-2-img-21.jpg',
+            'images/casa-2-img-22.jpg',
+            'images/casa-2-img-23.jpg',
+            'images/casa-2-img-24.jpg',
+            'images/casa-2-img-25.jpg'
         ]
     },
     {
@@ -61,9 +96,29 @@ const suites = [
         descricao: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
         comodidades: ['100 m²', '3 quartos', '5 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Recepção 24h'],
         imagens: [
-            'https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=400&fit=crop'
+            'images/casa-3-img-1.jpg',
+            'images/casa-3-img-2.jpg',
+            'images/casa-3-img-3.jpg',
+            'images/casa-3-img-4.jpg',
+            'images/casa-3-img-5.jpg',
+            'images/casa-3-img-6.jpg',
+            'images/casa-3-img-7.jpg',
+            'images/casa-3-img-8.jpg',
+            'images/casa-3-img-9.jpg',
+            'images/casa-3-img-10.jpg',
+            'images/casa-3-img-11.jpg',
+            'images/casa-3-img-12.jpg',
+            'images/casa-3-img-13.jpg',
+            'images/casa-3-img-14.jpg',
+            'images/casa-3-img-15.jpg',
+            'images/casa-3-img-16.jpg',
+            'images/casa-3-img-17.jpg',
+            'images/casa-3-img-18.jpg',
+            'images/casa-3-img-19.jpg',
+            'images/casa-3-img-20.jpg',
+            'images/casa-3-img-21.jpg',
+            'images/casa-3-img-22.jpg',
+            'images/casa-3-img-23.jpg'
         ]
     },
     {
@@ -77,9 +132,33 @@ const suites = [
         descricao: 'Casa completa com 100 m², ar-condicionado em todos ambientes, sala de estar, cozinha completa com geladeira e micro-ondas, além de 4 banheiros. Ideal para grupos e famílias que buscam conforto e privacidade. Inclui toalhas e roupa de cama.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado individual', 'Cozinha completa', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Utensílios de cozinha'],
         imagens: [
-            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop'
+            'images/casa-4-img-1.jpg',
+            'images/casa-4-img-2.jpg',
+            'images/casa-4-img-3.jpg',
+            'images/casa-4-img-4.jpg',
+            'images/casa-4-img-5.jpg',
+            'images/casa-4-img-6.jpg',
+            'images/casa-4-img-7.jpg',
+            'images/casa-4-img-8.jpg',
+            'images/casa-4-img-9.jpg',
+            'images/casa-4-img-10.jpg',
+            'images/casa-4-img-11.jpg',
+            'images/casa-4-img-12.jpg',
+            'images/casa-4-img-13.jpg',
+            'images/casa-4-img-14.jpg',
+            'images/casa-4-img-15.jpg',
+            'images/casa-4-img-16.jpg',
+            'images/casa-4-img-17.jpg',
+            'images/casa-4-img-18.jpg',
+            'images/casa-4-img-19.jpg',
+            'images/casa-4-img-20.jpg',
+            'images/casa-4-img-21.jpg',
+            'images/casa-4-img-22.jpg',
+            'images/casa-4-img-23.jpg',
+            'images/casa-4-img-24.jpg',
+            'images/casa-4-img-25.jpg',
+            'images/casa-4-img-26.jpg',
+            'images/casa-4-img-27.jpg'
         ]
     },
     {
@@ -93,9 +172,13 @@ const suites = [
         descricao: 'Conforto e elegância em um ambiente acolhedor, perfeita para sua estadia. Ideal para casais ou pequenas famílias.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo'],
         imagens: [
-            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop'
+            'images/WhatsApp Image 2025-12-18 at 13.50.03.jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.05 (1).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.05 (2).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.05 (3).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.05 (4).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.05 (5).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.05.jpeg'
         ]
     },
     {
@@ -109,9 +192,10 @@ const suites = [
         descricao: 'Luxo e funcionalidade combinados, com vista privilegiada e comodidades exclusivas. Perfeita para famílias.',
         comodidades: ['Wi-Fi', 'TV 55"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=400&fit=crop'
+            'images/suite-2-img-1.jpeg',
+            'images/suite-2-img-2.jpeg',
+            'images/suite-2-img-3.jpeg',
+            'images/suite-2-img-4.jpeg'
         ]
     },
     {
@@ -125,9 +209,12 @@ const suites = [
         descricao: 'O ápice do luxo, com vista panorâmica e todas as comodidades de um resort de primeira linha. Experiência única e inesquecível.',
         comodidades: ['Wi-Fi', 'TV 65"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Hidromassagem', 'Minibar'],
         imagens: [
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop'
+            'images/WhatsApp Image 2025-12-18 at 13.50.06.jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.06 (1).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.06 (2).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.06 (3).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.06 (4).jpeg',
+            'images/WhatsApp Image 2025-12-18 at 13.50.06 (5).jpeg'
         ]
     },
     {
@@ -141,75 +228,15 @@ const suites = [
         descricao: 'Vista privilegiada para o mar com todas as comodidades para uma estadia inesquecível.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+            'images/suite-4-img-1.jpeg',
+            'images/suite-4-img-2.jpeg',
+            'images/suite-4-img-3.jpeg',
+            'images/suite-4-img-4.jpeg',
+            'images/suite-4-img-5.jpeg',
+            'images/suite-4-img-6.jpeg',
+            'images/suite-4-img-7.jpeg'
         ]
     },
-    {
-        id: 'deluxe',
-        nome: 'Suíte Deluxe com Cama Queen-size',
-        preco: 150,
-        capacidadeAdultos: 2,
-        capacidadeCriancas: 1,
-        area: '48 m²',
-        vista: 'Vista para o jardim',
-        descricao: 'Elegância e sofisticação em um ambiente espaçoso com acabamentos de primeira linha.',
-        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
-        imagens: [
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop'
-        ]
-    },
-    {
-        id: 'executiva',
-        nome: 'Suíte Executiva',
-        preco: 150,
-        capacidadeAdultos: 2,
-        capacidadeCriancas: 1,
-        area: '42 m²',
-        vista: 'Vista para a piscina',
-        descricao: 'Perfeita para viagens de negócios, com espaço de trabalho e todas as comodidades necessárias.',
-        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Mesa de trabalho'],
-        imagens: [
-            'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
-        ]
-    },
-    {
-        id: 'familia',
-        nome: 'Suíte Família',
-        preco: 150,
-        capacidadeAdultos: 4,
-        capacidadeCriancas: 2,
-        area: '65 m²',
-        vista: 'Vista para o mar',
-        descricao: 'Espaço amplo e confortável ideal para famílias, com múltiplos ambientes e comodidades especiais.',
-        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Cama extra'],
-        imagens: [
-            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
-        ]
-    },
-    {
-        id: 'romantica',
-        nome: 'Suíte Romântica',
-        preco: 150,
-        capacidadeAdultos: 2,
-        capacidadeCriancas: 1,
-        area: '40 m²',
-        vista: 'Vista para o jardim',
-        descricao: 'Ambiente especial para casais, com decoração elegante e atmosfera acolhedora para momentos únicos.',
-        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Decoração especial'],
-        imagens: [
-            'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
-        ]
-    }
 ];
 
 // Calendário
@@ -774,21 +801,27 @@ function atualizarSuites() {
         const card = criarCardSuite(suite);
         container.appendChild(card);
     });
+    
+    // Inicializar modal após criar os cards
+    initModalImagens();
 }
 
 function criarCardSuite(suite) {
     const card = document.createElement('div');
     card.className = 'suite-card';
     
-    const imagensHTML = suite.imagens.map((img, index) => 
-        `<img src="${img}" alt="${suite.nome}" class="suite-miniatura ${index === 0 ? 'ativa' : ''}" data-index="${index}">`
-    ).join('');
-    
     card.innerHTML = `
         <div class="suite-imagens">
-            <img src="${suite.imagens[0]}" alt="${suite.nome}" class="suite-imagem-principal" id="img-principal-${suite.id}">
-            <div class="suite-miniaturas">
-                ${imagensHTML}
+            <div class="suite-carousel-wrapper" data-suite-id="${suite.id}">
+                <div class="suite-carousel-track">
+                    ${suite.imagens.map((img, index) => `
+                        <div class="suite-carousel-slide">
+                            <img src="${img}" alt="${suite.nome} - Imagem ${index + 1}" data-index="${index}">
+                        </div>
+                    `).join('')}
+                </div>
+                <button class="suite-carousel-btn prev" aria-label="Imagem anterior">‹</button>
+                <button class="suite-carousel-btn next" aria-label="Próxima imagem">›</button>
             </div>
         </div>
         <div class="suite-conteudo">
@@ -852,17 +885,8 @@ function criarCardSuite(suite) {
         }
     }
     
-    // Event listeners para miniaturas
-    const miniaturas = card.querySelectorAll('.suite-miniatura');
-    const imgPrincipal = card.querySelector(`#img-principal-${suite.id}`);
-    
-    miniaturas.forEach((miniatura, index) => {
-        miniatura.addEventListener('click', () => {
-            imgPrincipal.src = suite.imagens[index];
-            miniaturas.forEach(m => m.classList.remove('ativa'));
-            miniatura.classList.add('ativa');
-        });
-    });
+    // Inicializar carrossel
+    initCarrosselReserva(card, suite);
     
     // Event listener para botão escolher
     const btnEscolher = card.querySelector('.btn-escolher');
@@ -952,6 +976,168 @@ function criarCardSuite(suite) {
     }
     
     return card;
+}
+
+// Função para inicializar carrossel na página de reservas
+function initCarrosselReserva(card, suite) {
+    const carouselWrapper = card.querySelector('.suite-carousel-wrapper');
+    if (!carouselWrapper) return;
+    
+    const carouselTrack = carouselWrapper.querySelector('.suite-carousel-track');
+    const btnPrev = carouselWrapper.querySelector('.suite-carousel-btn.prev');
+    const btnNext = carouselWrapper.querySelector('.suite-carousel-btn.next');
+    const slides = carouselTrack.querySelectorAll('.suite-carousel-slide');
+    const totalSlides = slides.length;
+    
+    if (totalSlides === 0) return;
+    
+    let currentSlide = 0;
+    let autoPlayInterval;
+    
+    function updateCarousel() {
+        carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+    }
+    
+    function nextSlide() {
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
+    }
+    
+    function prevSlide() {
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
+    }
+    
+    function startAutoPlay() {
+        stopAutoPlay();
+        if (totalSlides > 1) {
+            autoPlayInterval = setInterval(nextSlide, 5000);
+        }
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    btnNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextSlide();
+    });
+    
+    btnPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevSlide();
+    });
+    
+    // Abrir modal ao clicar na imagem
+    slides.forEach((slide, index) => {
+        const img = slide.querySelector('img');
+        if (img) {
+            img.style.cursor = 'pointer';
+            img.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const todasImagens = Array.from(carouselTrack.querySelectorAll('img'));
+                if (typeof window.openModalImagens === 'function') {
+                    window.openModalImagens(todasImagens, index);
+                }
+            });
+        }
+    });
+    
+    carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
+    carouselWrapper.addEventListener('mouseleave', startAutoPlay);
+    
+    if (totalSlides > 1) {
+        startAutoPlay();
+    }
+    
+    updateCarousel();
+}
+
+// Função para inicializar modal de imagens
+function initModalImagens() {
+    const modal = document.getElementById('imageModal');
+    if (!modal) return;
+    
+    const modalImg = document.getElementById('modalImage');
+    const modalCounter = document.getElementById('modalCounter');
+    const closeBtn = modal.querySelector('.modal-close');
+    const prevBtn = modal.querySelector('.modal-prev');
+    const nextBtn = modal.querySelector('.modal-next');
+    
+    if (!modalImg || !modalCounter || !closeBtn || !prevBtn || !nextBtn) return;
+    
+    let currentImages = [];
+    let currentIndex = 0;
+    
+    // Função para abrir modal
+    window.openModalImagens = function(images, index) {
+        currentImages = images;
+        currentIndex = index >= 0 ? index : 0;
+        modal.style.display = 'flex';
+        updateModalImage();
+        document.body.style.overflow = 'hidden';
+    };
+    
+    // Função para atualizar imagem do modal
+    function updateModalImage() {
+        if (currentImages.length > 0 && currentImages[currentIndex]) {
+            modalImg.src = currentImages[currentIndex].src;
+            modalCounter.textContent = `${currentIndex + 1} / ${currentImages.length}`;
+        }
+    }
+    
+    // Fechar modal
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    });
+    
+    // Fechar modal ao clicar fora
+    modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+    
+    // Navegação anterior
+    prevBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (currentImages.length > 0) {
+            currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+            updateModalImage();
+        }
+    });
+    
+    // Navegação próxima
+    nextBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (currentImages.length > 0) {
+            currentIndex = (currentIndex + 1) % currentImages.length;
+            updateModalImage();
+        }
+    });
+    
+    // Navegação com teclado
+    document.addEventListener('keydown', function(e) {
+        if (modal.style.display === 'flex') {
+            if (e.key === 'Escape') {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else if (e.key === 'ArrowLeft') {
+                if (currentImages.length > 0) {
+                    currentIndex = (currentIndex - 1 + currentImages.length) % currentImages.length;
+                    updateModalImage();
+                }
+            } else if (e.key === 'ArrowRight') {
+                if (currentImages.length > 0) {
+                    currentIndex = (currentIndex + 1) % currentImages.length;
+                    updateModalImage();
+                }
+            }
+        }
+    });
 }
 
 // Botão Finalizar Reserva

@@ -53,7 +53,7 @@
 }
 
 /* Suítes Grid Section */
-/* Banner Divisória */
+/* Banner Divisória - Full Width */
 .banner-divisoria-section {
     padding: 0;
     background: #ffffff;
@@ -79,6 +79,8 @@
     max-width: 100%;
     max-height: 500px;
     min-height: 450px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
 }
 
 .suites-grid-section {
@@ -130,39 +132,95 @@
     transform: scale(1.05);
 }
 
-.suite-miniaturas {
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
+.suite-card:hover .suite-carousel-slide img {
+    transform: scale(1.05);
+}
+
+/* Carrossel de Imagens nos Cards */
+.suite-card-image {
+    position: relative;
+}
+
+.suite-carousel-wrapper {
+    position: relative;
+    width: 100%;
+    height: 280px;
+    overflow: hidden;
+}
+
+.suite-carousel-track {
     display: flex;
-    gap: 0.4rem;
-    background: rgba(0, 0, 0, 0.5);
-    padding: 0.5rem;
-    border-radius: 10px;
-    z-index: 10;
-    flex-wrap: wrap;
-    max-width: calc(100% - 2rem);
+    transition: transform 0.5s ease;
+    width: 100%;
+    height: 100%;
+}
+
+.suite-carousel-slide {
+    min-width: 100%;
+    width: 100%;
+    height: 280px;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.suite-carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.suite-carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
     justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    z-index: 10;
+    color: #0F1F4B;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.suite-card-image:hover .suite-carousel-btn {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.suite-carousel-btn:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.suite-carousel-btn.prev {
+    left: 10px;
+}
+
+.suite-carousel-btn.next {
+    right: 10px;
+}
+
+.suite-carousel-btn:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+/* Ocultar miniaturas antigas */
+.suite-miniaturas {
+    display: none;
 }
 
 .suite-miniatura {
-    width: 45px;
-    height: 45px;
-    object-fit: cover;
-    border-radius: 5px;
-    cursor: pointer;
-    border: 2px solid transparent;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-    flex-shrink: 0;
-}
-
-.suite-miniatura:hover,
-.suite-miniatura.ativa {
-    border-color: #40E0D0;
-    transform: scale(1.1);
-    opacity: 1;
+    display: none;
 }
 
 /* Variações visuais para criar diversidade nos cards */
@@ -341,10 +399,21 @@
         height: 240px;
     }
 
-    .suite-card-image img {
+    .suite-card-image img,
+    .suite-carousel-slide {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    .suite-carousel-slide {
+        height: 240px;
+    }
+
+    .suite-carousel-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
     }
 
     .suite-card-content {
@@ -425,6 +494,24 @@
 
     .suite-card-image {
         height: 200px;
+    }
+
+    .suite-carousel-slide {
+        height: 200px;
+    }
+
+    .suite-carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+
+    .suite-carousel-btn.prev {
+        left: 5px;
+    }
+
+    .suite-carousel-btn.next {
+        right: 5px;
     }
 }
 
@@ -522,11 +609,14 @@
 
 /* Cursor pointer para imagens clicáveis */
 .suite-imagem-principal,
-.suite-miniatura {
+.suite-miniatura,
+.gallery-image-clickable {
     cursor: pointer;
+    transition: opacity 0.3s;
 }
 
-.suite-miniatura:hover {
+.suite-miniatura:hover,
+.gallery-image-clickable:hover {
     opacity: 0.8;
 }
 
