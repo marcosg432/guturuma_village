@@ -305,11 +305,22 @@
     padding: 2.5rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin-bottom: 2rem;
+    min-height: auto;
+}
+
+.bloco-suites:empty {
+    display: none;
 }
 
 .suites-lista {
     display: grid;
     gap: 2rem;
+}
+
+.suites-container {
+    display: grid;
+    gap: 2rem;
+    width: 100%;
 }
 
 .suite-card {
@@ -621,6 +632,14 @@
         padding: 1.5rem;
         border-radius: 15px;
     }
+    
+    .suites-container {
+        gap: 1.5rem;
+    }
+    
+    .bloco-suites {
+        padding: 1.25rem;
+    }
 
     .bloco-titulo {
         font-size: clamp(1.5rem, 5vw, 1.8rem);
@@ -790,6 +809,14 @@
     .bloco-suites {
         padding: 1.25rem;
         border-radius: 12px;
+    }
+    
+    .suites-container {
+        gap: 1.25rem;
+    }
+    
+    .bloco-suites {
+        padding: 1rem;
     }
 
     .bloco-titulo {
