@@ -61,32 +61,17 @@ const adminApiLimiter = rateLimit ? rateLimit({
  * Configuração balanceada: segurança sem quebrar o site
  */
 const securityHeaders = helmet ? helmet({
-  // Content Security Policy - Configuração permissiva para não bloquear recursos
-  // Permite recursos do mesmo domínio e inline, mantendo segurança básica
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "http:", "https:", "data:", "blob:"],
-      scriptSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'", "http:", "https:", "data:", "blob:"],
-      styleSrc: ["'self'", "'unsafe-inline'", "http:", "https:", "data:"],
-      fontSrc: ["'self'", "http:", "https:", "data:"],
-      imgSrc: ["'self'", "http:", "https:", "data:", "blob:"],
-      connectSrc: ["'self'", "http:", "https:", "ws:", "wss:"],
-      frameSrc: ["'self'", "http:", "https:"],
-      objectSrc: ["'none'"],
-      baseUri: ["'self'"],
-      mediaSrc: ["'self'", "http:", "https:", "data:"],
-      workerSrc: ["'self'", "blob:"],
-      manifestSrc: ["'self'"],
-      formAction: ["'self'"],
-    },
-  },
-  // Outras proteções
+  // Content Security Policy DESABILITADO
+  // O CSP estava bloqueando recursos mesmo com configurações permissivas
+  // Mantemos outros headers de segurança importantes (noSniff, xssFilter, frameguard, etc.)
+  contentSecurityPolicy: false,
+  // Outras proteções importantes mantidas
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" },
   hsts: false,
-  noSniff: true,
-  xssFilter: true,
-  frameguard: { action: 'deny' },
+  noSniff: true, // Previne MIME type sniffing
+  xssFilter: true, // Filtro XSS do navegador
+  frameguard: { action: 'deny' }, // Previne clickjacking
   referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
 }) : ((req, res, next) => {
   // Fallback básico de headers de segurança
