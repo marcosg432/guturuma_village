@@ -64,67 +64,77 @@ const securityHeaders = helmet ? helmet({
   // Content Security Policy - Permite recursos necessários
   contentSecurityPolicy: {
     directives: {
-      defaultSrc: ["'self'"],
+      defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
       scriptSrc: [
         "'self'",
         "'unsafe-inline'", // Necessário para scripts inline no HTML
         "'unsafe-eval'", // Necessário para algumas bibliotecas
-        "https://cdn.jsdelivr.net", // Chart.js CDN
-        "http://localhost:*", // Desenvolvimento local
-        "http://127.0.0.1:*", // Desenvolvimento local
-        "http://193.160.119.67:*", // Servidor Hostinger
+        "https://cdn.jsdelivr.net",
+        "https://cdnjs.cloudflare.com",
+        "http://localhost:*",
+        "http://127.0.0.1:*",
+        "http://193.160.119.67:*",
+        "http:*", // Permitir qualquer origem HTTP
+        "https:*", // Permitir qualquer origem HTTPS
       ],
       styleSrc: [
         "'self'",
         "'unsafe-inline'", // Necessário para estilos inline no HTML
-        "https://fonts.googleapis.com", // Google Fonts
-        "http://localhost:*", // Desenvolvimento local
-        "http://127.0.0.1:*", // Desenvolvimento local
-        "http://193.160.119.67:*", // Servidor Hostinger
+        "https://fonts.googleapis.com",
+        "http://localhost:*",
+        "http://127.0.0.1:*",
+        "http://193.160.119.67:*",
+        "http:*", // Permitir qualquer origem HTTP
+        "https:*", // Permitir qualquer origem HTTPS
       ],
       fontSrc: [
         "'self'",
-        "https://fonts.gstatic.com", // Google Fonts
-        "data:", // Para fontes em base64
-        "http://localhost:*", // Desenvolvimento local
-        "http://127.0.0.1:*", // Desenvolvimento local
-        "http://193.160.119.67:*", // Servidor Hostinger
+        "https://fonts.gstatic.com",
+        "data:",
+        "http://localhost:*",
+        "http://127.0.0.1:*",
+        "http://193.160.119.67:*",
+        "http:*", // Permitir qualquer origem HTTP
+        "https:*", // Permitir qualquer origem HTTPS
       ],
       imgSrc: [
         "'self'",
-        "data:", // Para imagens em base64
-        "https:", // Permite todas as imagens HTTPS
-        "http:", // Permite imagens HTTP também
-        "blob:", // Para imagens blob (canvas, etc.)
+        "data:",
+        "https:",
+        "http:",
+        "blob:",
       ],
       connectSrc: [
         "'self'",
-        "http://localhost:*", // Permitir conexões locais em desenvolvimento
-        "http://127.0.0.1:*", // Permitir conexões locais (alternativa)
-        "http://193.160.119.67:*", // Servidor Hostinger
-        "https://fonts.googleapis.com", // Google Fonts API
-        "ws:", // WebSockets
-        "wss:", // WebSockets seguros
+        "http://localhost:*",
+        "http://127.0.0.1:*",
+        "http://193.160.119.67:*",
+        "https://fonts.googleapis.com",
+        "ws:",
+        "wss:",
+        "http:*",
+        "https:*",
       ],
       frameSrc: [
         "'self'",
-        "https://www.google.com", // Google Maps embed
+        "https://www.google.com",
+        "http:*",
+        "https:*",
       ],
       objectSrc: ["'none'"],
       baseUri: ["'self'"],
       mediaSrc: ["'self'", "http:", "https:", "data:"],
       workerSrc: ["'self'", "blob:"],
-      // upgradeInsecureRequests removido - habilitar apenas em produção com HTTPS
     },
   },
   // Outras proteções
-  crossOriginEmbedderPolicy: false, // Desabilitado para permitir recursos externos
-  crossOriginResourcePolicy: { policy: "cross-origin" }, // Permite recursos de outros domínios
-  hsts: false, // Desabilitado em desenvolvimento (habilitar em produção com HTTPS)
-  noSniff: true, // Previne MIME type sniffing
-  xssFilter: true, // Ativa filtro XSS do navegador (deprecated mas ainda útil)
-  frameguard: { action: 'deny' }, // Previne clickjacking
-  referrerPolicy: { policy: 'strict-origin-when-cross-origin' }, // Controla referrer
+  crossOriginEmbedderPolicy: false,
+  crossOriginResourcePolicy: { policy: "cross-origin" },
+  hsts: false,
+  noSniff: true,
+  xssFilter: true,
+  frameguard: { action: 'deny' },
+  referrerPolicy: { policy: 'strict-origin-when-cross-origin' },
 }) : ((req, res, next) => {
   // Fallback básico de headers de segurança
   res.setHeader('X-Content-Type-Options', 'nosniff');
@@ -202,19 +212,27 @@ function sanitizeRequest(req, res, next) {
   if (req.path.startsWith('/css/') || 
       req.path.startsWith('/js/') || 
       req.path.startsWith('/images/') ||
-      req.path.startsWith('/img/')) {
+      req.path.startsWith('/img/') ||
+      req.path.startsWith('/fonts/')) {
     return next();
   }
   
-  // Aplicar sanitização apenas para rotas de API e páginas HTML
-  if (req.body) {
-    req.body = sanitizeObject(req.body);
+  // Pular sanitização para arquivos HTML (não devem ser modificados)
+  if (req.path.match(/\.html?$/i) || req.path === '/' || req.path.match(/^\/(quartos|reserva|sobre|contato|agendamento|carrinho|suite)$/)) {
+    return next();
   }
-  if (req.query) {
-    req.query = sanitizeObject(req.query);
-  }
-  if (req.params) {
-    req.params = sanitizeObject(req.params);
+  
+  // Aplicar sanitização apenas para rotas de API (POST, PUT, DELETE)
+  if (req.method === 'POST' || req.method === 'PUT' || req.method === 'DELETE') {
+    if (req.body) {
+      req.body = sanitizeObject(req.body);
+    }
+    if (req.query) {
+      req.query = sanitizeObject(req.query);
+    }
+    if (req.params) {
+      req.params = sanitizeObject(req.params);
+    }
   }
   next();
 }
