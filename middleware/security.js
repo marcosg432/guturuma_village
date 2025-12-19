@@ -61,72 +61,9 @@ const adminApiLimiter = rateLimit ? rateLimit({
  * Configuração balanceada: segurança sem quebrar o site
  */
 const securityHeaders = helmet ? helmet({
-  // Content Security Policy - Permite recursos necessários
-  contentSecurityPolicy: {
-    directives: {
-      defaultSrc: ["'self'", "'unsafe-inline'", "'unsafe-eval'"],
-      scriptSrc: [
-        "'self'",
-        "'unsafe-inline'", // Necessário para scripts inline no HTML
-        "'unsafe-eval'", // Necessário para algumas bibliotecas
-        "https://cdn.jsdelivr.net",
-        "https://cdnjs.cloudflare.com",
-        "http://localhost:*",
-        "http://127.0.0.1:*",
-        "http://193.160.119.67:*",
-        "http:*", // Permitir qualquer origem HTTP
-        "https:*", // Permitir qualquer origem HTTPS
-      ],
-      styleSrc: [
-        "'self'",
-        "'unsafe-inline'", // Necessário para estilos inline no HTML
-        "https://fonts.googleapis.com",
-        "http://localhost:*",
-        "http://127.0.0.1:*",
-        "http://193.160.119.67:*",
-        "http:*", // Permitir qualquer origem HTTP
-        "https:*", // Permitir qualquer origem HTTPS
-      ],
-      fontSrc: [
-        "'self'",
-        "https://fonts.gstatic.com",
-        "data:",
-        "http://localhost:*",
-        "http://127.0.0.1:*",
-        "http://193.160.119.67:*",
-        "http:*", // Permitir qualquer origem HTTP
-        "https:*", // Permitir qualquer origem HTTPS
-      ],
-      imgSrc: [
-        "'self'",
-        "data:",
-        "https:",
-        "http:",
-        "blob:",
-      ],
-      connectSrc: [
-        "'self'",
-        "http://localhost:*",
-        "http://127.0.0.1:*",
-        "http://193.160.119.67:*",
-        "https://fonts.googleapis.com",
-        "ws:",
-        "wss:",
-        "http:*",
-        "https:*",
-      ],
-      frameSrc: [
-        "'self'",
-        "https://www.google.com",
-        "http:*",
-        "https:*",
-      ],
-      objectSrc: ["'none'"],
-      baseUri: ["'self'"],
-      mediaSrc: ["'self'", "http:", "https:", "data:"],
-      workerSrc: ["'self'", "blob:"],
-    },
-  },
+  // Content Security Policy DESABILITADO TEMPORARIAMENTE para diagnóstico
+  // TODO: Reativar após identificar o problema
+  contentSecurityPolicy: false,
   // Outras proteções
   crossOriginEmbedderPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" },
