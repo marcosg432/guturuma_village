@@ -68,37 +68,52 @@ const securityHeaders = helmet ? helmet({
       scriptSrc: [
         "'self'",
         "'unsafe-inline'", // Necessário para scripts inline no HTML
-        "'unsafe-eval'", // Pode ser necessário para algumas bibliotecas (temporário, remover se possível)
+        "'unsafe-eval'", // Necessário para algumas bibliotecas
         "https://cdn.jsdelivr.net", // Chart.js CDN
+        "http://localhost:*", // Desenvolvimento local
+        "http://127.0.0.1:*", // Desenvolvimento local
+        "http://193.160.119.67:*", // Servidor Hostinger
       ],
       styleSrc: [
         "'self'",
         "'unsafe-inline'", // Necessário para estilos inline no HTML
         "https://fonts.googleapis.com", // Google Fonts
+        "http://localhost:*", // Desenvolvimento local
+        "http://127.0.0.1:*", // Desenvolvimento local
+        "http://193.160.119.67:*", // Servidor Hostinger
       ],
       fontSrc: [
         "'self'",
         "https://fonts.gstatic.com", // Google Fonts
         "data:", // Para fontes em base64
+        "http://localhost:*", // Desenvolvimento local
+        "http://127.0.0.1:*", // Desenvolvimento local
+        "http://193.160.119.67:*", // Servidor Hostinger
       ],
       imgSrc: [
         "'self'",
         "data:", // Para imagens em base64
-        "https:", // Permite todas as imagens HTTPS (Unsplash, etc.)
-        "http:", // Permite imagens HTTP também (caso necessário)
+        "https:", // Permite todas as imagens HTTPS
+        "http:", // Permite imagens HTTP também
+        "blob:", // Para imagens blob (canvas, etc.)
       ],
       connectSrc: [
         "'self'",
         "http://localhost:*", // Permitir conexões locais em desenvolvimento
         "http://127.0.0.1:*", // Permitir conexões locais (alternativa)
+        "http://193.160.119.67:*", // Servidor Hostinger
         "https://fonts.googleapis.com", // Google Fonts API
+        "ws:", // WebSockets
+        "wss:", // WebSockets seguros
       ],
       frameSrc: [
         "'self'",
         "https://www.google.com", // Google Maps embed
       ],
       objectSrc: ["'none'"],
-      baseUri: ["'self'"], // Define base URL permitida
+      baseUri: ["'self'"],
+      mediaSrc: ["'self'", "http:", "https:", "data:"],
+      workerSrc: ["'self'", "blob:"],
       // upgradeInsecureRequests removido - habilitar apenas em produção com HTTPS
     },
   },
