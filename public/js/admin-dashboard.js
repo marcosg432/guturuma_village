@@ -124,30 +124,38 @@ function setupMobileMenu() {
             }
         }
         
-        mobileMenuToggle.addEventListener('click', function(e) {
+        // Adicionar suporte para toque e clique
+        const handleMenuToggle = function(e) {
+            e.preventDefault();
             e.stopPropagation();
             toggleMenu();
-        });
+        };
+        mobileMenuToggle.addEventListener('click', handleMenuToggle);
+        mobileMenuToggle.addEventListener('touchend', handleMenuToggle);
         
         // Fechar menu ao clicar no overlay
         if (overlay) {
-            overlay.addEventListener('click', function() {
+            const handleOverlayClose = function() {
                 sidebar.classList.remove('active');
                 overlay.classList.remove('active');
-            });
+            };
+            overlay.addEventListener('click', handleOverlayClose);
+            overlay.addEventListener('touchend', handleOverlayClose);
         }
         
         // Fechar menu ao clicar em um item do menu
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
-            item.addEventListener('click', function() {
+            const handleNavItemClick = function() {
                 if (window.innerWidth <= 768) {
                     sidebar.classList.remove('active');
                     if (overlay) {
                         overlay.classList.remove('active');
                     }
                 }
-            });
+            };
+            item.addEventListener('click', handleNavItemClick);
+            item.addEventListener('touchend', handleNavItemClick);
         });
         
         // Fechar menu ao redimensionar para desktop
@@ -164,15 +172,24 @@ function setupMobileMenu() {
 
 function setupEvents() {
     // Logout
-    document.getElementById('btn-logout').addEventListener('click', function() {
-        localStorage.removeItem('admin_token');
-        localStorage.removeItem('admin_user');
-        window.location.href = '/admin/login';
-    });
+    const btnLogout = document.getElementById('btn-logout');
+    if (btnLogout) {
+        const handleLogout = function() {
+            localStorage.removeItem('admin_token');
+            localStorage.removeItem('admin_user');
+            window.location.href = '/admin/login';
+        };
+        btnLogout.addEventListener('click', handleLogout);
+        btnLogout.addEventListener('touchend', handleLogout);
+    }
 
     // Filtro de status
     document.getElementById('filter-status').addEventListener('change', loadReservas);
-    document.getElementById('btn-refresh-reservas').addEventListener('click', loadReservas);
+    const btnRefreshReservas = document.getElementById('btn-refresh-reservas');
+    if (btnRefreshReservas) {
+        btnRefreshReservas.addEventListener('click', loadReservas);
+        btnRefreshReservas.addEventListener('touchend', loadReservas);
+    }
 
     // Formulário de agendamento manual
     document.getElementById('form-agendar').addEventListener('submit', handleAgendarManual);
@@ -181,6 +198,7 @@ function setupEvents() {
     const btnRefreshContato = document.getElementById('btn-refresh-contato');
     if (btnRefreshContato) {
         btnRefreshContato.addEventListener('click', loadContato);
+        btnRefreshContato.addEventListener('touchend', loadContato);
     }
 
     // Modal de reserva
@@ -190,13 +208,18 @@ function setupEvents() {
     setupModalUsuario();
 
     // Renda
-    document.getElementById('btn-atualizar-renda').addEventListener('click', loadRenda);
+    const btnAtualizarRenda = document.getElementById('btn-atualizar-renda');
+    if (btnAtualizarRenda) {
+        btnAtualizarRenda.addEventListener('click', loadRenda);
+        btnAtualizarRenda.addEventListener('touchend', loadRenda);
+    }
     
     // Busca no histórico
     const btnBuscarHistorico = document.getElementById('btn-buscar-historico');
     const inputBuscaHistorico = document.getElementById('input-busca-historico');
     if (btnBuscarHistorico) {
         btnBuscarHistorico.addEventListener('click', buscarHistorico);
+        btnBuscarHistorico.addEventListener('touchend', buscarHistorico);
     }
     if (inputBuscaHistorico) {
         inputBuscaHistorico.addEventListener('keypress', function(e) {
@@ -317,7 +340,9 @@ async function loadReservas() {
         
         // Adicionar event listeners aos cards
         container.querySelectorAll('.reserva-card').forEach(card => {
-            card.addEventListener('click', () => openModalReserva(card.dataset.id));
+            const handleCardClick = () => openModalReserva(card.dataset.id);
+            card.addEventListener('click', handleCardClick);
+            card.addEventListener('touchend', handleCardClick);
         });
     } catch (error) {
         console.error('Erro ao carregar reservas:', error);
@@ -415,12 +440,14 @@ async function loadQuartos() {
         
         // Adicionar event listeners para abrir ficha do quarto
         container.querySelectorAll('.quarto-card').forEach(card => {
-            card.addEventListener('click', function() {
+            const handleQuartoClick = function() {
                 const quartoId = this.getAttribute('data-quarto-id');
                 if (quartoId) {
                     abrirFichaQuarto(quartoId);
                 }
-            });
+            };
+            card.addEventListener('click', handleQuartoClick);
+            card.addEventListener('touchend', handleQuartoClick);
         });
     } catch (error) {
         console.error('Erro ao carregar quartos:', error);
@@ -546,9 +573,11 @@ function mostrarFichaQuarto(quarto, reservas) {
     // Adicionar event listener para fechar modal
     const closeBtn = modalContent.querySelector('.modal-close');
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
+        const handleClose = () => {
             modal.classList.remove('active');
-        });
+        };
+        closeBtn.addEventListener('click', handleClose);
+        closeBtn.addEventListener('touchend', handleClose);
     }
 
     modal.classList.add('active');
@@ -798,9 +827,11 @@ function mostrarFichaQuartoLista(quarto, reservas) {
     // Adicionar event listener para fechar modal
     const closeBtn = modalContent.querySelector('.modal-close');
     if (closeBtn) {
-        closeBtn.addEventListener('click', () => {
+        const handleClose = () => {
             modal.classList.remove('active');
-        });
+        };
+        closeBtn.addEventListener('click', handleClose);
+        closeBtn.addEventListener('touchend', handleClose);
     }
 
     // Fechar ao clicar fora
@@ -858,7 +889,7 @@ async function loadHistorico(termoBusca = '') {
         
         // Adicionar event listeners para botões de ver ficha
         container.querySelectorAll('.btn-ver-ficha-historico').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            const handleVerFicha = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const id = this.getAttribute('data-id');
@@ -868,12 +899,14 @@ async function loadHistorico(termoBusca = '') {
                 } else {
                     alert('Erro: ID da ficha não encontrado');
                 }
-            });
+            };
+            btn.addEventListener('click', handleVerFicha);
+            btn.addEventListener('touchend', handleVerFicha);
         });
         
         // Adicionar event listeners para botões de excluir
         container.querySelectorAll('.btn-excluir-historico').forEach(btn => {
-            btn.addEventListener('click', function(e) {
+            const handleExcluir = function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 const id = this.getAttribute('data-id');
@@ -882,7 +915,9 @@ async function loadHistorico(termoBusca = '') {
                 } else {
                     alert('Erro: ID da ficha não encontrado');
                 }
-            });
+            };
+            btn.addEventListener('click', handleExcluir);
+            btn.addEventListener('touchend', handleExcluir);
         });
     } catch (error) {
         console.error('Erro ao carregar histórico:', error);
@@ -1049,10 +1084,14 @@ async function loadUsuarios() {
         
         // Event listeners
         container.querySelectorAll('.btn-edit-usuario').forEach(btn => {
-            btn.addEventListener('click', () => openModalUsuario(btn.dataset.id));
+            const handleEdit = () => openModalUsuario(btn.dataset.id);
+            btn.addEventListener('click', handleEdit);
+            btn.addEventListener('touchend', handleEdit);
         });
         container.querySelectorAll('.btn-delete-usuario').forEach(btn => {
-            btn.addEventListener('click', () => deleteUsuario(btn.dataset.id));
+            const handleDelete = () => deleteUsuario(btn.dataset.id);
+            btn.addEventListener('click', handleDelete);
+            btn.addEventListener('touchend', handleDelete);
         });
     } catch (error) {
         console.error('Erro ao carregar usuários:', error);
@@ -1075,7 +1114,12 @@ function createUsuarioItem(usuario) {
     `;
 }
 
-document.getElementById('btn-add-usuario').addEventListener('click', () => openModalUsuario(null));
+const btnAddUsuario = document.getElementById('btn-add-usuario');
+if (btnAddUsuario) {
+    const handleAddUsuario = () => openModalUsuario(null);
+    btnAddUsuario.addEventListener('click', handleAddUsuario);
+    btnAddUsuario.addEventListener('touchend', handleAddUsuario);
+}
 
 // ========== ABA: AGENDAR MANUALMENTE ==========
 function calcularValorAgendamento() {
@@ -1205,11 +1249,13 @@ function setupModalReserva() {
     const form = document.getElementById('form-editar-reserva');
 
     closeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        const handleClose = () => {
             modal.classList.remove('active');
             // Reabilitar campos ao fechar (para próxima abertura)
             enableModalFields(true);
-        });
+        };
+        btn.addEventListener('click', handleClose);
+        btn.addEventListener('touchend', handleClose);
     });
 
     window.addEventListener('click', (e) => {
@@ -1513,10 +1559,12 @@ function setupModalUsuario() {
     const form = document.getElementById('form-usuario');
 
     closeBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
+        const handleClose = () => {
             modal.classList.remove('active');
             form.reset();
-        });
+        };
+        btn.addEventListener('click', handleClose);
+        btn.addEventListener('touchend', handleClose);
     });
 
     window.addEventListener('click', (e) => {

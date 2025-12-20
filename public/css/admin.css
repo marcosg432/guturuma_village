@@ -194,6 +194,9 @@ body {
     cursor: pointer;
     font-weight: 600;
     transition: background 0.3s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .btn-logout:hover {
@@ -270,6 +273,9 @@ body {
     cursor: pointer;
     font-weight: 500;
     transition: background 0.3s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .btn-refresh:hover {
@@ -290,6 +296,9 @@ body {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .reserva-card:hover {
@@ -626,6 +635,9 @@ body {
     cursor: pointer;
     font-weight: 600;
     transition: background 0.3s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .btn-primary:hover {
@@ -641,6 +653,9 @@ body {
     cursor: pointer;
     font-weight: 600;
     transition: background 0.3s;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .btn-secondary:hover {
@@ -687,6 +702,15 @@ body {
     color: #999;
     cursor: pointer;
     line-height: 1;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    padding: 10px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .modal-close:hover {
@@ -780,6 +804,9 @@ body {
     padding: 12px;
     cursor: pointer;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
 }
 
 .mobile-menu-toggle svg {
@@ -799,11 +826,13 @@ body {
     z-index: 999;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 }
 
 .sidebar-overlay.active {
     display: block;
     opacity: 1;
+    pointer-events: auto;
 }
 
 /* Responsive */
