@@ -275,15 +275,30 @@ function preencherCarrinho() {
             document.getElementById('suite-vista').textContent = suite.vista;
             document.getElementById('suite-descricao').textContent = suite.descricao;
             
-            // Preencher imagem
+            // Preencher imagem - usar a imagem principal do quartos-data.js
             const imgElement = document.getElementById('suite-imagem-principal');
-            if (imgElement && suite.imagens && suite.imagens.length > 0) {
-                imgElement.src = suite.imagens[0];
-                imgElement.alt = suite.nome;
-                imgElement.style.display = 'block';
-                console.log('✅ Imagem carregada:', suite.imagens[0]);
+            if (imgElement) {
+                // Verificar se temos a imagem no quartosImagens (fonte centralizada)
+                let imagemParaUsar = null;
+                if (typeof quartosImagens !== 'undefined' && quartosImagens[suite.id]) {
+                    imagemParaUsar = quartosImagens[suite.id].principal;
+                    console.log('✅ Imagem principal encontrada no quartos-data.js:', imagemParaUsar);
+                } else if (suite.imagens && suite.imagens.length > 0) {
+                    // Fallback para imagens do suite se quartosImagens não estiver disponível
+                    imagemParaUsar = suite.imagens[0];
+                    console.log('⚠️ Usando imagem do suite (fallback):', imagemParaUsar);
+                }
+                
+                if (imagemParaUsar) {
+                    imgElement.src = imagemParaUsar;
+                    imgElement.alt = suite.nome;
+                    imgElement.style.display = 'block';
+                    console.log('✅ Imagem carregada:', imagemParaUsar);
+                } else {
+                    console.error('❌ Nenhuma imagem disponível para a suíte:', suite.id);
+                }
             } else {
-                console.error('❌ Elemento de imagem não encontrado ou sem imagens');
+                console.error('❌ Elemento de imagem não encontrado');
             }
         } else {
             console.error('❌ Suíte não encontrada:', carrinhoData.suiteSelecionada);

@@ -215,7 +215,9 @@
 }
 
 /* Ocultar miniaturas antigas */
+/* Miniaturas ocultas nos cards - apenas imagem principal é exibida */
 .suite-miniaturas {
+    display: none !important;
     display: none;
 }
 

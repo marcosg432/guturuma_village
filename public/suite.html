@@ -114,10 +114,14 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/quartos-data.js"></script>
     <script>
         // Carregar detalhes da suíte baseado no parâmetro da URL
         const urlParams = new URLSearchParams(window.location.search);
         const suiteType = urlParams.get('tipo') || 'harmonia';
+        
+        // Obter imagens do arquivo compartilhado
+        const imagensQuarto = quartosImagens[suiteType] || null;
 
         const suites = {
             standard: {
@@ -520,24 +524,64 @@
         const suite = suites[suiteType] || suites.standard;
         document.getElementById('page-title').textContent = suite.title + ' - village Residences';
 
+        // Usar imagens compartilhadas se disponíveis, caso contrário usar as do objeto suite
+        let imagensParaExibir = [];
+        let imagemPrincipal = suite.mainImage;
+        
+        if (imagensQuarto && imagensQuarto.todas && imagensQuarto.todas.length > 0) {
+            // Usar imagens compartilhadas do quartos-data.js
+            imagemPrincipal = imagensQuarto.principal;
+            // Remover a imagem principal da galeria (ela só aparece no banner)
+            const imagensGaleria = imagensQuarto.todas.filter(img => img !== imagensQuarto.principal);
+            imagensParaExibir = imagensGaleria.map((src, idx) => ({
+                src: src,
+                placeholder: `Imagem ${idx + 1}`
+            }));
+        } else {
+            // Fallback para imagens do objeto suite
+            imagemPrincipal = suite.mainImage;
+            imagensParaExibir = suite.images;
+        }
+
         let currentImage = 0;
+        let carouselInterval = null;
+        let isCarouselPaused = false;
+        
+        // Função para iniciar o auto-play do carrossel
+        function startCarouselAutoPlay() {
+            // Limpar intervalo anterior se existir
+            if (carouselInterval) {
+                clearInterval(carouselInterval);
+            }
+            
+            // Só iniciar auto-play se houver mais de uma imagem
+            if (imagensParaExibir.length > 1) {
+                carouselInterval = setInterval(() => {
+                    if (!isCarouselPaused) {
+                        nextImage();
+                    }
+                }, 4000); // Muda a imagem a cada 4 segundos
+            }
+        }
+        
+        // Função para pausar o auto-play temporariamente
+        function pauseCarouselTemporarily() {
+            isCarouselPaused = true;
+            // Retomar após 8 segundos de inatividade
+            setTimeout(() => {
+                isCarouselPaused = false;
+            }, 8000);
+        }
+        
         function renderSuite() {
             const content = document.getElementById('suite-content');
             content.innerHTML = `
-                <!-- Banner Principal com Título -->
-                <div class="suite-banner" style="position: relative; width: 100%; height: 500px; border-radius: 20px; overflow: hidden; margin-bottom: 4rem; margin-top: 2rem; box-shadow: 0 10px 30px rgba(0,0,0,0.15);">
-                    <img src="${suite.mainImage || 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=1920&h=800&fit=crop'}" alt="${suite.title}" style="width: 100%; height: 100%; object-fit: cover;">
-                    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
-                        <h1 class="room-title" style="font-size: 3.5rem; font-weight: 700; color: #ffffff; text-shadow: 2px 2px 10px rgba(0,0,0,0.5); margin: 0;">${suite.title}</h1>
-                    </div>
-                </div>
-
                 <!-- Carrossel de Imagens -->
                 <div class="suite-carousel-section" style="margin-bottom: 4rem;">
                     <h2 style="font-size: 2rem; margin-bottom: 2rem; color: #2c3e50; text-align: center;">Galeria</h2>
                     <div class="room-carousel-container" style="position: relative; max-width: 1000px; margin: 0 auto;">
                         <div class="room-carousel" id="suite-carousel" style="display: flex; transition: transform 0.5s ease; width: 100%;">
-                            ${suite.images.map((img, idx) => `
+                            ${imagensParaExibir.map((img, idx) => `
                                 <div class="carousel-slide" style="min-width: 100%; height: 500px; flex-shrink: 0;">
                                     <img src="${img.src}" alt="${img.placeholder}" class="gallery-image-clickable" data-image-index="${idx}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 15px; cursor: pointer;">
                                 </div>
@@ -627,13 +671,15 @@
         }
 
         function nextImage() {
-            currentImage = (currentImage + 1) % suite.images.length;
+            currentImage = (currentImage + 1) % imagensParaExibir.length;
             updateCarousel();
+            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
         }
 
         function prevImage() {
-            currentImage = (currentImage - 1 + suite.images.length) % suite.images.length;
+            currentImage = (currentImage - 1 + imagensParaExibir.length) % imagensParaExibir.length;
             updateCarousel();
+            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
         }
 
         function updateCarousel() {
@@ -647,7 +693,7 @@
         function updateIndicators() {
             const indicators = document.getElementById('carousel-indicators');
             if (indicators) {
-                indicators.innerHTML = suite.images.map((_, idx) => 
+                indicators.innerHTML = imagensParaExibir.map((_, idx) => 
                     `<span class="carousel-indicator ${idx === currentImage ? 'active' : ''}" onclick="goToImage(${idx})" style="width: 12px; height: 12px; border-radius: 50%; background: ${idx === currentImage ? '#0F1F4B' : '#ccc'}; cursor: pointer; transition: background 0.3s ease;"></span>`
                 ).join('');
             }
@@ -656,17 +702,28 @@
         function goToImage(idx) {
             currentImage = idx;
             updateCarousel();
+            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
         }
 
         renderSuite();
+        
+        // Iniciar auto-play após renderizar
+        setTimeout(() => {
+            startCarouselAutoPlay();
+        }, 500);
 
         // Sistema de modal para abrir imagens da galeria
         let currentGalleryImages = [];
         let currentGalleryIndex = 0;
 
-        function openGalleryModal(suiteImages, index) {
-            currentGalleryImages = suiteImages.map(img => img.src);
-            currentGalleryIndex = index;
+        function openGalleryModal(imagesArray, index) {
+            // Garantir que estamos usando o array correto de imagens
+            const imagesToUse = imagesArray || imagensParaExibir;
+            currentGalleryImages = imagesToUse.map(img => {
+                // Se for objeto com src, usar src, senão usar diretamente
+                return typeof img === 'string' ? img : img.src;
+            });
+            currentGalleryIndex = index >= 0 ? index : 0;
             const modal = document.getElementById('imageModal');
             const modalImg = document.getElementById('modalImage');
             const modalCounter = document.getElementById('modalCounter');
@@ -761,10 +818,21 @@
             document.querySelectorAll('.gallery-image-clickable').forEach(img => {
                 img.addEventListener('click', function() {
                     const index = parseInt(this.getAttribute('data-image-index'));
-                    const suite = suites[suiteType] || suites.standard;
-                    openGalleryModal(suite.images, index);
+                    openGalleryModal(imagensParaExibir, index);
                 });
             });
+
+            // Pausar auto-play ao passar o mouse sobre o carrossel
+            const carouselContainer = document.querySelector('.room-carousel-container');
+            if (carouselContainer) {
+                carouselContainer.addEventListener('mouseenter', function() {
+                    isCarouselPaused = true;
+                });
+                
+                carouselContainer.addEventListener('mouseleave', function() {
+                    isCarouselPaused = false;
+                });
+            }
 
             // Inicializar controles do modal após garantir que o DOM está pronto
             initModalControls();

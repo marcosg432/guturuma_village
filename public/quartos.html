@@ -661,9 +661,19 @@
     </div>
 
     <script src="js/main.js"></script>
+    <script src="js/quartos-data.js"></script>
     <script>
-        // Carregar preços dinamicamente
+        // Carregar preços dinamicamente e garantir que a imagem principal seja exibida
         document.addEventListener('DOMContentLoaded', async function() {
+            // Garantir que cada card use a imagem principal correta
+            if (typeof quartosImagens !== 'undefined') {
+                Object.keys(quartosImagens).forEach(quartoId => {
+                    const imgPrincipal = document.getElementById(`img-principal-${quartoId}`);
+                    if (imgPrincipal && quartosImagens[quartoId]) {
+                        imgPrincipal.src = quartosImagens[quartoId].principal;
+                    }
+                });
+            }
             try {
                 const response = await fetch('/api/precos');
                 if (response.ok) {
@@ -683,105 +693,8 @@
                 console.error('Erro ao carregar preços:', error);
             }
 
-            // Converter estrutura de miniaturas em carrossel
-            function initCarrossel(cardImageContainer) {
-                const imgPrincipal = cardImageContainer.querySelector('.suite-imagem-principal');
-                const miniaturasContainer = cardImageContainer.querySelector('.suite-miniaturas');
-                
-                if (!miniaturasContainer || !imgPrincipal) return;
-                
-                const quartoId = imgPrincipal.id.replace('img-principal-', '');
-                const miniaturas = Array.from(miniaturasContainer.querySelectorAll('.suite-miniatura'));
-                
-                if (miniaturas.length === 0) return;
-                
-                // Criar estrutura do carrossel
-                const carouselWrapper = document.createElement('div');
-                carouselWrapper.className = 'suite-carousel-wrapper';
-                
-                const carouselTrack = document.createElement('div');
-                carouselTrack.className = 'suite-carousel-track';
-                carouselTrack.setAttribute('data-quarto', quartoId);
-                
-                // Criar slides para cada imagem
-                miniaturas.forEach((miniatura, index) => {
-                    const slide = document.createElement('div');
-                    slide.className = 'suite-carousel-slide';
-                    const img = document.createElement('img');
-                    img.src = miniatura.src;
-                    img.alt = miniatura.alt;
-                    img.style.transition = 'transform 0.5s ease';
-                    slide.appendChild(img);
-                    carouselTrack.appendChild(slide);
-                });
-                
-                // Criar botões de navegação
-                const btnPrev = document.createElement('button');
-                btnPrev.className = 'suite-carousel-btn prev';
-                btnPrev.innerHTML = '‹';
-                btnPrev.setAttribute('aria-label', 'Imagem anterior');
-                
-                const btnNext = document.createElement('button');
-                btnNext.className = 'suite-carousel-btn next';
-                btnNext.innerHTML = '›';
-                btnNext.setAttribute('aria-label', 'Próxima imagem');
-                
-                carouselWrapper.appendChild(carouselTrack);
-                carouselWrapper.appendChild(btnPrev);
-                carouselWrapper.appendChild(btnNext);
-                
-                // Substituir conteúdo antigo pelo carrossel
-                cardImageContainer.innerHTML = '';
-                cardImageContainer.appendChild(carouselWrapper);
-                
-                // Inicializar carrossel
-                let currentSlide = 0;
-                const slides = carouselTrack.querySelectorAll('.suite-carousel-slide');
-                const totalSlides = slides.length;
-                
-                function updateCarousel() {
-                    carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
-                }
-                
-                function nextSlide() {
-                    currentSlide = (currentSlide + 1) % totalSlides;
-                    updateCarousel();
-                }
-                
-                function prevSlide() {
-                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                    updateCarousel();
-                }
-                
-                btnNext.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    nextSlide();
-                });
-                
-                btnPrev.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    prevSlide();
-                });
-                
-                // Auto-play opcional (pausa ao passar o mouse)
-                let autoPlayInterval;
-                function startAutoPlay() {
-                    autoPlayInterval = setInterval(nextSlide, 5000);
-                }
-                
-                function stopAutoPlay() {
-                    clearInterval(autoPlayInterval);
-                }
-                
-                carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
-                carouselWrapper.addEventListener('mouseleave', startAutoPlay);
-                startAutoPlay();
-            }
-            
-            // Inicializar carrosséis para todos os cards
-            document.querySelectorAll('.suite-card-image').forEach(container => {
-                initCarrossel(container);
-            });
+            // Cards agora mostram apenas a imagem principal - carrossel desabilitado
+            // As miniaturas estão ocultas via CSS e não são mais necessárias no card
 
             // Sistema de modal para abrir imagens
             const modal = document.getElementById('imageModal');
@@ -811,16 +724,20 @@
                 }
             }
 
-            // Adicionar evento de clique nas imagens do carrossel para abrir modal
-            document.querySelectorAll('.suite-carousel-slide img').forEach(img => {
+            // Adicionar evento de clique na imagem principal do card para abrir modal com todas as imagens
+            document.querySelectorAll('.suite-imagem-principal').forEach(img => {
                 img.style.cursor = 'pointer';
                 img.addEventListener('click', function() {
-                    const carouselTrack = this.closest('.suite-carousel-track');
-                    if (!carouselTrack) return;
-                    const quartoId = carouselTrack.getAttribute('data-quarto');
-                    const todasImagens = Array.from(carouselTrack.querySelectorAll('img'));
-                    const indexInicial = todasImagens.indexOf(this);
-                    openModal(todasImagens, indexInicial >= 0 ? indexInicial : 0);
+                    const quartoId = this.id.replace('img-principal-', '');
+                    if (typeof quartosImagens !== 'undefined' && quartosImagens[quartoId]) {
+                        // Criar elementos de imagem a partir dos caminhos
+                        const todasImagens = quartosImagens[quartoId].todas.map(src => {
+                            const imgEl = new Image();
+                            imgEl.src = src;
+                            return imgEl;
+                        });
+                        openModal(todasImagens, 0);
+                    }
                 });
             });
 
