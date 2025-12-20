@@ -152,6 +152,99 @@ function saveDatabase() {
   }
 }
 
+// Sistema de Backup Automático
+const backupDir = path.join(__dirname, 'backups');
+const MAX_BACKUPS = 30; // Manter últimos 30 backups (aproximadamente 7-8 dias com backups a cada 6h)
+
+function fazerBackupAutomatico() {
+  try {
+    if (!db || !fs.existsSync(dbPath)) {
+      console.log('⚠️ Backup automático: Banco não disponível');
+      return;
+    }
+
+    // Criar diretório de backup se não existir
+    if (!fs.existsSync(backupDir)) {
+      fs.mkdirSync(backupDir, { recursive: true });
+    }
+
+    // Criar nome do arquivo com data e hora
+    const agora = new Date();
+    const dataStr = agora.toISOString()
+      .replace(/T/, '_')
+      .replace(/:/g, '-')
+      .replace(/\..+/, '')
+      .split('_')[0];
+    const horaStr = agora.toTimeString()
+      .split(' ')[0]
+      .replace(/:/g, '-');
+    
+    const backupFileName = `auto_backup_${dataStr}_${horaStr}.db`;
+    const backupPath = path.join(backupDir, backupFileName);
+
+    // Copiar arquivo do banco
+    fs.copyFileSync(dbPath, backupPath);
+
+    // Obter tamanho
+    const stats = fs.statSync(dbPath);
+    const sizeMB = (stats.size / 1024 / 1024).toFixed(2);
+
+    console.log(`✅ Backup automático criado: ${backupFileName} (${sizeMB} MB) às ${agora.toLocaleString('pt-BR')}`);
+
+    // Gerenciar backups antigos - manter apenas os últimos MAX_BACKUPS
+    gerenciarBackupsAntigos();
+
+  } catch (error) {
+    console.error('❌ Erro ao fazer backup automático:', error.message);
+  }
+}
+
+function gerenciarBackupsAntigos() {
+  try {
+    if (!fs.existsSync(backupDir)) return;
+
+    const backups = fs.readdirSync(backupDir)
+      .filter(file => file.startsWith('auto_backup_') && file.endsWith('.db'))
+      .map(file => {
+        const filePath = path.join(backupDir, file);
+        const fileStats = fs.statSync(filePath);
+        return {
+          name: file,
+          path: filePath,
+          date: fileStats.mtime
+        };
+      })
+      .sort((a, b) => b.date - a.date); // Mais recentes primeiro
+
+    // Se tiver mais backups que o máximo permitido, deletar os mais antigos
+    if (backups.length > MAX_BACKUPS) {
+      const backupsParaDeletar = backups.slice(MAX_BACKUPS);
+      let totalDeletado = 0;
+      let espacoLiberado = 0;
+
+      backupsParaDeletar.forEach(backup => {
+        try {
+          const stats = fs.statSync(backup.path);
+          espacoLiberado += stats.size;
+          fs.unlinkSync(backup.path);
+          totalDeletado++;
+        } catch (error) {
+          console.error(`Erro ao deletar backup ${backup.name}:`, error.message);
+        }
+      });
+
+      if (totalDeletado > 0) {
+        const espacoMB = (espacoLiberado / 1024 / 1024).toFixed(2);
+        console.log(`🗑️  Backups antigos removidos: ${totalDeletado} arquivo(s) (${espacoMB} MB liberados)`);
+      }
+    }
+
+    console.log(`📦 Total de backups automáticos mantidos: ${backups.length}`);
+  } catch (error) {
+    console.error('❌ Erro ao gerenciar backups antigos:', error.message);
+  }
+}
+
 function createTables() {
   // Habilitar foreign keys
   try {
@@ -3207,6 +3300,15 @@ initDatabase().then(() => {
   } else {
     console.log('⚠️ SMTP não configurado. E-mails não serão enviados até que seja configurado.');
   }
+
+  // Fazer backup inicial imediatamente
+  fazerBackupAutomatico();
+  
+  // Configurar backup automático a cada 6 horas (6 * 60 * 60 * 1000 = 21600000 ms)
+  const intervaloBackup = 6 * 60 * 60 * 1000; // 6 horas em milissegundos
+  setInterval(fazerBackupAutomatico, intervaloBackup);
+  console.log(`🔄 Sistema de backup automático ativado (a cada 6 horas)`);
+  console.log(`📦 Máximo de backups mantidos: ${MAX_BACKUPS} (últimos ${Math.ceil(MAX_BACKUPS / 4)} dias)`);
 
   app.listen(PORT, () => {
     console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
