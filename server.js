@@ -517,6 +517,23 @@ function insertDefaultData() {
     console.log('👤 Usuário Luiz Marcos atualizado: luizmarcosramires@hotmail.com');
   }
 
+  // Remover usuários antigos que não devem mais existir
+  const emailsPermitidos = [
+    'admin@villageresidences.com',
+    'luizmarcosramires@hotmail.com'
+  ];
+  const usuariosAntigos = queryAll('SELECT id, email FROM users_admin');
+  if (usuariosAntigos && usuariosAntigos.length > 0) {
+    usuariosAntigos.forEach(usuario => {
+      const emailLower = usuario.email.toLowerCase();
+      const emailPermitido = emailsPermitidos.some(email => email.toLowerCase() === emailLower);
+      if (!emailPermitido) {
+        execute('DELETE FROM users_admin WHERE id = ?', [usuario.id]);
+        console.log(`🗑️ Usuário antigo removido: ${usuario.email}`);
+      }
+    });
+  }
+
   // Apagar todas as reservas antigas para o novo sistema funcionar corretamente
   try {
     const reservasAntigas = queryAll('SELECT COUNT(*) as count FROM reservas');
