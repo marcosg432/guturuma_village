@@ -3307,17 +3307,32 @@ initDatabase().then(() => {
     console.log('⚠️ SMTP não configurado. E-mails não serão enviados até que seja configurado.');
   }
 
-  // Fazer backup inicial imediatamente
-  fazerBackupAutomatico();
+  // Fazer backup inicial imediatamente (não bloquear inicialização se falhar)
+  try {
+    fazerBackupAutomatico();
+  } catch (error) {
+    console.error('⚠️ Erro no backup inicial (servidor continuará):', error.message);
+  }
   
   // Configurar backup automático a cada 6 horas (6 * 60 * 60 * 1000 = 21600000 ms)
-  const intervaloBackup = 6 * 60 * 60 * 1000; // 6 horas em milissegundos
-  setInterval(fazerBackupAutomatico, intervaloBackup);
-  console.log(`🔄 Sistema de backup automático ativado (a cada 6 horas)`);
-  console.log(`📦 Máximo de backups mantidos: ${MAX_BACKUPS} (últimos ${Math.ceil(MAX_BACKUPS / 4)} dias)`);
+  try {
+    const intervaloBackup = 6 * 60 * 60 * 1000; // 6 horas em milissegundos
+    setInterval(() => {
+      try {
+        fazerBackupAutomatico();
+      } catch (error) {
+        console.error('⚠️ Erro no backup automático:', error.message);
+      }
+    }, intervaloBackup);
+    console.log(`🔄 Sistema de backup automático ativado (a cada 6 horas)`);
+    console.log(`📦 Máximo de backups mantidos: ${MAX_BACKUPS} (últimos ${Math.ceil(MAX_BACKUPS / 4)} dias)`);
+  } catch (error) {
+    console.error('⚠️ Erro ao configurar backup automático:', error.message);
+  }
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Servidor rodando em http://localhost:${PORT}`);
+  // Iniciar servidor
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
     console.log(`💾 Banco de dados: SQLite (embutido)`);
   });
 }).catch(error => {
