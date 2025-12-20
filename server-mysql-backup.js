@@ -254,17 +254,17 @@ async function insertDefaultData() {
   
   try {
     // Admin padrão
-    const adminPassword = await bcrypt.hash('Boob.08.', 10);
+    const adminPassword = await bcrypt.hash('admin123', 10);
     await connection.query(`
       INSERT IGNORE INTO users_admin (name, email, password) 
       VALUES (?, ?, ?)
-    `, ['Administrador', 'murilodiasms15@gmail.com', adminPassword]);
+    `, ['Administrador', 'admin@villageresidences.com', adminPassword]);
 
     // Email autorizado
     await connection.query(`
       INSERT IGNORE INTO allowed_emails (name, email) 
       VALUES (?, ?)
-    `, ['Administrador', 'murilodiasms15@gmail.com']);
+    `, ['Administrador', 'admin@villageresidences.com']);
 
     // Quartos
     const categorias = [
@@ -310,7 +310,7 @@ async function insertDefaultData() {
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'murilodiasms15@gmail.com',
+    user: 'admin@villageresidences.com',
     pass: process.env.EMAIL_PASSWORD || 'sua_senha_app_gmail'
   }
 });
@@ -324,9 +324,9 @@ function generate2FACode() {
 async function send2FACode(email, code) {
   try {
     await transporter.sendMail({
-      from: 'murilodiasms15@gmail.com',
-      to: 'murilodiasms15@gmail.com',
-      subject: 'Código de Verificação 2FA - Brisa Imperial',
+      from: 'admin@villageresidences.com',
+      to: 'admin@villageresidences.com',
+      subject: 'Código de Verificação 2FA - Village Residences',
       html: `
         <h2>Código de Verificação</h2>
         <p>Seu código de verificação é: <strong>${code}</strong></p>
@@ -699,7 +699,7 @@ app.post('/api/reserva', async (req, res) => {
     // Enviar email de confirmação
     try {
       await transporter.sendMail({
-        from: 'murilodiasms15@gmail.com',
+        from: 'admin@villageresidences.com',
         to: email,
         subject: `Confirmação de Reserva - ${codigo}`,
         html: `

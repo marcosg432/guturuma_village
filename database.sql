@@ -102,12 +102,12 @@ CREATE TABLE IF NOT EXISTS configuracoes (
 );
 
 -- Inserir dados padrão
--- Senha padrão: Boob.08. (hash bcrypt)
+-- Senha padrão: admin123 (hash bcrypt - ALTERAR EM PRODUÇÃO)
 INSERT IGNORE INTO users_admin (name, email, password) VALUES 
-('Administrador', 'murilodiasms15@gmail.com', '$2a$10$rK8Q8Q8Q8Q8Q8Q8Q8Q8Q8u8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8');
+('Administrador', 'admin@villageresidences.com', '$2a$10$rK8Q8Q8Q8Q8Q8Q8Q8Q8u8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8Q8');
 
 INSERT IGNORE INTO allowed_emails (name, email) VALUES 
-('Administrador', 'murilodiasms15@gmail.com');
+('Administrador', 'admin@villageresidences.com');
 
 -- Inserir quartos padrão
 INSERT IGNORE INTO quartos (categoria, numero, capacidade, vista, preco_base) VALUES

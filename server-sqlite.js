@@ -361,7 +361,7 @@ atualizarStatusReservas();
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: 'murilodiasms15@gmail.com',
+    user: 'admin@villageresidences.com',
     pass: 'your-app-password'
   }
 });
@@ -657,7 +657,7 @@ app.post('/api/reserva', async (req, res) => {
     // Enviar email de confirmação (opcional)
     try {
       await transporter.sendMail({
-        from: 'murilodiasms15@gmail.com',
+        from: 'admin@villageresidences.com',
         to: email,
         subject: `Confirmação de Reserva - ${codigo}`,
         html: `
@@ -796,9 +796,9 @@ app.post('/api/admin/login', async (req, res) => {
     // Enviar código por email (opcional)
     try {
       await transporter.sendMail({
-        from: 'murilodiasms15@gmail.com',
+        from: 'admin@villageresidences.com',
         to: email,
-        subject: 'Código de Verificação - Brisa Imperial',
+        subject: 'Código de Verificação - Village Residences',
         html: `<p>Seu código de verificação é: <strong>${twoFactorCode}</strong></p><p>Este código expira em 10 minutos.</p>`
       });
     } catch (emailError) {

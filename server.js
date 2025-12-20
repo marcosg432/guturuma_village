@@ -377,18 +377,18 @@ function createTables() {
 }
 
 function insertDefaultData() {
-  // Criar usuário administrador principal (Murilo Dias)
-  const emailMurilo = 'luizmarcosramires@hotmail.com';
-  const muriloUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailMurilo.toLowerCase()]);
-  if (!muriloUser) {
-    const hashedPassword = bcrypt.hashSync('Boob.08.', 10);
+  // Criar usuário administrador principal
+  const emailAdmin = 'admin@villageresidences.com';
+  const adminUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailAdmin.toLowerCase()]);
+  if (!adminUser) {
+    const hashedPassword = bcrypt.hashSync('admin123', 10);
     const result = execute('INSERT INTO users_admin (name, email, password) VALUES (?, ?, ?)', 
-      ['Murilo Dias', emailMurilo, hashedPassword]);
-    console.log('👤 Usuário admin criado: luizmarcosramires@hotmail.com / Boob.08.');
+      ['Administrador', emailAdmin, hashedPassword]);
+    console.log('👤 Usuário admin criado: admin@villageresidences.com / admin123');
     console.log('📝 ID do usuário criado:', result.lastInsertRowid);
     
     // Verificar se foi criado corretamente
-    const verifyUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailMurilo.toLowerCase()]);
+    const verifyUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailAdmin.toLowerCase()]);
     if (verifyUser) {
       console.log('✅ Usuário verificado no banco:', { id: verifyUser.id, email: verifyUser.email, name: verifyUser.name, hasPassword: !!verifyUser.password });
     } else {
@@ -396,26 +396,26 @@ function insertDefaultData() {
     }
   } else {
     // Atualizar senha e nome se o usuário já existir
-    const hashedPassword = bcrypt.hashSync('Boob.08.', 10);
+    const hashedPassword = bcrypt.hashSync('admin123', 10);
     execute('UPDATE users_admin SET name = ?, password = ? WHERE LOWER(email) = ?', 
-      ['Murilo Dias', hashedPassword, emailMurilo.toLowerCase()]);
-    console.log('👤 Usuário admin atualizado: luizmarcosramires@hotmail.com');
+      ['Administrador', hashedPassword, emailAdmin.toLowerCase()]);
+    console.log('👤 Usuário admin atualizado: admin@villageresidences.com');
     
     // Verificar se foi atualizado corretamente
-    const verifyUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailMurilo.toLowerCase()]);
+    const verifyUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailAdmin.toLowerCase()]);
     if (verifyUser) {
       console.log('✅ Usuário verificado após atualização:', { id: verifyUser.id, email: verifyUser.email, name: verifyUser.name, hasPassword: !!verifyUser.password });
     }
   }
 
   // Criar usuário admin padrão (backup) se não existir
-  const emailAdmin = 'luizmarcosramires@hotmail.com';
+  const emailAdmin = 'admin@villageresidences.com';
   const adminResult = queryOne('SELECT COUNT(*) as count FROM users_admin WHERE LOWER(email) = ?', [emailAdmin.toLowerCase()]);
   if (adminResult && adminResult.count === 0) {
     const hashedPassword = bcrypt.hashSync('admin123', 10);
     execute('INSERT INTO users_admin (name, email, password) VALUES (?, ?, ?)', 
       ['Administrador', emailAdmin, hashedPassword]);
-    console.log('👤 Usuário admin backup criado: luizmarcosramires@hotmail.com / admin123');
+    console.log('👤 Usuário admin backup criado: admin@villageresidences.com / admin123');
   }
 
   // Apagar todas as reservas antigas para o novo sistema funcionar corretamente
@@ -1471,7 +1471,7 @@ app.post('/api/reserva', apiLimiter, validateReserva, async (req, res) => {
     if (transporter) {
     try {
       await transporter.sendMail({
-        from: 'luizmarcosramires@hotmail.com',
+        from: 'admin@villageresidences.com',
         to: email,
         subject: `Confirmação de Reserva - ${codigo}`,
         html: `

@@ -626,6 +626,23 @@ body {
     margin-top: 30px;
 }
 
+.form-actions .modal-close {
+    position: static;
+    font-size: inherit;
+    padding: 12px 24px;
+    color: white;
+    background: #6c757d;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s;
+    min-width: auto;
+    min-height: auto;
+    display: inline-block;
+    line-height: normal;
+}
+
 .btn-primary {
     padding: 12px 24px;
     background: #40E0D0;

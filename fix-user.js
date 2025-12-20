@@ -23,9 +23,9 @@ async function fixUser() {
       return;
     }
 
-    const email = 'murilodiasms15@gmail.com';
-    const password = 'Boob.08.';
-    const name = 'Murilo Dias';
+    const email = 'admin@villageresidences.com';
+    const password = 'admin123';
+    const name = 'Administrador';
 
     // Verificar se usuário existe
     const stmt = db.prepare('SELECT * FROM users_admin WHERE LOWER(email) = ?');
