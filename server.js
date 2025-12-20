@@ -501,14 +501,20 @@ function insertDefaultData() {
     }
   }
 
-  // Criar usuário admin padrão (backup) se não existir
-  const emailAdmin = 'admin@villageresidences.com';
-  const adminResult = queryOne('SELECT COUNT(*) as count FROM users_admin WHERE LOWER(email) = ?', [emailAdmin.toLowerCase()]);
-  if (adminResult && adminResult.count === 0) {
-    const hashedPassword = bcrypt.hashSync('admin123', 10);
+  // Criar/atualizar usuário Luiz Marcos
+  const emailLuiz = 'luizmarcosramires@hotmail.com';
+  const luizUser = queryOne('SELECT * FROM users_admin WHERE LOWER(email) = ?', [emailLuiz.toLowerCase()]);
+  if (!luizUser) {
+    const hashedPasswordLuiz = bcrypt.hashSync('Luizadminramires', 10);
     execute('INSERT INTO users_admin (name, email, password) VALUES (?, ?, ?)', 
-      ['Administrador', emailAdmin, hashedPassword]);
-    console.log('👤 Usuário admin backup criado: admin@villageresidences.com / admin123');
+      ['Luiz Marcos', emailLuiz, hashedPasswordLuiz]);
+    console.log('👤 Usuário Luiz Marcos criado: luizmarcosramires@hotmail.com');
+  } else {
+    // Atualizar nome e senha se o usuário já existir
+    const hashedPasswordLuiz = bcrypt.hashSync('Luizadminramires', 10);
+    execute('UPDATE users_admin SET name = ?, password = ? WHERE LOWER(email) = ?', 
+      ['Luiz Marcos', hashedPasswordLuiz, emailLuiz.toLowerCase()]);
+    console.log('👤 Usuário Luiz Marcos atualizado: luizmarcosramires@hotmail.com');
   }
 
   // Apagar todas as reservas antigas para o novo sistema funcionar corretamente
