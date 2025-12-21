@@ -4,6 +4,117 @@
 const API_BASE = '/api/admin';
 let currentUser = null;
 
+// ========== PROTEÇÃO CONTRA CLICQUES DURANTE SCROLL (MOBILE) ==========
+let isScrolling = false;
+let scrollTimeout = null;
+const SCROLL_THRESHOLD = 10; // Pixels de movimento para considerar scroll
+const SCROLL_COOLDOWN = 150; // Milissegundos após scroll para permitir cliques
+
+// Detectar scroll
+function initScrollProtection() {
+    let lastScrollTop = 0;
+    let ticking = false;
+
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (Math.abs(currentScrollTop - lastScrollTop) > 5) {
+                    isScrolling = true;
+                    if (scrollTimeout) clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        isScrolling = false;
+                    }, SCROLL_COOLDOWN);
+                }
+                
+                lastScrollTop = currentScrollTop;
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }, { passive: true });
+
+    // Detectar scroll em elementos com overflow
+    document.addEventListener('scroll', function(e) {
+        const target = e.target;
+        if (target !== document && target !== document.body && target !== document.documentElement) {
+            if (target.scrollTop !== (target.lastScrollTop || 0)) {
+                isScrolling = true;
+                if (scrollTimeout) clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+                }, SCROLL_COOLDOWN);
+                target.lastScrollTop = target.scrollTop;
+            }
+        }
+    }, true);
+}
+
+// Adicionar proteção aos elementos clicáveis
+function addSafeTouchListeners(element, handler) {
+    let touchStartTime = 0;
+    let touchStartY = 0;
+    let touchStartX = 0;
+    let hasMoved = false;
+    
+    // Capturar touchstart para detectar movimento
+    element.addEventListener('touchstart', function(e) {
+        touchStartTime = Date.now();
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+        hasMoved = false;
+    }, { passive: true });
+    
+    // Capturar touchmove para detectar scroll
+    element.addEventListener('touchmove', function(e) {
+        const deltaY = Math.abs(e.touches[0].clientY - touchStartY);
+        const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
+        if (deltaY > SCROLL_THRESHOLD || deltaX > SCROLL_THRESHOLD) {
+            hasMoved = true;
+        }
+    }, { passive: true });
+    
+    // Usar touchend e click com proteção
+    element.addEventListener('touchend', function(e) {
+        const touchDuration = Date.now() - touchStartTime;
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndX = e.changedTouches[0].clientX;
+        const deltaY = Math.abs(touchEndY - touchStartY);
+        const deltaX = Math.abs(touchEndX - touchStartX);
+        
+        // Se está fazendo scroll, houve movimento ou é muito rápido, ignorar
+        if (isScrolling || hasMoved || deltaY > SCROLL_THRESHOLD || deltaX > SCROLL_THRESHOLD || touchDuration < 100) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+        
+        // Permitir o clique
+        e.preventDefault();
+        e.stopPropagation();
+        handler.call(this, e);
+        return false;
+    }, { passive: false });
+    
+    // Usar click para mouse e como fallback
+    element.addEventListener('click', function(e) {
+        // Ignorar se veio de um touch (touchend já tratou)
+        if (e.targetTouches && e.targetTouches.length > 0) {
+            return;
+        }
+        
+        // Ignorar se está fazendo scroll
+        if (isScrolling) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+        
+        handler.call(this, e);
+    });
+}
+
 // Dados das suítes (mesmo do reserva-nova.js)
 const suites = {
     'casa-1': { nome: 'Casa Sobrado 2 – Conforto e Espaço com 3 Quartos', preco: 250 },
@@ -22,6 +133,9 @@ const suites = {
 
 // Inicialização
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar proteção contra cliques durante scroll
+    initScrollProtection();
+
     // Verificar autenticação
     const token = localStorage.getItem('admin_token');
     if (!token) {
@@ -124,38 +238,39 @@ function setupMobileMenu() {
             }
         }
         
-        // Adicionar suporte para toque e clique
+        // Adicionar suporte para toque e clique com proteção contra scroll
         const handleMenuToggle = function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            toggleMenu();
+            if (!isScrolling) {
+                e.preventDefault();
+                e.stopPropagation();
+                toggleMenu();
+            }
         };
-        mobileMenuToggle.addEventListener('click', handleMenuToggle);
-        mobileMenuToggle.addEventListener('touchend', handleMenuToggle);
+        addSafeTouchListeners(mobileMenuToggle, handleMenuToggle);
         
-        // Fechar menu ao clicar no overlay
+        // Fechar menu ao clicar no overlay com proteção contra scroll
         if (overlay) {
             const handleOverlayClose = function() {
-                sidebar.classList.remove('active');
-                overlay.classList.remove('active');
+                if (!isScrolling) {
+                    sidebar.classList.remove('active');
+                    overlay.classList.remove('active');
+                }
             };
-            overlay.addEventListener('click', handleOverlayClose);
-            overlay.addEventListener('touchend', handleOverlayClose);
+            addSafeTouchListeners(overlay, handleOverlayClose);
         }
         
-        // Fechar menu ao clicar em um item do menu
+        // Fechar menu ao clicar em um item do menu com proteção contra scroll
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             const handleNavItemClick = function() {
-                if (window.innerWidth <= 768) {
+                if (!isScrolling && window.innerWidth <= 768) {
                     sidebar.classList.remove('active');
                     if (overlay) {
                         overlay.classList.remove('active');
                     }
                 }
             };
-            item.addEventListener('click', handleNavItemClick);
-            item.addEventListener('touchend', handleNavItemClick);
+            addSafeTouchListeners(item, handleNavItemClick);
         });
         
         // Fechar menu ao redimensionar para desktop
@@ -175,20 +290,25 @@ function setupEvents() {
     const btnLogout = document.getElementById('btn-logout');
     if (btnLogout) {
         const handleLogout = function() {
-            localStorage.removeItem('admin_token');
-            localStorage.removeItem('admin_user');
-            window.location.href = '/admin/login';
+            if (!isScrolling) {
+                localStorage.removeItem('admin_token');
+                localStorage.removeItem('admin_user');
+                window.location.href = '/admin/login';
+            }
         };
-        btnLogout.addEventListener('click', handleLogout);
-        btnLogout.addEventListener('touchend', handleLogout);
+        addSafeTouchListeners(btnLogout, handleLogout);
     }
 
     // Filtro de status
     document.getElementById('filter-status').addEventListener('change', loadReservas);
     const btnRefreshReservas = document.getElementById('btn-refresh-reservas');
     if (btnRefreshReservas) {
-        btnRefreshReservas.addEventListener('click', loadReservas);
-        btnRefreshReservas.addEventListener('touchend', loadReservas);
+        const handleRefresh = function() {
+            if (!isScrolling) {
+                loadReservas();
+            }
+        };
+        addSafeTouchListeners(btnRefreshReservas, handleRefresh);
     }
 
     // Formulário de agendamento manual
@@ -197,8 +317,12 @@ function setupEvents() {
     // Botão de atualizar contato
     const btnRefreshContato = document.getElementById('btn-refresh-contato');
     if (btnRefreshContato) {
-        btnRefreshContato.addEventListener('click', loadContato);
-        btnRefreshContato.addEventListener('touchend', loadContato);
+        const handleRefreshContato = function() {
+            if (!isScrolling) {
+                loadContato();
+            }
+        };
+        addSafeTouchListeners(btnRefreshContato, handleRefreshContato);
     }
 
     // Modal de reserva
@@ -210,16 +334,24 @@ function setupEvents() {
     // Renda
     const btnAtualizarRenda = document.getElementById('btn-atualizar-renda');
     if (btnAtualizarRenda) {
-        btnAtualizarRenda.addEventListener('click', loadRenda);
-        btnAtualizarRenda.addEventListener('touchend', loadRenda);
+        const handleRefreshRenda = function() {
+            if (!isScrolling) {
+                loadRenda();
+            }
+        };
+        addSafeTouchListeners(btnAtualizarRenda, handleRefreshRenda);
     }
     
     // Busca no histórico
     const btnBuscarHistorico = document.getElementById('btn-buscar-historico');
     const inputBuscaHistorico = document.getElementById('input-busca-historico');
     if (btnBuscarHistorico) {
-        btnBuscarHistorico.addEventListener('click', buscarHistorico);
-        btnBuscarHistorico.addEventListener('touchend', buscarHistorico);
+        const handleBuscar = function() {
+            if (!isScrolling) {
+                buscarHistorico();
+            }
+        };
+        addSafeTouchListeners(btnBuscarHistorico, handleBuscar);
     }
     if (inputBuscaHistorico) {
         inputBuscaHistorico.addEventListener('keypress', function(e) {
@@ -338,11 +470,14 @@ async function loadReservas() {
 
         container.innerHTML = reservas.map(reserva => createReservaCard(reserva)).join('');
         
-        // Adicionar event listeners aos cards
+        // Adicionar event listeners aos cards com proteção contra scroll
         container.querySelectorAll('.reserva-card').forEach(card => {
-            const handleCardClick = () => openModalReserva(card.dataset.id);
-            card.addEventListener('click', handleCardClick);
-            card.addEventListener('touchend', handleCardClick);
+            const handleCardClick = () => {
+                if (!isScrolling) {
+                    openModalReserva(card.dataset.id);
+                }
+            };
+            addSafeTouchListeners(card, handleCardClick);
         });
     } catch (error) {
         console.error('Erro ao carregar reservas:', error);
@@ -438,16 +573,17 @@ async function loadQuartos() {
 
         container.innerHTML = quartos.map(quarto => createQuartoCard(quarto)).join('');
         
-        // Adicionar event listeners para abrir ficha do quarto
+        // Adicionar event listeners para abrir ficha do quarto com proteção contra scroll
         container.querySelectorAll('.quarto-card').forEach(card => {
             const handleQuartoClick = function() {
-                const quartoId = this.getAttribute('data-quarto-id');
-                if (quartoId) {
-                    abrirFichaQuarto(quartoId);
+                if (!isScrolling) {
+                    const quartoId = this.getAttribute('data-quarto-id');
+                    if (quartoId) {
+                        abrirFichaQuarto(quartoId);
+                    }
                 }
             };
-            card.addEventListener('click', handleQuartoClick);
-            card.addEventListener('touchend', handleQuartoClick);
+            addSafeTouchListeners(card, handleQuartoClick);
         });
     } catch (error) {
         console.error('Erro ao carregar quartos:', error);
@@ -574,10 +710,11 @@ function mostrarFichaQuarto(quarto, reservas) {
     const closeBtn = modalContent.querySelector('.modal-close');
     if (closeBtn) {
         const handleClose = () => {
-            modal.classList.remove('active');
+            if (!isScrolling) {
+                modal.classList.remove('active');
+            }
         };
-        closeBtn.addEventListener('click', handleClose);
-        closeBtn.addEventListener('touchend', handleClose);
+        addSafeTouchListeners(closeBtn, handleClose);
     }
 
     modal.classList.add('active');
@@ -828,15 +965,16 @@ function mostrarFichaQuartoLista(quarto, reservas) {
     const closeBtn = modalContent.querySelector('.modal-close');
     if (closeBtn) {
         const handleClose = () => {
-            modal.classList.remove('active');
+            if (!isScrolling) {
+                modal.classList.remove('active');
+            }
         };
-        closeBtn.addEventListener('click', handleClose);
-        closeBtn.addEventListener('touchend', handleClose);
+        addSafeTouchListeners(closeBtn, handleClose);
     }
 
     // Fechar ao clicar fora
     modal.addEventListener('click', function(e) {
-        if (e.target === modal) {
+        if (e.target === modal && !isScrolling) {
             modal.classList.remove('active');
         }
     });
@@ -887,9 +1025,14 @@ async function loadHistorico(termoBusca = '') {
 
         container.innerHTML = historico.map(item => createHistoricoItem(item)).join('');
         
-        // Adicionar event listeners para botões de ver ficha
+        // Adicionar event listeners para botões de ver ficha com proteção contra scroll
         container.querySelectorAll('.btn-ver-ficha-historico').forEach(btn => {
             const handleVerFicha = function(e) {
+                if (isScrolling) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                }
                 e.preventDefault();
                 e.stopPropagation();
                 const id = this.getAttribute('data-id');
@@ -900,13 +1043,17 @@ async function loadHistorico(termoBusca = '') {
                     alert('Erro: ID da ficha não encontrado');
                 }
             };
-            btn.addEventListener('click', handleVerFicha);
-            btn.addEventListener('touchend', handleVerFicha);
+            addSafeTouchListeners(btn, handleVerFicha);
         });
         
-        // Adicionar event listeners para botões de excluir
+        // Adicionar event listeners para botões de excluir com proteção contra scroll
         container.querySelectorAll('.btn-excluir-historico').forEach(btn => {
             const handleExcluir = function(e) {
+                if (isScrolling) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    return;
+                }
                 e.preventDefault();
                 e.stopPropagation();
                 const id = this.getAttribute('data-id');
@@ -916,8 +1063,7 @@ async function loadHistorico(termoBusca = '') {
                     alert('Erro: ID da ficha não encontrado');
                 }
             };
-            btn.addEventListener('click', handleExcluir);
-            btn.addEventListener('touchend', handleExcluir);
+            addSafeTouchListeners(btn, handleExcluir);
         });
     } catch (error) {
         console.error('Erro ao carregar histórico:', error);
@@ -1082,16 +1228,22 @@ async function loadUsuarios() {
 
         container.innerHTML = usuarios.map(usuario => createUsuarioItem(usuario)).join('');
         
-        // Event listeners
+        // Event listeners com proteção contra scroll
         container.querySelectorAll('.btn-edit-usuario').forEach(btn => {
-            const handleEdit = () => openModalUsuario(btn.dataset.id);
-            btn.addEventListener('click', handleEdit);
-            btn.addEventListener('touchend', handleEdit);
+            const handleEdit = () => {
+                if (!isScrolling) {
+                    openModalUsuario(btn.dataset.id);
+                }
+            };
+            addSafeTouchListeners(btn, handleEdit);
         });
         container.querySelectorAll('.btn-delete-usuario').forEach(btn => {
-            const handleDelete = () => deleteUsuario(btn.dataset.id);
-            btn.addEventListener('click', handleDelete);
-            btn.addEventListener('touchend', handleDelete);
+            const handleDelete = () => {
+                if (!isScrolling) {
+                    deleteUsuario(btn.dataset.id);
+                }
+            };
+            addSafeTouchListeners(btn, handleDelete);
         });
     } catch (error) {
         console.error('Erro ao carregar usuários:', error);
@@ -1116,9 +1268,12 @@ function createUsuarioItem(usuario) {
 
 const btnAddUsuario = document.getElementById('btn-add-usuario');
 if (btnAddUsuario) {
-    const handleAddUsuario = () => openModalUsuario(null);
-    btnAddUsuario.addEventListener('click', handleAddUsuario);
-    btnAddUsuario.addEventListener('touchend', handleAddUsuario);
+    const handleAddUsuario = () => {
+        if (!isScrolling) {
+            openModalUsuario(null);
+        }
+    };
+    addSafeTouchListeners(btnAddUsuario, handleAddUsuario);
 }
 
 // ========== ABA: AGENDAR MANUALMENTE ==========
@@ -1250,12 +1405,13 @@ function setupModalReserva() {
 
     closeBtns.forEach(btn => {
         const handleClose = () => {
-            modal.classList.remove('active');
-            // Reabilitar campos ao fechar (para próxima abertura)
-            enableModalFields(true);
+            if (!isScrolling) {
+                modal.classList.remove('active');
+                // Reabilitar campos ao fechar (para próxima abertura)
+                enableModalFields(true);
+            }
         };
-        btn.addEventListener('click', handleClose);
-        btn.addEventListener('touchend', handleClose);
+        addSafeTouchListeners(btn, handleClose);
     });
 
     window.addEventListener('click', (e) => {
@@ -1560,11 +1716,12 @@ function setupModalUsuario() {
 
     closeBtns.forEach(btn => {
         const handleClose = () => {
-            modal.classList.remove('active');
-            form.reset();
+            if (!isScrolling) {
+                modal.classList.remove('active');
+                form.reset();
+            }
         };
-        btn.addEventListener('click', handleClose);
-        btn.addEventListener('touchend', handleClose);
+        addSafeTouchListeners(btn, handleClose);
     });
 
     window.addEventListener('click', (e) => {
