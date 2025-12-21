@@ -12,12 +12,14 @@ function addSafeTouchListeners(element, handler) {
     let touchStartY = 0;
     let touchStartX = 0;
     let moved = false;
+    let touchHandled = false;
     
     // Capturar touchstart
     element.addEventListener('touchstart', function(e) {
         touchStartY = e.touches[0].clientY;
         touchStartX = e.touches[0].clientX;
         moved = false;
+        touchHandled = false;
     }, { passive: true });
     
     // Capturar touchmove para detectar movimento (scroll)
@@ -26,26 +28,44 @@ function addSafeTouchListeners(element, handler) {
         const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
         
         // Se moveu mais que o threshold, considerar como scroll
-        if (deltaY > SCROLL_THRESHOLD || deltaX > SCROLL_THRESHOLD) {
+        // Aumentar threshold para elementos do menu para serem mais permissivos
+        const threshold = element.classList.contains('nav-item') ? 30 : SCROLL_THRESHOLD;
+        if (deltaY > threshold || deltaX > threshold) {
             moved = true;
         }
     }, { passive: true });
     
     // Usar touchend - bloquear apenas se houve movimento significativo
     element.addEventListener('touchend', function(e) {
+        // Calcular movimento final
+        const touchEndY = e.changedTouches[0].clientY;
+        const touchEndX = e.changedTouches[0].clientX;
+        const finalDeltaY = Math.abs(touchEndY - touchStartY);
+        const finalDeltaX = Math.abs(touchEndX - touchStartX);
+        const threshold = element.classList.contains('nav-item') ? 30 : SCROLL_THRESHOLD;
+        
         // Se moveu significativamente, não é um tap, é scroll - bloquear
-        if (moved) {
+        if (moved || finalDeltaY > threshold || finalDeltaX > threshold) {
             return; // Não fazer nada, deixar o scroll acontecer naturalmente
         }
         
         // Se não moveu, é um tap válido - executar handler
-        e.preventDefault(); // Prevenir que o click event também dispare
+        e.preventDefault();
+        e.stopPropagation();
+        touchHandled = true;
         handler.call(this, e);
         return false;
     }, { passive: false });
     
-    // Usar click para mouse (desktop) - sempre permitir
+    // Usar click para mouse (desktop) - sempre permitir, mas evitar duplo disparo
     element.addEventListener('click', function(e) {
+        // Se já foi tratado pelo touchend, ignorar click
+        if (touchHandled) {
+            e.preventDefault();
+            e.stopPropagation();
+            touchHandled = false; // Reset para próximo evento
+            return false;
+        }
         handler.call(this, e);
     });
 }
@@ -104,6 +124,8 @@ function setupNavigation() {
     const navItems = document.querySelectorAll('.nav-item');
     const tabContents = document.querySelectorAll('.tab-content');
     const pageTitle = document.getElementById('page-title');
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
 
     const titles = {
         reservas: 'Reservas',
@@ -116,9 +138,17 @@ function setupNavigation() {
     };
 
     navItems.forEach(item => {
-        item.addEventListener('click', function(e) {
+        const handleNavClick = function(e) {
             e.preventDefault();
             const tab = this.dataset.tab;
+
+            // Fechar menu mobile se estiver aberto
+            if (window.innerWidth <= 768 && sidebar) {
+                sidebar.classList.remove('active');
+                if (overlay) {
+                    overlay.classList.remove('active');
+                }
+            }
 
             // Atualizar navegação
             navItems.forEach(nav => nav.classList.remove('active'));
@@ -152,7 +182,10 @@ function setupNavigation() {
                     loadContato();
                     break;
             }
-        });
+        };
+        
+        // Usar addSafeTouchListeners para ter proteção contra scroll
+        addSafeTouchListeners(item, handleNavClick);
     });
 }
 
@@ -188,19 +221,7 @@ function setupMobileMenu() {
             addSafeTouchListeners(overlay, handleOverlayClose);
         }
         
-        // Fechar menu ao clicar em um item do menu com proteção contra scroll
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            const handleNavItemClick = function() {
-                if (window.innerWidth <= 768) {
-                    sidebar.classList.remove('active');
-                    if (overlay) {
-                        overlay.classList.remove('active');
-                    }
-                }
-            };
-            addSafeTouchListeners(item, handleNavItemClick);
-        });
+        // Os nav-items já têm listeners no setupNavigation() que também fecham o menu
         
         // Fechar menu ao redimensionar para desktop
         window.addEventListener('resize', function() {
