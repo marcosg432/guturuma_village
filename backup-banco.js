@@ -89,3 +89,8 @@ async function fazerBackup() {
 // Executar
 fazerBackup();
 
+
+
+
+
+

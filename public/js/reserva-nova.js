@@ -29,22 +29,14 @@ const suites = [
         descricao: 'Acomode-se nesta casa de temporada com 100 m², ar-condicionado e varanda. Possui 3 quartos separados, sala de estar, cozinha completa com geladeira e forno, além de 4 banheiros. Toalhas e roupa de cama fornecidas. Ótima opção para famílias que precisam de conforto e praticidade.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV de tela plana', 'Utensílios de cozinha', 'Aceita pets', 'Estacionamento gratuito'],
         imagens: [
-            'images/casa-1-img-1.jpg',
-            'images/casa-1-img-2.jpg',
-            'images/casa-1-img-3.jpg',
-            'images/casa-1-img-4.jpg',
-            'images/casa-1-img-5.jpg',
-            'images/casa-1-img-6.jpg',
-            'images/casa-1-img-7.jpg',
-            'images/casa-1-img-8.jpg',
-            'images/casa-1-img-9.jpg',
-            'images/casa-1-img-10.jpg',
-            'images/casa-1-img-11.jpg',
-            'images/casa-1-img-12.jpg',
-            'images/casa-1-img-13.jpg',
-            'images/casa-1-img-14.jpg',
-            'images/casa-1-img-15.jpg',
-            'images/casa-1-img-16.jpg'
+            'images/casa-sobrado-2/casa-sobrado-2-1.png',
+            'images/casa-sobrado-2/casa-sobrado-2-2.png',
+            'images/casa-sobrado-2/casa-sobrado-2-3.png',
+            'images/casa-sobrado-2/casa-sobrado-2-4.png',
+            'images/casa-sobrado-2/casa-sobrado-2-5.png',
+            'images/casa-sobrado-2/casa-sobrado-2-6.png',
+            'images/casa-sobrado-2/casa-sobrado-2-7.png',
+            'images/casa-sobrado-2/casa-sobrado-2-8.png'
         ]
     },
     {
@@ -58,31 +50,12 @@ const suites = [
         descricao: 'Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila. Inclui roupas de cama e toalhas. Estacionamento no local e Wi-Fi gratuito.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Cozinha equipada', 'Sala de estar', 'Ar-condicionado', 'TV', 'Wi-Fi gratuito', 'Estacionamento gratuito'],
         imagens: [
-            'images/casa-2-img-1.jpg',
-            'images/casa-2-img-2.jpg',
-            'images/casa-2-img-3.jpg',
-            'images/casa-2-img-4.jpg',
-            'images/casa-2-img-5.jpg',
-            'images/casa-2-img-6.jpg',
-            'images/casa-2-img-7.jpg',
-            'images/casa-2-img-8.jpg',
-            'images/casa-2-img-9.jpg',
-            'images/casa-2-img-10.jpg',
-            'images/casa-2-img-11.jpg',
-            'images/casa-2-img-12.jpg',
-            'images/casa-2-img-13.jpg',
-            'images/casa-2-img-14.jpg',
-            'images/casa-2-img-15.jpg',
-            'images/casa-2-img-16.jpg',
-            'images/casa-2-img-17.jpg',
-            'images/casa-2-img-18.jpg',
-            'images/casa-2-img-19.jpg',
-            'images/casa-2-img-20.jpg',
-            'images/casa-2-img-21.jpg',
-            'images/casa-2-img-22.jpg',
-            'images/casa-2-img-23.jpg',
-            'images/casa-2-img-24.jpg',
-            'images/casa-2-img-25.jpg'
+            'images/casa-sobrado-4/casa-sobrado-4-1.png',
+            'images/casa-sobrado-4/casa-sobrado-4-2.png',
+            'images/casa-sobrado-4/casa-sobrado-4-3.png',
+            'images/casa-sobrado-4/casa-sobrado-4-4.png',
+            'images/casa-sobrado-4/casa-sobrado-4-5.png',
+            'images/casa-sobrado-4/casa-sobrado-4-6.png'
         ]
     },
     {
@@ -96,29 +69,16 @@ const suites = [
         descricao: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
         comodidades: ['100 m²', '3 quartos', '5 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Recepção 24h'],
         imagens: [
-            'images/casa-3-img-1.jpg',
-            'images/casa-3-img-2.jpg',
-            'images/casa-3-img-3.jpg',
-            'images/casa-3-img-4.jpg',
-            'images/casa-3-img-5.jpg',
-            'images/casa-3-img-6.jpg',
-            'images/casa-3-img-7.jpg',
-            'images/casa-3-img-8.jpg',
-            'images/casa-3-img-9.jpg',
-            'images/casa-3-img-10.jpg',
-            'images/casa-3-img-11.jpg',
-            'images/casa-3-img-12.jpg',
-            'images/casa-3-img-13.jpg',
-            'images/casa-3-img-14.jpg',
-            'images/casa-3-img-15.jpg',
-            'images/casa-3-img-16.jpg',
-            'images/casa-3-img-17.jpg',
-            'images/casa-3-img-18.jpg',
-            'images/casa-3-img-19.jpg',
-            'images/casa-3-img-20.jpg',
-            'images/casa-3-img-21.jpg',
-            'images/casa-3-img-22.jpg',
-            'images/casa-3-img-23.jpg'
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-1.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-2.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-3.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-4.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-5.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-6.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-7.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-8.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-9.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-10.png'
         ]
     },
     {
@@ -132,33 +92,19 @@ const suites = [
         descricao: 'Casa completa com 100 m², ar-condicionado em todos ambientes, sala de estar, cozinha completa com geladeira e micro-ondas, além de 4 banheiros. Ideal para grupos e famílias que buscam conforto e privacidade. Inclui toalhas e roupa de cama.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado individual', 'Cozinha completa', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Utensílios de cozinha'],
         imagens: [
-            'images/casa-4-img-1.jpg',
-            'images/casa-4-img-2.jpg',
-            'images/casa-4-img-3.jpg',
-            'images/casa-4-img-4.jpg',
-            'images/casa-4-img-5.jpg',
-            'images/casa-4-img-6.jpg',
-            'images/casa-4-img-7.jpg',
-            'images/casa-4-img-8.jpg',
-            'images/casa-4-img-9.jpg',
-            'images/casa-4-img-10.jpg',
-            'images/casa-4-img-11.jpg',
-            'images/casa-4-img-12.jpg',
-            'images/casa-4-img-13.jpg',
-            'images/casa-4-img-14.jpg',
-            'images/casa-4-img-15.jpg',
-            'images/casa-4-img-16.jpg',
-            'images/casa-4-img-17.jpg',
-            'images/casa-4-img-18.jpg',
-            'images/casa-4-img-19.jpg',
-            'images/casa-4-img-20.jpg',
-            'images/casa-4-img-21.jpg',
-            'images/casa-4-img-22.jpg',
-            'images/casa-4-img-23.jpg',
-            'images/casa-4-img-24.jpg',
-            'images/casa-4-img-25.jpg',
-            'images/casa-4-img-26.jpg',
-            'images/casa-4-img-27.jpg'
+            'images/casa-sobrado-6/casa-sobrado-6-1.png',
+            'images/casa-sobrado-6/casa-sobrado-6-2.png',
+            'images/casa-sobrado-6/casa-sobrado-6-3.png',
+            'images/casa-sobrado-6/casa-sobrado-6-4.png',
+            'images/casa-sobrado-6/casa-sobrado-6-5.png',
+            'images/casa-sobrado-6/casa-sobrado-6-6.png',
+            'images/casa-sobrado-6/casa-sobrado-6-7.png',
+            'images/casa-sobrado-6/casa-sobrado-6-8.png',
+            'images/casa-sobrado-6/casa-sobrado-6-9.png',
+            'images/casa-sobrado-6/casa-sobrado-6-10.png',
+            'images/casa-sobrado-6/casa-sobrado-6-11.png',
+            'images/casa-sobrado-6/casa-sobrado-6-12.png',
+            'images/casa-sobrado-6/casa-sobrado-6-13.png'
         ]
     },
     {
@@ -172,13 +118,9 @@ const suites = [
         descricao: 'Conforto e elegância em um ambiente acolhedor, perfeita para sua estadia. Ideal para casais ou pequenas famílias.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo'],
         imagens: [
-            'images/WhatsApp Image 2025-12-18 at 13.50.03.jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.05 (1).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.05 (2).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.05 (3).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.05 (4).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.05 (5).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.05.jpeg'
+            'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png',
+            'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-2.png',
+            'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-3.png'
         ]
     },
     {
@@ -192,10 +134,10 @@ const suites = [
         descricao: 'Luxo e funcionalidade combinados, com vista privilegiada e comodidades exclusivas. Perfeita para famílias.',
         comodidades: ['Wi-Fi', 'TV 55"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'images/suite-2-img-1.jpeg',
-            'images/suite-2-img-2.jpeg',
-            'images/suite-2-img-3.jpeg',
-            'images/suite-2-img-4.jpeg'
+            'images/suite-2/suite-2-1.png',
+            'images/suite-2/suite-2-2.png',
+            'images/suite-2/suite-2-3.png',
+            'images/suite-2/suite-2-4.png'
         ]
     },
     {
@@ -209,12 +151,10 @@ const suites = [
         descricao: 'O ápice do luxo, com vista panorâmica e todas as comodidades de um resort de primeira linha. Experiência única e inesquecível.',
         comodidades: ['Wi-Fi', 'TV 65"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Hidromassagem', 'Minibar'],
         imagens: [
-            'images/WhatsApp Image 2025-12-18 at 13.50.06.jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.06 (1).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.06 (2).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.06 (3).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.06 (4).jpeg',
-            'images/WhatsApp Image 2025-12-18 at 13.50.06 (5).jpeg'
+            'images/suite-3/suite-3-1.png',
+            'images/suite-3/suite-3-2.png',
+            'images/suite-3/suite-3-3.png',
+            'images/suite-3/suite-3-4.png'
         ]
     },
     {
@@ -228,13 +168,10 @@ const suites = [
         descricao: 'Vista privilegiada para o mar com todas as comodidades para uma estadia inesquecível.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'images/suite-4-img-1.jpeg',
-            'images/suite-4-img-2.jpeg',
-            'images/suite-4-img-3.jpeg',
-            'images/suite-4-img-4.jpeg',
-            'images/suite-4-img-5.jpeg',
-            'images/suite-4-img-6.jpeg',
-            'images/suite-4-img-7.jpeg'
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-1.png',
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-2.png',
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-3.png',
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-4.png'
         ]
     },
 ];

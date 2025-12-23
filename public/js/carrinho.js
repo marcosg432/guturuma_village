@@ -13,9 +13,14 @@ const suites = [
         descricao: 'Acomode-se nesta casa de temporada com 100 m², ar-condicionado e varanda. Possui 3 quartos separados, sala de estar, cozinha completa com geladeira e forno, além de 4 banheiros. Toalhas e roupa de cama fornecidas. Ótima opção para famílias que precisam de conforto e praticidade.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV de tela plana', 'Utensílios de cozinha', 'Aceita pets', 'Estacionamento gratuito'],
         imagens: [
-            'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop'
+            'images/casa-sobrado-2/casa-sobrado-2-1.png',
+            'images/casa-sobrado-2/casa-sobrado-2-2.png',
+            'images/casa-sobrado-2/casa-sobrado-2-3.png',
+            'images/casa-sobrado-2/casa-sobrado-2-4.png',
+            'images/casa-sobrado-2/casa-sobrado-2-5.png',
+            'images/casa-sobrado-2/casa-sobrado-2-6.png',
+            'images/casa-sobrado-2/casa-sobrado-2-7.png',
+            'images/casa-sobrado-2/casa-sobrado-2-8.png'
         ]
     },
     {
@@ -29,9 +34,12 @@ const suites = [
         descricao: 'Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila. Inclui roupas de cama e toalhas. Estacionamento no local e Wi-Fi gratuito.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Cozinha equipada', 'Sala de estar', 'Ar-condicionado', 'TV', 'Wi-Fi gratuito', 'Estacionamento gratuito'],
         imagens: [
-            'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?w=600&h=400&fit=crop'
+            'images/casa-sobrado-4/casa-sobrado-4-1.png',
+            'images/casa-sobrado-4/casa-sobrado-4-2.png',
+            'images/casa-sobrado-4/casa-sobrado-4-3.png',
+            'images/casa-sobrado-4/casa-sobrado-4-4.png',
+            'images/casa-sobrado-4/casa-sobrado-4-5.png',
+            'images/casa-sobrado-4/casa-sobrado-4-6.png'
         ]
     },
     {
@@ -45,9 +53,16 @@ const suites = [
         descricao: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
         comodidades: ['100 m²', '3 quartos', '5 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Recepção 24h'],
         imagens: [
-            'https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=600&h=400&fit=crop'
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-1.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-2.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-3.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-4.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-5.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-6.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-7.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-8.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-9.png',
+            'images/casa-ampla-confortavel/casa-ampla-confortavel-10.png'
         ]
     },
     {
@@ -61,9 +76,19 @@ const suites = [
         descricao: 'Casa completa com 100 m², ar-condicionado em todos ambientes, sala de estar, cozinha completa com geladeira e micro-ondas, além de 4 banheiros. Ideal para grupos e famílias que buscam conforto e privacidade. Inclui toalhas e roupa de cama.',
         comodidades: ['100 m²', '3 quartos', '4 banheiros', 'Ar-condicionado individual', 'Cozinha completa', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Utensílios de cozinha'],
         imagens: [
-            'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&h=400&fit=crop'
+            'images/casa-sobrado-6/casa-sobrado-6-1.png',
+            'images/casa-sobrado-6/casa-sobrado-6-2.png',
+            'images/casa-sobrado-6/casa-sobrado-6-3.png',
+            'images/casa-sobrado-6/casa-sobrado-6-4.png',
+            'images/casa-sobrado-6/casa-sobrado-6-5.png',
+            'images/casa-sobrado-6/casa-sobrado-6-6.png',
+            'images/casa-sobrado-6/casa-sobrado-6-7.png',
+            'images/casa-sobrado-6/casa-sobrado-6-8.png',
+            'images/casa-sobrado-6/casa-sobrado-6-9.png',
+            'images/casa-sobrado-6/casa-sobrado-6-10.png',
+            'images/casa-sobrado-6/casa-sobrado-6-11.png',
+            'images/casa-sobrado-6/casa-sobrado-6-12.png',
+            'images/casa-sobrado-6/casa-sobrado-6-13.png'
         ]
     },
     {
@@ -77,9 +102,9 @@ const suites = [
         descricao: 'Conforto e elegância em um ambiente acolhedor, perfeita para sua estadia. Ideal para casais ou pequenas famílias.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo'],
         imagens: [
-            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop'
+            'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png',
+            'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-2.png',
+            'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-3.png'
         ]
     },
     {
@@ -93,9 +118,10 @@ const suites = [
         descricao: 'Luxo e funcionalidade combinados, com vista privilegiada e comodidades exclusivas. Perfeita para famílias.',
         comodidades: ['Wi-Fi', 'TV 55"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=600&h=400&fit=crop'
+            'images/suite-2/suite-2-1.png',
+            'images/suite-2/suite-2-2.png',
+            'images/suite-2/suite-2-3.png',
+            'images/suite-2/suite-2-4.png'
         ]
     },
     {
@@ -109,9 +135,10 @@ const suites = [
         descricao: 'O ápice do luxo, com vista panorâmica e todas as comodidades de um resort de primeira linha. Experiência única e inesquecível.',
         comodidades: ['Wi-Fi', 'TV 65"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Hidromassagem', 'Minibar'],
         imagens: [
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop'
+            'images/suite-3/suite-3-1.png',
+            'images/suite-3/suite-3-2.png',
+            'images/suite-3/suite-3-3.png',
+            'images/suite-3/suite-3-4.png'
         ]
     },
     {
@@ -125,9 +152,10 @@ const suites = [
         descricao: 'Vista privilegiada para o mar com todas as comodidades para uma estadia inesquecível.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-1.png',
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-2.png',
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-3.png',
+            'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-4.png'
         ]
     },
     {
@@ -141,9 +169,10 @@ const suites = [
         descricao: 'Elegância e sofisticação em um ambiente espaçoso com acabamentos de primeira linha.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop'
+            'images/suite-deluxe/suite-deluxe-1.png',
+            'images/suite-deluxe/suite-deluxe-2.png',
+            'images/suite-deluxe/suite-deluxe-3.png',
+            'images/suite-deluxe/suite-deluxe-4.png'
         ]
     },
     {
@@ -157,9 +186,10 @@ const suites = [
         descricao: 'Perfeita para viagens de negócios, com espaço de trabalho e todas as comodidades necessárias.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Mesa de trabalho'],
         imagens: [
-            'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+            'images/quarto-duplo/quarto-duplo-1.png',
+            'images/quarto-duplo/quarto-duplo-2.png',
+            'images/quarto-duplo/quarto-duplo-3.png',
+            'images/quarto-duplo/quarto-duplo-4.png'
         ]
     },
     {
@@ -173,9 +203,10 @@ const suites = [
         descricao: 'Espaço amplo e confortável ideal para famílias, com múltiplos ambientes e comodidades especiais.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Cama extra'],
         imagens: [
-            'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+            'images/suite-deluxe-familia/suite-deluxe-familia-1.png',
+            'images/suite-deluxe-familia/suite-deluxe-familia-2.png',
+            'images/suite-deluxe-familia/suite-deluxe-familia-3.png',
+            'images/suite-deluxe-familia/suite-deluxe-familia-4.png'
         ]
     },
     {
@@ -189,9 +220,9 @@ const suites = [
         descricao: 'Ambiente especial para casais, com decoração elegante e atmosfera acolhedora para momentos únicos.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Decoração especial'],
         imagens: [
-            'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
-            'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop'
+            'images/suite-romantica/suite-romantica-1.png',
+            'images/suite-romantica/suite-romantica-2.png',
+            'images/suite-romantica/suite-romantica-3.png'
         ]
     }
 ];

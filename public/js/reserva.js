@@ -702,77 +702,77 @@ function updateResumo() {
     // Dados das suítes
     const suiteData = {
         'Casa Sobrado 2 – Conforto e Espaço com 3 Quartos': {
-            image: 'https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=600&h=400&fit=crop',
+            image: 'images/casa-sobrado-2/casa-sobrado-2-1.png',
             maxOccupancy: 'Até 8 pessoas',
             area: '100 m²',
             view: 'Condomínio',
             description: 'Acomode-se nesta casa de temporada com 100 m², ar-condicionado e varanda. Possui 3 quartos separados, sala de estar, cozinha completa com geladeira e forno, além de 4 banheiros.'
         },
         'Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias': {
-            image: 'https://images.unsplash.com/photo-1613977257363-707ba9348227?w=600&h=400&fit=crop',
+            image: 'images/casa-sobrado-4/casa-sobrado-4-1.png',
             maxOccupancy: 'Até 8 pessoas',
             area: '100 m²',
             view: 'Condomínio',
             description: 'Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila.'
         },
         'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros': {
-            image: 'https://images.unsplash.com/photo-1600585154084-4e5fe7c39198?w=600&h=400&fit=crop',
+            image: 'images/casa-ampla-confortavel/casa-ampla-confortavel-1.png',
             maxOccupancy: 'Até 10 pessoas',
             area: '100 m²',
             view: 'Condomínio',
             description: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto.'
         },
         'Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos': {
-            image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&h=400&fit=crop',
+            image: 'images/casa-sobrado-6/casa-sobrado-6-1.png',
             maxOccupancy: 'Até 8 pessoas',
             area: '100 m²',
             view: 'Condomínio',
             description: 'Casa completa com 100 m², ar-condicionado em todos ambientes, sala de estar, cozinha completa com geladeira e micro-ondas, além de 4 banheiros. Ideal para grupos e famílias.'
         },
         'Quarto Deluxe com Cama Queen-size': {
-            image: 'https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=600&h=400&fit=crop',
+            image: 'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png',
             maxOccupancy: 'Até 3 pessoas',
             area: '60 m²',
             view: 'Vista para o jardim',
             description: '60 m² | Wi-Fi gratuito | Banheiro privativo | 1 cama de casal'
         },
         'Suíte Orquídea Premium': {
-            image: 'https://images.unsplash.com/photo-1590490360182-c33d57733427?w=600&h=400&fit=crop',
+            image: 'images/suite-2/suite-2-1.png',
             maxOccupancy: 'Até 2 pessoas',
             area: '30 m²',
             view: 'Vista para a piscina',
             description: '30 m² | Wi-Fi gratuito | Banheiro privativo | 1 cama de solteiro + 1 cama de casal'
         },
         'Suíte Imperial Master': {
-            image: 'https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=600&h=400&fit=crop',
+            image: 'images/suite-3/suite-3-1.png',
             maxOccupancy: 'Até 6 pessoas',
             area: '25 m²',
             view: 'Vista para o mar',
             description: '25 m² | Wi-Fi gratuito | Banheiro privativo | 1 cama de solteiro + 1 cama de casal'
         },
         'Suíte Deluxe com Cama Queen-size': {
-            image: 'https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=600&h=400&fit=crop',
+            image: 'images/suite-deluxe/suite-deluxe-1.png',
             maxOccupancy: 'Até 2 pessoas',
             area: '30 m²',
             view: 'Vista para o jardim',
             description: '30 m² | Ar-condicionado | Wi-Fi | TV tela plana | 1 cama de casal grande'
         },
         'Suíte Executiva': {
-            image: 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=600&h=400&fit=crop',
+            image: 'images/quarto-duplo/quarto-duplo-1.png',
             maxOccupancy: 'Até 2 pessoas',
             area: '25 m²',
             view: 'Vista para a piscina',
             description: '25 m² | Wi-Fi | Banheiro privativo | 1 cama de casal'
         },
         'Suíte Família': {
-            image: 'https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=400&fit=crop',
+            image: 'images/suite-deluxe-familia/suite-deluxe-familia-1.png',
             maxOccupancy: 'Até 4 pessoas',
             area: '30 m²',
             view: 'Vista para o mar',
             description: '30 m² | Ar-condicionado | Wi-Fi | TV tela plana | 1 cama de casal grande'
         },
         'Suíte Romântica': {
-            image: 'https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=600&h=400&fit=crop',
+            image: 'images/suite-romantica/suite-romantica-1.png',
             maxOccupancy: 'Até 2 pessoas',
             area: '25 m²',
             view: 'Vista para o jardim',

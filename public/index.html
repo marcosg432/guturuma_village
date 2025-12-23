@@ -566,26 +566,39 @@
             
             .banner-mobile {
                 display: block;
+                overflow: visible;
             }
             
             .banner-mobile .scroll-expand-hero {
-                min-height: 60vh !important;
+                min-height: 100vh !important;
             }
             
             .banner-mobile .scroll-expand-container {
-                min-height: 60vh !important;
+                min-height: 100vh !important;
             }
             
             .banner-mobile .scroll-expand-bg {
-                height: 60vh !important;
+                height: 100vh !important;
             }
             
             .banner-mobile .scroll-expand-bg img {
-                height: 60vh !important;
+                height: 100vh !important;
             }
             
             .banner-mobile .container > div {
-                height: 60vh !important;
+                height: auto !important;
+                min-height: 100vh !important;
+            }
+
+            /* Garantir que o card azul do banner mobile apareça inteiro */
+            .banner-mobile .scroll-expand-media {
+                width: min(320px, 90vw) !important;
+                height: auto !important;
+                max-height: none !important;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                overflow: visible !important;
             }
         }
         
@@ -815,7 +828,7 @@
             <div class="suites-premium-grid">
                 <div class="suite-premium-card" data-suite="harmonia">
                     <div class="suite-premium-image">
-                        <img src="images/WhatsApp Image 2025-12-18 at 13.50.03.jpeg" alt="Quarto Deluxe com Cama Queen-size" class="suite-image-clickable" style="cursor: pointer;">
+                        <img src="images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png" alt="Quarto Deluxe com Cama Queen-size" class="suite-image-clickable" style="cursor: pointer;">
                     </div>
                     <div class="suite-premium-content">
                         <h3>Quarto Deluxe com Cama Queen-size</h3>
@@ -825,7 +838,7 @@
                 </div>
                 <div class="suite-premium-card" data-suite="orquidea">
                     <div class="suite-premium-image">
-                        <img src="images/suite-2-img-1.jpeg" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
+                        <img src="images/suite-2/suite-2-1.png" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
                     </div>
                     <div class="suite-premium-content">
                         <h3>Suíte</h3>
@@ -835,7 +848,7 @@
                 </div>
                 <div class="suite-premium-card" data-suite="imperial">
                     <div class="suite-premium-image">
-                        <img src="images/WhatsApp Image 2025-12-18 at 13.50.06.jpeg" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
+                        <img src="images/suite-3/suite-3-1.png" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
                     </div>
                     <div class="suite-premium-content">
                         <h3>Suíte</h3>
@@ -857,7 +870,7 @@
             <div class="suites-premium-grid">
                 <div class="suite-premium-card" data-suite="harmonia">
                     <div class="suite-premium-image">
-                        <img src="images/WhatsApp Image 2025-12-18 at 13.50.03.jpeg" alt="Quarto Deluxe com Cama Queen-size" class="suite-image-clickable" style="cursor: pointer;">
+                        <img src="images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png" alt="Quarto Deluxe com Cama Queen-size" class="suite-image-clickable" style="cursor: pointer;">
                     </div>
                     <div class="suite-premium-content">
                         <h3>Quarto Deluxe com Cama Queen-size</h3>
@@ -867,7 +880,7 @@
                 </div>
                 <div class="suite-premium-card" data-suite="orquidea">
                     <div class="suite-premium-image">
-                        <img src="images/suite-2-img-1.jpeg" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
+                        <img src="images/suite-2/suite-2-1.png" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
                     </div>
                     <div class="suite-premium-content">
                         <h3>Suíte</h3>
@@ -877,7 +890,7 @@
                 </div>
                 <div class="suite-premium-card" data-suite="imperial">
                     <div class="suite-premium-image">
-                        <img src="images/WhatsApp Image 2025-12-18 at 13.50.06.jpeg" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
+                        <img src="images/suite-3/suite-3-1.png" alt="Suíte" class="suite-image-clickable" style="cursor: pointer;">
                     </div>
                     <div class="suite-premium-content">
                         <h3>Suíte</h3>
@@ -1048,27 +1061,21 @@
         // Imagens de cada suíte
         const suiteImages = {
             harmonia: [
-                'images/WhatsApp Image 2025-12-18 at 13.50.03.jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.05 (1).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.05 (2).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.05 (3).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.05 (4).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.05 (5).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.05.jpeg'
+                'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png',
+                'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-2.png',
+                'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-3.png'
             ],
             orquidea: [
-                'images/suite-2-img-1.jpeg',
-                'images/suite-2-img-2.jpeg',
-                'images/suite-2-img-3.jpeg',
-                'images/suite-2-img-4.jpeg'
+                'images/suite-2/suite-2-1.png',
+                'images/suite-2/suite-2-2.png',
+                'images/suite-2/suite-2-3.png',
+                'images/suite-2/suite-2-4.png'
             ],
             imperial: [
-                'images/WhatsApp Image 2025-12-18 at 13.50.06.jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.06 (1).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.06 (2).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.06 (3).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.06 (4).jpeg',
-                'images/WhatsApp Image 2025-12-18 at 13.50.06 (5).jpeg'
+                'images/suite-3/suite-3-1.png',
+                'images/suite-3/suite-3-2.png',
+                'images/suite-3/suite-3-3.png',
+                'images/suite-3/suite-3-4.png'
             ]
         };
 

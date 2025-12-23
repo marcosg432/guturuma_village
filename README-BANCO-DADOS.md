@@ -127,3 +127,8 @@ cp database/brisa_imperial.db backups/backup_manual.db
 du -h database/brisa_imperial.db
 ```
 
+
+
+
+
+

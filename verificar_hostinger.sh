@@ -63,3 +63,8 @@ echo "4. Ver logs em tempo real:"
 echo "   pm2 logs gururuma-village"
 echo ""
 
+
+
+
+
+
