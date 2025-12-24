@@ -732,51 +732,58 @@ function updateResumo() {
         'Quarto Deluxe com Cama Queen-size': {
             image: 'images/quarto-deluxe-cama-queen/quarto-deluxe-cama-queen-1.png',
             maxOccupancy: 'Até 3 pessoas',
-            area: '60 m²',
+            area: '35 m²',
             view: 'Vista para o jardim',
-            description: '60 m² | Wi-Fi gratuito | Banheiro privativo | 1 cama de casal'
+            description: 'Conforto e elegância em um ambiente acolhedor, perfeita para sua estadia. Ideal para casais ou pequenas famílias.'
+        },
+        'Quarto Deluxe Premium Vista': {
+            image: 'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-1.png',
+            maxOccupancy: 'Até 3 pessoas',
+            area: '45 m²',
+            view: 'Vista privilegiada',
+            description: 'Vista privilegiada da região com todas as comodidades para uma estadia inesquecível.'
         },
         'Suíte Orquídea Premium': {
             image: 'images/suite-2/suite-2-1.png',
-            maxOccupancy: 'Até 2 pessoas',
-            area: '30 m²',
-            view: 'Vista para a piscina',
-            description: '30 m² | Wi-Fi gratuito | Banheiro privativo | 1 cama de solteiro + 1 cama de casal'
+            maxOccupancy: 'Até 6 pessoas',
+            area: '45 m²',
+            view: 'Vista para o condomínio',
+            description: 'Luxo e funcionalidade combinados, com vista privilegiada e comodidades exclusivas. Perfeita para famílias.'
         },
         'Suíte Imperial Master': {
             image: 'images/suite-3/suite-3-1.png',
-            maxOccupancy: 'Até 6 pessoas',
-            area: '25 m²',
-            view: 'Vista para o mar',
-            description: '25 m² | Wi-Fi gratuito | Banheiro privativo | 1 cama de solteiro + 1 cama de casal'
+            maxOccupancy: 'Até 9 pessoas',
+            area: '80 m²',
+            view: 'Vista panorâmica',
+            description: 'O ápice do luxo, com todas as comodidades de um ambiente exclusivo e completo. Experiência única e inesquecível.'
         },
         'Suíte Deluxe com Cama Queen-size': {
             image: 'images/suite-deluxe/suite-deluxe-1.png',
-            maxOccupancy: 'Até 2 pessoas',
-            area: '30 m²',
+            maxOccupancy: 'Até 3 pessoas',
+            area: '48 m²',
             view: 'Vista para o jardim',
-            description: '30 m² | Ar-condicionado | Wi-Fi | TV tela plana | 1 cama de casal grande'
+            description: 'Elegância e sofisticação em um ambiente espaçoso com acabamentos de primeira linha.'
         },
         'Suíte Executiva': {
             image: 'images/quarto-duplo/quarto-duplo-1.png',
-            maxOccupancy: 'Até 2 pessoas',
-            area: '25 m²',
-            view: 'Vista para a piscina',
-            description: '25 m² | Wi-Fi | Banheiro privativo | 1 cama de casal'
+            maxOccupancy: 'Até 3 pessoas',
+            area: '42 m²',
+            view: 'Vista para o condomínio',
+            description: 'Perfeita para viagens de negócios, com espaço de trabalho e todas as comodidades necessárias.'
         },
         'Suíte Família': {
             image: 'images/suite-deluxe-familia/suite-deluxe-familia-1.png',
-            maxOccupancy: 'Até 4 pessoas',
-            area: '30 m²',
-            view: 'Vista para o mar',
-            description: '30 m² | Ar-condicionado | Wi-Fi | TV tela plana | 1 cama de casal grande'
+            maxOccupancy: 'Até 6 pessoas',
+            area: '65 m²',
+            view: 'Vista para a área externa',
+            description: 'Espaço amplo e confortável ideal para famílias, com múltiplos ambientes e comodidades especiais.'
         },
         'Suíte Romântica': {
             image: 'images/suite-romantica/suite-romantica-1.png',
-            maxOccupancy: 'Até 2 pessoas',
-            area: '25 m²',
+            maxOccupancy: 'Até 3 pessoas',
+            area: '40 m²',
             view: 'Vista para o jardim',
-            description: '25 m² | Wi-Fi | Banheiro privativo | 1 cama de casal'
+            description: 'Ambiente especial para casais, com decoração elegante e atmosfera acolhedora para momentos únicos.'
         }
     };
 
@@ -789,7 +796,7 @@ function updateResumo() {
     if (document.getElementById('suite-img-summary')) {
         document.getElementById('suite-img-summary').src = suite.image;
         document.getElementById('suite-name-summary').textContent = reservaData.categoria;
-        document.getElementById('suite-category-summary').textContent = 'village Residences';
+        document.getElementById('suite-category-summary').textContent = 'Village Residences';
         document.getElementById('checkin-summary').textContent = formatDate(reservaData.check_in);
         document.getElementById('checkout-summary').textContent = formatDate(reservaData.check_out);
         document.getElementById('nights-summary').textContent = `${noites} ${noites === 1 ? 'noite' : 'noites'}`;

@@ -114,7 +114,7 @@ const suites = [
         capacidadeAdultos: 4,
         capacidadeCriancas: 2,
         area: '45 m²',
-        vista: 'Vista para a piscina',
+        vista: 'Vista para o condomínio',
         descricao: 'Luxo e funcionalidade combinados, com vista privilegiada e comodidades exclusivas. Perfeita para famílias.',
         comodidades: ['Wi-Fi', 'TV 55"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
@@ -131,8 +131,8 @@ const suites = [
         capacidadeAdultos: 6,
         capacidadeCriancas: 3,
         area: '80 m²',
-        vista: 'Vista para o mar',
-        descricao: 'O ápice do luxo, com vista panorâmica e todas as comodidades de um resort de primeira linha. Experiência única e inesquecível.',
+        vista: 'Vista panorâmica',
+        descricao: 'O ápice do luxo, com todos os diferenciais de um ambiente exclusivo e completo. Experiência única e inesquecível.',
         comodidades: ['Wi-Fi', 'TV 65"', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Hidromassagem', 'Minibar'],
         imagens: [
             'images/suite-3/suite-3-1.png',
@@ -148,8 +148,8 @@ const suites = [
         capacidadeAdultos: 2,
         capacidadeCriancas: 1,
         area: '45 m²',
-        vista: 'Vista para o mar',
-        descricao: 'Vista privilegiada para o mar com todas as comodidades para uma estadia inesquecível.',
+        vista: 'Vista privilegiada',
+        descricao: 'Vista privilegiada da região com todas as comodidades para uma estadia inesquecível.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda'],
         imagens: [
             'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-1.png',
@@ -182,7 +182,7 @@ const suites = [
         capacidadeAdultos: 2,
         capacidadeCriancas: 1,
         area: '42 m²',
-        vista: 'Vista para a piscina',
+        vista: 'Vista para o condomínio',
         descricao: 'Perfeita para viagens de negócios, com espaço de trabalho e todas as comodidades necessárias.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Mesa de trabalho'],
         imagens: [
@@ -199,7 +199,7 @@ const suites = [
         capacidadeAdultos: 4,
         capacidadeCriancas: 2,
         area: '65 m²',
-        vista: 'Vista para o mar',
+        vista: 'Vista para a área externa',
         descricao: 'Espaço amplo e confortável ideal para famílias, com múltiplos ambientes e comodidades especiais.',
         comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Frigobar', 'Banheiro privativo', 'Varanda', 'Cama extra'],
         imagens: [

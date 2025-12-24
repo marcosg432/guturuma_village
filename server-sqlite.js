@@ -283,11 +283,11 @@ function insertDefaultData() {
       { categoria: 'Suíte Harmonia', numero: 101, capacidade: 2, vista: 'Jardim', preco_base: 250 },
       { categoria: 'Suíte Harmonia', numero: 102, capacidade: 2, vista: 'Jardim', preco_base: 250 },
       { categoria: 'Suíte Harmonia', numero: 103, capacidade: 2, vista: 'Jardim', preco_base: 250 },
-      { categoria: 'Suíte Orquídea Premium', numero: 201, capacidade: 2, vista: 'Mar', preco_base: 350 },
-      { categoria: 'Suíte Orquídea Premium', numero: 202, capacidade: 2, vista: 'Mar', preco_base: 350 },
-      { categoria: 'Suíte Orquídea Premium', numero: 203, capacidade: 2, vista: 'Mar', preco_base: 350 },
-      { categoria: 'Suíte Imperial Master', numero: 301, capacidade: 4, vista: 'Mar', preco_base: 500 },
-      { categoria: 'Suíte Imperial Master', numero: 302, capacidade: 4, vista: 'Mar', preco_base: 500 }
+      { categoria: 'Suíte Orquídea Premium', numero: 201, capacidade: 2, vista: 'Piscina', preco_base: 350 },
+      { categoria: 'Suíte Orquídea Premium', numero: 202, capacidade: 2, vista: 'Piscina', preco_base: 350 },
+      { categoria: 'Suíte Orquídea Premium', numero: 203, capacidade: 2, vista: 'Piscina', preco_base: 350 },
+      { categoria: 'Suíte Imperial Master', numero: 301, capacidade: 4, vista: 'Panorâmica', preco_base: 500 },
+      { categoria: 'Suíte Imperial Master', numero: 302, capacidade: 4, vista: 'Panorâmica', preco_base: 500 }
     ];
 
     const insertQuarto = db.prepare(`
