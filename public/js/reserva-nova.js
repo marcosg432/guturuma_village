@@ -60,14 +60,14 @@ const suites = [
     },
     {
         id: 'casa-3',
-        nome: 'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros',
+        nome: 'Casa Ampla e Confortável – 3 Quartos e 3 Banheiros',
         preco: 250,
         capacidadeAdultos: 10,
         capacidadeCriancas: 5,
         area: '100 m²',
         vista: 'Condomínio',
-        descricao: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
-        comodidades: ['100 m²', '3 quartos', '5 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Recepção 24h'],
+        descricao: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 3 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
+        comodidades: ['100 m²', '3 quartos', '3 banheiros', 'Ar-condicionado', 'Cozinha completa', 'Sala de estar', 'Wi-Fi gratuito', 'TV', 'Estacionamento gratuito', 'Recepção 24h'],
         imagens: [
             'images/casa-ampla-confortavel/casa-ampla-confortavel-1.png',
             'images/casa-ampla-confortavel/casa-ampla-confortavel-2.png',
@@ -172,6 +172,73 @@ const suites = [
             'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-2.png',
             'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-3.png',
             'images/quarto-deluxe-premium-vista/quarto-deluxe-premium-vista-4.png'
+        ]
+    },
+    {
+        id: 'deluxe',
+        nome: 'Suíte Deluxe com Cama Queen-size',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '30 m²',
+        vista: 'Vista para o jardim',
+        descricao: 'Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo. Área da Casa: 30 m². 1 cama de casal grande. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Banheiro privativo'],
+        imagens: [
+            'images/suite-deluxe/suite-deluxe-1.png',
+            'images/suite-deluxe/suite-deluxe-2.png',
+            'images/suite-deluxe/suite-deluxe-3.png',
+            'images/suite-deluxe/suite-deluxe-4.png'
+        ]
+    },
+    {
+        id: 'executiva',
+        nome: 'Quarto Duplo',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '25 m²',
+        vista: 'Vista para o condomínio',
+        descricao: '25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Banheiro privativo'],
+        imagens: [
+            'images/quarto-duplo/quarto-duplo-1.png',
+            'images/quarto-duplo/quarto-duplo-2.png',
+            'images/quarto-duplo/quarto-duplo-3.png',
+            'images/quarto-duplo/quarto-duplo-4.png'
+        ]
+    },
+    {
+        id: 'familia',
+        nome: 'Suíte Deluxe com Cama Queen-size',
+        preco: 150,
+        capacidadeAdultos: 4,
+        capacidadeCriancas: 2,
+        area: '30 m²',
+        vista: 'Vista para a área externa',
+        descricao: 'Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo. Área da Casa: 30 m². 1 cama de casal grande. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Banheiro privativo'],
+        imagens: [
+            'images/suite-deluxe-familia/suite-deluxe-familia-1.png',
+            'images/suite-deluxe-familia/suite-deluxe-familia-2.png',
+            'images/suite-deluxe-familia/suite-deluxe-familia-3.png',
+            'images/suite-deluxe-familia/suite-deluxe-familia-4.png'
+        ]
+    },
+    {
+        id: 'romantica',
+        nome: 'Suíte de 1 Quarto',
+        preco: 150,
+        capacidadeAdultos: 2,
+        capacidadeCriancas: 1,
+        area: '25 m²',
+        vista: 'Vista para o jardim',
+        descricao: '25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade oferece 1 cama.',
+        comodidades: ['Wi-Fi', 'TV', 'Ar-condicionado', 'Banheiro privativo'],
+        imagens: [
+            'images/suite-romantica/suite-romantica-1.png',
+            'images/suite-romantica/suite-romantica-2.png',
+            'images/suite-romantica/suite-romantica-3.png'
         ]
     },
 ];
@@ -784,22 +851,6 @@ function criarCardSuite(suite) {
                     </span>
                     <span>${suite.area}</span>
                 </div>
-                <div class="suite-info-item">
-                    <span>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 2V6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M12 18V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.93 4.93L7.76 7.76" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16.24 16.24L19.07 19.07" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M2 12H6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M18 12H22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.93 19.07L7.76 16.24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M16.24 7.76L19.07 4.93" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </span>
-                    <span>${suite.vista}</span>
-                </div>
             </div>
             <p class="suite-descricao">${suite.descricao}</p>
             <div class="suite-comodidades">
@@ -915,10 +966,16 @@ function criarCardSuite(suite) {
     return card;
 }
 
+// Velocidade padrão do carrossel (em milissegundos) - TODOS os carrosséis usam esta velocidade
+const CAROUSEL_SPEED = 3000; // 3 segundos
+
 // Função para inicializar carrossel na página de reservas
 function initCarrosselReserva(card, suite) {
     const carouselWrapper = card.querySelector('.suite-carousel-wrapper');
-    if (!carouselWrapper) return;
+    if (!carouselWrapper) {
+        console.warn('Carrossel não encontrado para suite:', suite.id);
+        return;
+    }
     
     const carouselTrack = carouselWrapper.querySelector('.suite-carousel-track');
     const btnPrev = carouselWrapper.querySelector('.suite-carousel-btn.prev');
@@ -926,45 +983,77 @@ function initCarrosselReserva(card, suite) {
     const slides = carouselTrack.querySelectorAll('.suite-carousel-slide');
     const totalSlides = slides.length;
     
-    if (totalSlides === 0) return;
+    if (totalSlides === 0) {
+        console.warn('Nenhum slide encontrado para suite:', suite.id);
+        return;
+    }
     
     let currentSlide = 0;
     let autoPlayInterval;
     
     function updateCarousel() {
-        carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        if (carouselTrack) {
+            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
     }
     
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % totalSlides;
-        updateCarousel();
+        if (totalSlides > 1) {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateCarousel();
+        }
     }
     
     function prevSlide() {
-        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-        updateCarousel();
+        if (totalSlides > 1) {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
     }
     
     function startAutoPlay() {
         stopAutoPlay();
+        // Só iniciar auto-play se houver mais de uma imagem
         if (totalSlides > 1) {
-            autoPlayInterval = setInterval(nextSlide, 5000);
+            autoPlayInterval = setInterval(nextSlide, CAROUSEL_SPEED);
         }
     }
     
     function stopAutoPlay() {
-        clearInterval(autoPlayInterval);
+        if (autoPlayInterval) {
+            clearInterval(autoPlayInterval);
+            autoPlayInterval = null;
+        }
     }
     
-    btnNext.addEventListener('click', (e) => {
-        e.stopPropagation();
-        nextSlide();
-    });
+    // Configurar botões de navegação
+    if (btnNext) {
+        btnNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextSlide();
+            stopAutoPlay();
+            // Retomar após 5 segundos
+            setTimeout(() => {
+                if (totalSlides > 1) {
+                    startAutoPlay();
+                }
+            }, 5000);
+        });
+    }
     
-    btnPrev.addEventListener('click', (e) => {
-        e.stopPropagation();
-        prevSlide();
-    });
+    if (btnPrev) {
+        btnPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevSlide();
+            stopAutoPlay();
+            // Retomar após 5 segundos
+            setTimeout(() => {
+                if (totalSlides > 1) {
+                    startAutoPlay();
+                }
+            }, 5000);
+        });
+    }
     
     // Abrir modal ao clicar na imagem
     slides.forEach((slide, index) => {
@@ -981,14 +1070,25 @@ function initCarrosselReserva(card, suite) {
         }
     });
     
-    carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
-    carouselWrapper.addEventListener('mouseleave', startAutoPlay);
+    // Pausar quando o mouse estiver sobre o carrossel
+    if (carouselWrapper) {
+        carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
+        carouselWrapper.addEventListener('mouseleave', () => {
+            if (totalSlides > 1) {
+                startAutoPlay();
+            }
+        });
+    }
     
+    // Iniciar auto-play se houver mais de uma imagem
     if (totalSlides > 1) {
         startAutoPlay();
     }
     
+    // Inicializar posição do carrossel
     updateCarousel();
+    
+    console.log(`✅ Carrossel inicializado para suite: ${suite.id} - ${totalSlides} imagem(ns)`);
 }
 
 // Função para inicializar modal de imagens

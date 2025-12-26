@@ -9,7 +9,39 @@
     <link rel="stylesheet" href="css/quartos.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Tipografia Premium - Luxo e Sofisticação */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Títulos principais e de seções - Fonte elegante */
+        h1, h2, h3, h4, h5, h6,
+        .section-title,
+        .suites-premium-title,
+        .why-choose-title,
+        .about-modern-text h2,
+        .cta-title {
+            font-family: 'Playfair Display', serif;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        /* Navbar */
+        .navbar h1,
+        .nav-brand h1 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+        
+        .nav-menu a {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
     <!-- Navbar -->
@@ -79,7 +111,7 @@
     <!-- Casas Exclusivas -->
     <section class="suites-grid-section">
         <div class="container">
-            <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #2c3e50; font-family: 'Playfair Display', serif;">Casas Exclusivas – Propriedade Secundária</h2>
+            <h2 class="section-title" style="text-align: center; font-size: 2.5rem; margin-bottom: 3rem; color: #2c3e50; font-family: 'Playfair Display', serif;">Casas Exclusivas</h2>
             <div class="suites-grid">
                 <!-- Casa 1 -->
                 <div class="suite-card">
@@ -163,14 +195,14 @@
                         </div>
                     </div>
                     <div class="suite-card-content">
-                        <h2 class="suite-card-title">Casa Ampla e Confortável – 3 Quartos e 5 Banheiros</h2>
+                        <h2 class="suite-card-title">Casa Ampla e Confortável – 3 Quartos e 3 Banheiros</h2>
                         <div class="suite-card-icons">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <p class="suite-card-description">Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.</p>
+                        <p class="suite-card-description">Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 3 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.</p>
                         <div class="suite-card-footer">
                             <div class="suite-price">
                                 <span class="price-value">R$ <span class="price-amount">250</span> /noite</span>
@@ -631,8 +663,140 @@
                 console.error('Erro ao carregar preços:', error);
             }
 
-            // Cards agora mostram apenas a imagem principal - carrossel desabilitado
-            // As miniaturas estão ocultas via CSS e não são mais necessárias no card
+            // Mapeamento de IDs do HTML para IDs do quartosImagens
+            const idMapping = {
+                'casa-1': 'casa-1',
+                'casa-2': 'casa-2',
+                'casa-3': 'casa-3',
+                'casa-4': 'casa-4',
+                'suite-1': 'harmonia',
+                'suite-2': 'orquidea',
+                'suite-3': 'imperial',
+                'suite-4': 'premium-vista',
+                'suite-5': 'deluxe',
+                'suite-6': 'executiva',
+                'suite-7': 'familia',
+                'suite-8': 'romantica'
+            };
+            
+            // Velocidade padrão do carrossel (em milissegundos) - TODOS os carrosséis usam esta velocidade
+            const CAROUSEL_SPEED = 3000; // 3 segundos
+            
+            // Sistema de carrossel automático para imagens principais dos cards
+            const cardCarousels = {};
+            
+            function initCardCarousel(htmlId, quartoId) {
+                if (!quartosImagens || !quartosImagens[quartoId] || !quartosImagens[quartoId].todas) {
+                    console.warn(`Carrossel não inicializado: quartoId "${quartoId}" não encontrado em quartosImagens`);
+                    return;
+                }
+                
+                const todasImagens = quartosImagens[quartoId].todas;
+                if (todasImagens.length === 0) {
+                    console.warn(`Carrossel não inicializado: nenhuma imagem para "${quartoId}"`);
+                    return;
+                }
+                
+                const imgPrincipal = document.getElementById(`img-principal-${htmlId}`);
+                if (!imgPrincipal) {
+                    console.warn(`Carrossel não inicializado: elemento img-principal-${htmlId} não encontrado`);
+                    return;
+                }
+                
+                const card = imgPrincipal.closest('.suite-card');
+                if (!card) {
+                    console.warn(`Carrossel não inicializado: card não encontrado para "${htmlId}"`);
+                    return;
+                }
+                
+                let currentIndex = 0;
+                let isPaused = false;
+                let carouselInterval = null;
+                
+                function updateImage() {
+                    if (imgPrincipal && todasImagens[currentIndex]) {
+                        // Adicionar fade out
+                        imgPrincipal.style.opacity = '0';
+                        imgPrincipal.style.transition = 'opacity 0.3s ease';
+                        setTimeout(() => {
+                            imgPrincipal.src = todasImagens[currentIndex];
+                            // Fade in
+                            setTimeout(() => {
+                                imgPrincipal.style.opacity = '1';
+                            }, 50);
+                        }, 300);
+                    }
+                }
+                
+                function nextImage() {
+                    if (!isPaused && todasImagens.length > 1) {
+                        currentIndex = (currentIndex + 1) % todasImagens.length;
+                        updateImage();
+                    }
+                }
+                
+                function startCarousel() {
+                    if (carouselInterval) {
+                        clearInterval(carouselInterval);
+                    }
+                    // Só iniciar auto-play se houver mais de uma imagem
+                    if (todasImagens.length > 1) {
+                        carouselInterval = setInterval(nextImage, CAROUSEL_SPEED);
+                    }
+                }
+                
+                function stopCarousel() {
+                    if (carouselInterval) {
+                        clearInterval(carouselInterval);
+                        carouselInterval = null;
+                    }
+                }
+                
+                // Pausar quando o mouse estiver sobre o card
+                card.addEventListener('mouseenter', () => {
+                    isPaused = true;
+                    stopCarousel();
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    isPaused = false;
+                    startCarousel();
+                });
+                
+                // Iniciar carrossel
+                startCarousel();
+                
+                // Salvar referência para poder parar depois se necessário
+                cardCarousels[htmlId] = {
+                    stop: stopCarousel,
+                    start: startCarousel,
+                    next: nextImage
+                };
+                
+                console.log(`✅ Carrossel inicializado para: ${htmlId} (${quartoId}) - ${todasImagens.length} imagens`);
+            }
+            
+            // Inicializar carrossel para TODOS os cards
+            // Primeiro, tentar pelos IDs do HTML diretamente
+            Object.keys(idMapping).forEach(htmlId => {
+                const quartoId = idMapping[htmlId];
+                initCardCarousel(htmlId, quartoId);
+            });
+            
+            // Também inicializar pelos IDs diretos do quartosImagens (caso algum não esteja mapeado)
+            if (typeof quartosImagens !== 'undefined') {
+                Object.keys(quartosImagens).forEach(quartoId => {
+                    // Verificar se já foi inicializado pelo mapeamento
+                    const alreadyInitialized = Object.values(idMapping).includes(quartoId);
+                    if (!alreadyInitialized) {
+                        // Tentar encontrar o elemento HTML correspondente
+                        const imgPrincipal = document.getElementById(`img-principal-${quartoId}`);
+                        if (imgPrincipal) {
+                            initCardCarousel(quartoId, quartoId);
+                        }
+                    }
+                });
+            }
 
             // Sistema de modal para abrir imagens
             const modal = document.getElementById('imageModal');
@@ -666,7 +830,10 @@
             document.querySelectorAll('.suite-imagem-principal').forEach(img => {
                 img.style.cursor = 'pointer';
                 img.addEventListener('click', function() {
-                    const quartoId = this.id.replace('img-principal-', '');
+                    const htmlId = this.id.replace('img-principal-', '');
+                    // Usar o mapeamento para encontrar o quartoId correto
+                    const quartoId = idMapping[htmlId] || htmlId;
+                    
                     if (typeof quartosImagens !== 'undefined' && quartosImagens[quartoId]) {
                         // Criar elementos de imagem a partir dos caminhos
                         const todasImagens = quartosImagens[quartoId].todas.map(src => {

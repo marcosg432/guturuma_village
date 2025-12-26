@@ -102,11 +102,14 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
+        // Velocidade padrão do carrossel (em milissegundos) - TODOS os carrosséis usam esta velocidade
+        const CAROUSEL_SPEED = 3000; // 3 segundos
+        
         // Auto-play carrossel
         let autoPlayInterval = setInterval(() => {
             currentResortSlide = (currentResortSlide + 1) % resortSlides.length;
             updateResortCarousel();
-        }, 5000);
+        }, CAROUSEL_SPEED);
 
         // Hover para pausar auto-play
         const carouselWrapper = document.querySelector('.resort-carousel-wrapper');
@@ -118,7 +121,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 autoPlayInterval = setInterval(() => {
                     currentResortSlide = (currentResortSlide + 1) % resortSlides.length;
                     updateResortCarousel();
-                }, 5000);
+                }, CAROUSEL_SPEED);
             });
         }
     }

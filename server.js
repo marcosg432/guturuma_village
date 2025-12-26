@@ -37,6 +37,10 @@ const {
   logUnauthorizedAccess 
 } = require('./middleware/logger');
 
+// Channel Manager
+const ChannelManager = require('./channel-manager');
+let channelManager;
+
 const app = express();
 const PORT = process.env.PORT || 5000;
 const JWT_SECRET = process.env.JWT_SECRET || 'brisa_imperial_secret_key_2024_secure'; // ⚠️ USAR VARIÁVEL DE AMBIENTE EM PRODUÇÃO
@@ -461,11 +465,158 @@ function createTables() {
 
   // Tabela historico_2fa removida - sistema 2FA desativado
 
+  // ==========================================
+  // TABELAS PARA CHANNEL MANAGER
+  // ==========================================
+  
+  // Tabela de propriedades (hotéis/pousadas)
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS propriedades (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL,
+      codigo_externo TEXT UNIQUE,
+      ativo INTEGER DEFAULT 1,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  // Tabela de canais (Booking.com, Airbnb, etc.)
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS canais (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      nome TEXT NOT NULL UNIQUE,
+      tipo TEXT NOT NULL,
+      api_key TEXT,
+      api_secret TEXT,
+      webhook_url TEXT,
+      ativo INTEGER DEFAULT 1,
+      configuracao TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    )
+  `);
+
+  // Tabela de mapeamento de quartos com canais externos
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS room_channel_mapping (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      quarto_id INTEGER NOT NULL,
+      canal_id INTEGER NOT NULL,
+      room_code_externo TEXT NOT NULL,
+      sync_ativo INTEGER DEFAULT 1,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (quarto_id) REFERENCES quartos(id) ON DELETE CASCADE,
+      FOREIGN KEY (canal_id) REFERENCES canais(id) ON DELETE CASCADE,
+      UNIQUE(quarto_id, canal_id)
+    )
+  `);
+
+  // Tabela de disponibilidade por data
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS disponibilidade (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      quarto_id INTEGER NOT NULL,
+      data DATE NOT NULL,
+      disponivel INTEGER DEFAULT 1,
+      bloqueado INTEGER DEFAULT 0,
+      motivo_bloqueio TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (quarto_id) REFERENCES quartos(id) ON DELETE CASCADE,
+      UNIQUE(quarto_id, data)
+    )
+  `);
+
+  // Tabela de tarifas por data
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS tarifas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      quarto_id INTEGER NOT NULL,
+      data DATE NOT NULL,
+      preco REAL NOT NULL,
+      preco_minimo REAL,
+      preco_maximo REAL,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (quarto_id) REFERENCES quartos(id) ON DELETE CASCADE,
+      UNIQUE(quarto_id, data)
+    )
+  `);
+
+  // Tabela de reservas externas (vindas de canais)
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS reservas_externas (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      codigo_externo TEXT UNIQUE NOT NULL,
+      canal_id INTEGER NOT NULL,
+      quarto_id INTEGER,
+      categoria TEXT NOT NULL,
+      nome_completo TEXT NOT NULL,
+      email TEXT NOT NULL,
+      telefone TEXT,
+      check_in DATE NOT NULL,
+      check_out DATE NOT NULL,
+      num_hospedes INTEGER NOT NULL,
+      adultos INTEGER,
+      criancas INTEGER,
+      valor_total REAL NOT NULL,
+      status TEXT NOT NULL DEFAULT 'Confirmado',
+      dados_originais TEXT,
+      sync_status TEXT DEFAULT 'Pendente',
+      sync_at DATETIME,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (canal_id) REFERENCES canais(id) ON DELETE CASCADE,
+      FOREIGN KEY (quarto_id) REFERENCES quartos(id) ON DELETE SET NULL
+    )
+  `);
+
+  // Tabela de logs de sincronização
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS sync_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      canal_id INTEGER,
+      tipo_operacao TEXT NOT NULL,
+      direcao TEXT NOT NULL,
+      status TEXT NOT NULL,
+      dados_enviados TEXT,
+      dados_recebidos TEXT,
+      erro TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY (canal_id) REFERENCES canais(id) ON DELETE SET NULL
+    )
+  `);
+
+  // Atualizar tabela quartos para incluir propriedade_id
+  try {
+    db.exec(`ALTER TABLE quartos ADD COLUMN propriedade_id INTEGER`);
+    db.exec(`ALTER TABLE quartos ADD COLUMN codigo_externo TEXT`);
+  } catch (e) {
+    // Colunas já existem, ignorar erro
+  }
+
+  // Atualizar tabela reservas para incluir origem da reserva
+  try {
+    db.exec(`ALTER TABLE reservas ADD COLUMN origem TEXT DEFAULT 'Sistema'`);
+    db.exec(`ALTER TABLE reservas ADD COLUMN codigo_externo TEXT`);
+    db.exec(`ALTER TABLE reservas ADD COLUMN canal_id INTEGER`);
+  } catch (e) {
+    // Colunas já existem, ignorar erro
+  }
+
   // Criar índices para melhor performance
   db.exec(`CREATE INDEX IF NOT EXISTS idx_reservas_check_in ON reservas(check_in)`);
   db.exec(`CREATE INDEX IF NOT EXISTS idx_reservas_check_out ON reservas(check_out)`);
   db.exec(`CREATE INDEX IF NOT EXISTS idx_reservas_status ON reservas(status)`);
   db.exec(`CREATE INDEX IF NOT EXISTS idx_historico_reserva ON historico_check(reserva_id)`);
+  db.exec(`CREATE INDEX IF NOT EXISTS idx_disponibilidade_quarto_data ON disponibilidade(quarto_id, data)`);
+  db.exec(`CREATE INDEX IF NOT EXISTS idx_tarifas_quarto_data ON tarifas(quarto_id, data)`);
+  db.exec(`CREATE INDEX IF NOT EXISTS idx_reservas_externas_canal ON reservas_externas(canal_id)`);
+  db.exec(`CREATE INDEX IF NOT EXISTS idx_reservas_externas_check_in ON reservas_externas(check_in)`);
+  db.exec(`CREATE INDEX IF NOT EXISTS idx_reservas_externas_check_out ON reservas_externas(check_out)`);
+  db.exec(`CREATE INDEX IF NOT EXISTS idx_sync_logs_canal ON sync_logs(canal_id)`);
   // Índices de historico_2fa removidos - sistema 2FA desativado
 }
 
@@ -547,7 +698,7 @@ function insertDefaultData() {
 
   // Garantir que temos apenas 1 quarto por categoria (remover duplicatas)
   try {
-    const categorias = ['Casa 1', 'Casa 2', 'Casa 3', 'Casa 4', 'Quarto Deluxe com Cama Queen-size', 'Suíte Orquídea Premium', 'Suíte Imperial Master', 'Suíte Deluxe com Cama Queen-size', 'Suíte Executiva', 'Suíte Família', 'Suíte Romântica'];
+    const categorias = ['Casa 1', 'Casa 2', 'Casa 3', 'Casa 4', 'Quarto Deluxe com Cama Queen-size', 'Suíte Orquídea Premium', 'Suíte Imperial Master', 'Suíte Deluxe com Cama Queen-size', 'Quarto Duplo', 'Suíte de 1 Quarto'];
     for (const categoria of categorias) {
       const quartosCategoria = queryAll('SELECT * FROM quartos WHERE categoria = ?', [categoria]);
       if (quartosCategoria && quartosCategoria.length > 1) {
@@ -567,16 +718,16 @@ function insertDefaultData() {
   const quartosNovos = [
     { categoria: 'Casa Sobrado 2 – Conforto e Espaço com 3 Quartos', numero: 1, capacidade: 8, vista: 'Condomínio', preco_base: 250 },
     { categoria: 'Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias', numero: 2, capacidade: 8, vista: 'Condomínio', preco_base: 250 },
-    { categoria: 'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros', numero: 3, capacidade: 10, vista: 'Condomínio', preco_base: 250 },
+    { categoria: 'Casa Ampla e Confortável – 3 Quartos e 3 Banheiros', numero: 3, capacidade: 10, vista: 'Condomínio', preco_base: 250 },
     { categoria: 'Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos', numero: 4, capacidade: 8, vista: 'Condomínio', preco_base: 250 },
     { categoria: 'Quarto Deluxe com Cama Queen-size', numero: 101, capacidade: 2, vista: 'Jardim', preco_base: 150 },
     { categoria: 'Suíte Orquídea Premium', numero: 201, capacidade: 4, vista: 'Piscina', preco_base: 150 },
     { categoria: 'Suíte Imperial Master', numero: 301, capacidade: 6, vista: 'Mar', preco_base: 150 },
     { categoria: 'Quarto Deluxe com Cama Queen-size', numero: 401, capacidade: 2, vista: 'Mar', preco_base: 150 },
     { categoria: 'Suíte Deluxe com Cama Queen-size', numero: 501, capacidade: 2, vista: 'Jardim', preco_base: 150 },
-    { categoria: 'Suíte Executiva', numero: 601, capacidade: 2, vista: 'Piscina', preco_base: 150 },
-    { categoria: 'Suíte Família', numero: 701, capacidade: 4, vista: 'Mar', preco_base: 150 },
-    { categoria: 'Suíte Romântica', numero: 801, capacidade: 2, vista: 'Jardim', preco_base: 150 }
+    { categoria: 'Quarto Duplo', numero: 601, capacidade: 2, vista: 'Condomínio', preco_base: 150 },
+    { categoria: 'Suíte Deluxe com Cama Queen-size', numero: 701, capacidade: 4, vista: 'Área externa', preco_base: 150 },
+    { categoria: 'Suíte de 1 Quarto', numero: 801, capacidade: 2, vista: 'Jardim', preco_base: 150 }
   ];
 
   let quartosCriados = 0;
@@ -1198,7 +1349,7 @@ app.get('/api/quartos/info', async (req, res) => {
     }
 
     // Buscar um quarto de cada categoria (para obter os preços)
-    const categorias = ['Casa 1', 'Casa 2', 'Casa 3', 'Casa 4', 'Quarto Deluxe com Cama Queen-size', 'Suíte Orquídea Premium', 'Suíte Imperial Master', 'Suíte Deluxe com Cama Queen-size', 'Suíte Executiva', 'Suíte Família', 'Suíte Romântica'];
+    const categorias = ['Casa 1', 'Casa 2', 'Casa 3', 'Casa 4', 'Quarto Deluxe com Cama Queen-size', 'Suíte Orquídea Premium', 'Suíte Imperial Master', 'Suíte Deluxe com Cama Queen-size', 'Quarto Duplo', 'Suíte de 1 Quarto'];
     
     const quartosInfo = [];
     
@@ -3316,6 +3467,9 @@ app.use((req, res) => {
 
 // Inicializar servidor
 initDatabase().then(() => {
+  // Inicializar Channel Manager
+  channelManager = new ChannelManager(db, queryOne, queryAll, execute, saveDatabase);
+  console.log('✅ Channel Manager inicializado');
   // Carregar configuração SMTP após banco estar pronto
   transporter = createTransporter();
   if (transporter) {
@@ -3347,10 +3501,248 @@ initDatabase().then(() => {
     console.error('⚠️ Erro ao configurar backup automático:', error.message);
   }
 
+  // ==========================================
+  // ENDPOINTS API - CHANNEL MANAGER
+  // ==========================================
+
+  /**
+   * GET /api/channel-manager/availability/:quartoId
+   * Retorna disponibilidade e preços de um quarto para um período
+   * Usado pelo Channel Manager para buscar disponibilidade
+   */
+  app.get('/api/channel-manager/availability/:quartoId', apiLimiter, async (req, res) => {
+    try {
+      const { quartoId } = req.params;
+      const { check_in, check_out } = req.query;
+
+      if (!check_in || !check_out) {
+        return res.status(400).json({ 
+          error: 'Parâmetros check_in e check_out são obrigatórios' 
+        });
+      }
+
+      const disponibilidade = channelManager.obterDisponibilidadePeriodo(
+        parseInt(quartoId),
+        check_in,
+        check_out
+      );
+
+      res.json({
+        success: true,
+        quarto_id: parseInt(quartoId),
+        periodo: { check_in, check_out },
+        disponibilidade
+      });
+    } catch (error) {
+      console.error('Erro ao buscar disponibilidade:', error);
+      res.status(500).json({ error: 'Erro ao buscar disponibilidade' });
+    }
+  });
+
+  /**
+   * POST /api/channel-manager/reservation
+   * Recebe reserva de um canal externo (Booking.com, Airbnb, etc.)
+   * Previne overbooking automaticamente
+   */
+  app.post('/api/channel-manager/reservation', apiLimiter, async (req, res) => {
+    try {
+      const {
+        codigo_externo,
+        canal_id,
+        quarto_id,
+        categoria,
+        nome_completo,
+        email,
+        telefone,
+        check_in,
+        check_out,
+        num_hospedes,
+        adultos,
+        criancas,
+        valor_total,
+        status,
+        dados_originais
+      } = req.body;
+
+      // Validações obrigatórias
+      if (!codigo_externo || !canal_id || !quarto_id || !check_in || !check_out) {
+        return res.status(400).json({
+          success: false,
+          error: 'Campos obrigatórios: codigo_externo, canal_id, quarto_id, check_in, check_out'
+        });
+      }
+
+      const resultado = channelManager.processarReservaExterna({
+        codigo_externo,
+        canal_id: parseInt(canal_id),
+        quarto_id: parseInt(quarto_id),
+        categoria: categoria || 'Não especificado',
+        nome_completo,
+        email,
+        telefone,
+        check_in,
+        check_out,
+        num_hospedes: parseInt(num_hospedes) || 1,
+        adultos: parseInt(adultos) || parseInt(num_hospedes) || 1,
+        criancas: parseInt(criancas) || 0,
+        valor_total: parseFloat(valor_total) || 0,
+        status: status || 'Confirmado',
+        dados_originais
+      });
+
+      if (resultado.success) {
+        res.status(201).json(resultado);
+      } else {
+        res.status(409).json(resultado); // 409 Conflict para overbooking
+      }
+    } catch (error) {
+      console.error('Erro ao processar reserva externa:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Erro ao processar reserva externa',
+        message: error.message
+      });
+    }
+  });
+
+  /**
+   * POST /api/channel-manager/cancel
+   * Processa cancelamento de reserva externa
+   */
+  app.post('/api/channel-manager/cancel', apiLimiter, async (req, res) => {
+    try {
+      const { codigo_externo, canal_id } = req.body;
+
+      if (!codigo_externo || !canal_id) {
+        return res.status(400).json({
+          success: false,
+          error: 'Campos obrigatórios: codigo_externo, canal_id'
+        });
+      }
+
+      const resultado = channelManager.processarCancelamentoExterno(
+        codigo_externo,
+        parseInt(canal_id)
+      );
+
+      if (resultado.success) {
+        res.json(resultado);
+      } else {
+        res.status(404).json(resultado);
+      }
+    } catch (error) {
+      console.error('Erro ao processar cancelamento:', error);
+      res.status(500).json({
+        success: false,
+        error: 'Erro ao processar cancelamento',
+        message: error.message
+      });
+    }
+  });
+
+  /**
+   * GET /api/channel-manager/rooms
+   * Lista todos os quartos disponíveis para sincronização
+   */
+  app.get('/api/channel-manager/rooms', apiLimiter, async (req, res) => {
+    try {
+      const quartos = queryAll(`
+        SELECT 
+          q.id,
+          q.categoria,
+          q.numero,
+          q.capacidade,
+          q.preco_base,
+          q.disponivel,
+          q.propriedade_id,
+          q.codigo_externo
+        FROM quartos q
+        WHERE q.disponivel = 1
+        ORDER BY q.categoria, q.numero
+      `);
+
+      res.json({
+        success: true,
+        quartos
+      });
+    } catch (error) {
+      console.error('Erro ao listar quartos:', error);
+      res.status(500).json({ error: 'Erro ao listar quartos' });
+    }
+  });
+
+  /**
+   * GET /api/channel-manager/channels
+   * Lista todos os canais configurados
+   */
+  app.get('/api/channel-manager/channels', apiLimiter, async (req, res) => {
+    try {
+      const canais = channelManager.getCanais();
+      res.json({
+        success: true,
+        canais
+      });
+    } catch (error) {
+      console.error('Erro ao listar canais:', error);
+      res.status(500).json({ error: 'Erro ao listar canais' });
+    }
+  });
+
+  /**
+   * GET /api/channel-manager/mappings
+   * Lista mapeamentos de quartos com canais
+   */
+  app.get('/api/channel-manager/mappings', apiLimiter, async (req, res) => {
+    try {
+      const { quarto_id, canal_id } = req.query;
+      const mappings = channelManager.getRoomMappings(
+        quarto_id ? parseInt(quarto_id) : null,
+        canal_id ? parseInt(canal_id) : null
+      );
+      res.json({
+        success: true,
+        mappings
+      });
+    } catch (error) {
+      console.error('Erro ao listar mapeamentos:', error);
+      res.status(500).json({ error: 'Erro ao listar mapeamentos' });
+    }
+  });
+
+  /**
+   * GET /api/channel-manager/sync-logs
+   * Lista logs de sincronização
+   */
+  app.get('/api/channel-manager/sync-logs', adminApiLimiter, authenticateToken, requireAdmin, async (req, res) => {
+    try {
+      const { canal_id, limit = 100 } = req.query;
+      let query = 'SELECT * FROM sync_logs WHERE 1=1';
+      const params = [];
+
+      if (canal_id) {
+        query += ' AND canal_id = ?';
+        params.push(parseInt(canal_id));
+      }
+
+      query += ' ORDER BY created_at DESC LIMIT ?';
+      params.push(parseInt(limit));
+
+      const logs = queryAll(query, params);
+      res.json({
+        success: true,
+        logs
+      });
+    } catch (error) {
+      console.error('Erro ao listar logs:', error);
+      res.status(500).json({ error: 'Erro ao listar logs' });
+    }
+  });
+
   // Iniciar servidor
   app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Servidor rodando em http://0.0.0.0:${PORT}`);
     console.log(`💾 Banco de dados: SQLite (embutido)`);
+    console.log(`🔗 Channel Manager API disponível em /api/channel-manager/*`);
   });
 }).catch(error => {
   console.error('❌ Erro ao inicializar servidor:', error);

@@ -19,15 +19,14 @@ let reservaData = {
 let precos = {
     'Casa Sobrado 2 – Conforto e Espaço com 3 Quartos': 250,
     'Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias': 250,
-    'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros': 250,
+    'Casa Ampla e Confortável – 3 Quartos e 3 Banheiros': 250,
     'Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos': 250,
     'Quarto Deluxe com Cama Queen-size': 350,
     'Suíte Orquídea Premium': 550,
     'Suíte Imperial Master': 950,
     'Suíte Deluxe com Cama Queen-size': 480,
-    'Suíte Executiva': 420,
-    'Suíte Família': 600,
-    'Suíte Romântica': 500
+    'Quarto Duplo': 150,
+    'Suíte de 1 Quarto': 150
 };
 
 // Carregar preços atualizados do servidor
@@ -715,12 +714,12 @@ function updateResumo() {
             view: 'Condomínio',
             description: 'Casa ampla com 100 m², ar-condicionado, cozinha equipada e 3 quartos separados. Conta com sala de estar, 4 banheiros e todos os utensílios básicos para uma estadia tranquila.'
         },
-        'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros': {
+        'Casa Ampla e Confortável – 3 Quartos e 3 Banheiros': {
             image: 'images/casa-ampla-confortavel/casa-ampla-confortavel-1.png',
             maxOccupancy: 'Até 10 pessoas',
             area: '100 m²',
             view: 'Condomínio',
-            description: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto.'
+            description: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 3 banheiros. Acomoda famílias grandes com conforto.'
         },
         'Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos': {
             image: 'images/casa-sobrado-6/casa-sobrado-6-1.png',
@@ -764,26 +763,19 @@ function updateResumo() {
             view: 'Vista para o jardim',
             description: 'Elegância e sofisticação em um ambiente espaçoso com acabamentos de primeira linha.'
         },
-        'Suíte Executiva': {
+        'Quarto Duplo': {
             image: 'images/quarto-duplo/quarto-duplo-1.png',
-            maxOccupancy: 'Até 3 pessoas',
-            area: '42 m²',
+            maxOccupancy: 'Até 2 pessoas',
+            area: '25 m²',
             view: 'Vista para o condomínio',
-            description: 'Perfeita para viagens de negócios, com espaço de trabalho e todas as comodidades necessárias.'
+            description: '25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.'
         },
-        'Suíte Família': {
-            image: 'images/suite-deluxe-familia/suite-deluxe-familia-1.png',
-            maxOccupancy: 'Até 6 pessoas',
-            area: '65 m²',
-            view: 'Vista para a área externa',
-            description: 'Espaço amplo e confortável ideal para famílias, com múltiplos ambientes e comodidades especiais.'
-        },
-        'Suíte Romântica': {
+        'Suíte de 1 Quarto': {
             image: 'images/suite-romantica/suite-romantica-1.png',
-            maxOccupancy: 'Até 3 pessoas',
-            area: '40 m²',
+            maxOccupancy: 'Até 2 pessoas',
+            area: '25 m²',
             view: 'Vista para o jardim',
-            description: 'Ambiente especial para casais, com decoração elegante e atmosfera acolhedora para momentos únicos.'
+            description: '25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade oferece 1 cama.'
         }
     };
 

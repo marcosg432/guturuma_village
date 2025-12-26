@@ -74,16 +74,16 @@ function addSafeTouchListeners(element, handler) {
 const suites = {
     'casa-1': { nome: 'Casa Sobrado 2 – Conforto e Espaço com 3 Quartos', preco: 250 },
     'casa-2': { nome: 'Casa Sobrado 4 – Ampla, Completa e Ideal para Famílias', preco: 250 },
-    'casa-3': { nome: 'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros', preco: 250 },
+    'casa-3': { nome: 'Casa Ampla e Confortável – 3 Quartos e 3 Banheiros', preco: 250 },
     'casa-4': { nome: 'Casa Sobrado 6 – Ampla, Equipada e com 3 Quartos', preco: 250 },
     harmonia: { nome: 'Quarto Deluxe com Cama Queen-size', preco: 150 },
     orquidea: { nome: 'Suíte Orquídea Premium', preco: 150 },
     imperial: { nome: 'Suíte Imperial Master', preco: 150 },
     'premium-vista': { nome: 'Quarto Deluxe com Cama Queen-size', preco: 150 },
     deluxe: { nome: 'Suíte Deluxe com Cama Queen-size', preco: 150 },
-    executiva: { nome: 'Suíte Executiva', preco: 150 },
-    familia: { nome: 'Suíte Família', preco: 150 },
-    romantica: { nome: 'Suíte Romântica', preco: 150 }
+    executiva: { nome: 'Quarto Duplo', preco: 150 },
+    familia: { nome: 'Suíte Deluxe com Cama Queen-size', preco: 150 },
+    romantica: { nome: 'Suíte de 1 Quarto', preco: 150 }
 };
 
 // Inicialização

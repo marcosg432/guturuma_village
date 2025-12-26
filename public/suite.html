@@ -273,7 +273,7 @@
                 rules: 'Check-in: 14h | Check-out: 12h | Estacionamento gratuito | Wi-Fi gratuito'
             },
             'casa-3': {
-                title: 'Casa Ampla e Confortável – 3 Quartos e 5 Banheiros',
+                title: 'Casa Ampla e Confortável – 3 Quartos e 3 Banheiros',
                 badge: 'Casa',
                 mainImage: 'images/casa-ampla-confortavel/casa-ampla-confortavel-1.png',
                 images: [
@@ -291,7 +291,7 @@
                 amenities: [
                     '100 m²',
                     '3 quartos',
-                    '5 banheiros',
+                    '3 banheiros',
                     'Ar-condicionado',
                     'Cozinha completa',
                     'Sala de estar',
@@ -300,7 +300,7 @@
                     'Estacionamento gratuito',
                     'Recepção 24h'
                 ],
-                description: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 5 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
+                description: 'Casa completa com 100 m², ar-condicionado, 3 quartos separados, sala de estar, cozinha completa com geladeira e fogão, além de 3 banheiros. Acomoda famílias grandes com conforto. Roupas de cama e toalhas fornecidas.',
                 environment: 'Casa ampla e completa, perfeita para famílias grandes que buscam conforto e espaço.',
                 capacity: 'Até 10 pessoas',
                 size: '100 m²',
@@ -455,7 +455,7 @@
                     'Cama dobrável',
                     'Fumantes: não é permitido fumar'
                 ],
-                description: 'Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo | Área da Casa: 30 m² | 1 cama de casal grande | Camas confortáveis, nota 7.4 – Com base em 10 avaliações | Não há berços ou camas extras disponíveis. | Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.',
+                description: 'Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo. Área da Casa: 30 m². 1 cama de casal grande. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.',
                 environment: 'Ambiente espaçoso com decoração refinada, acabamentos de primeira linha e iluminação cuidadosamente planejada.',
                 capacity: 'Até 2 pessoas',
                 size: '30 m²',
@@ -478,7 +478,7 @@
                     'Cama dobrável',
                     'Fumantes: não é permitido fumar'
                 ],
-                description: '25 m² • WiFi Gratuito • Banheiro privativo | Tamanho 25 m² | 1 cama de casal | Camas confortáveis, nota 7.4 – Com base em 10 avaliações | Não há berços ou camas extras disponíveis. | Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.',
+                description: '25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade possui 1 cama.',
                 environment: 'Ambiente funcional com área de trabalho dedicada, design moderno e todas as comodidades necessárias para viagens de negócios.',
                 capacity: 'Até 2 pessoas',
                 size: '25 m²',
@@ -503,7 +503,7 @@
                     'Cama dobrável',
                     'Fumantes: não é permitido fumar'
                 ],
-                description: 'Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo | Área da Casa: 30 m² | 1 cama de casal grande | Camas confortáveis, nota 7.4 – Com base em 10 avaliações | Não há berços ou camas extras disponíveis. | Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.',
+                description: 'Casa de temporada • 30 m² • Ar-condicionado • WiFi gratuito • TV • Banheiro privativo. Área da Casa: 30 m². 1 cama de casal grande. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta casa de temporada possui banheiro privativo e ar-condicionado. Oferece TV de tela plana. A unidade possui 1 cama.',
                 environment: 'Ambiente amplo e acolhedor com múltiplos ambientes, espaço generoso e comodidades especiais para famílias.',
                 capacity: 'Até 4 pessoas',
                 size: '30 m²',
@@ -525,7 +525,7 @@
                     'Cama dobrável',
                     'Fumantes: não é permitido fumar'
                 ],
-                description: '25 m² • WiFi Gratuito • Banheiro privativo | Tamanho 25 m² | 1 cama de casal | Camas confortáveis, nota 7.4 – Com base em 10 avaliações | Não há berços ou camas extras disponíveis. | Esta suíte possui banheiro privativo e área para refeições. A unidade oferece 1 cama.',
+                description: '25 m² • WiFi Gratuito • Banheiro privativo. Tamanho 25 m². 1 cama de casal. Camas confortáveis, nota 7.4 – Com base em 10 avaliações. Esta suíte possui banheiro privativo e área para refeições. A unidade oferece 1 cama.',
                 environment: 'Ambiente especial com decoração elegante e romântica, atmosfera acolhedora e detalhes especiais para momentos únicos.',
                 capacity: 'Até 2 pessoas',
                 size: '25 m²',
@@ -556,6 +556,9 @@
             imagensParaExibir = suite.images;
         }
 
+        // Velocidade padrão do carrossel (em milissegundos) - TODOS os carrosséis usam esta velocidade
+        const CAROUSEL_SPEED = 3000; // 3 segundos
+        
         let currentImage = 0;
         let carouselInterval = null;
         let isCarouselPaused = false;
@@ -573,7 +576,7 @@
                     if (!isCarouselPaused) {
                         nextImage();
                     }
-                }, 4000); // Muda a imagem a cada 4 segundos
+                }, CAROUSEL_SPEED);
             }
         }
         
@@ -600,8 +603,8 @@
                                 </div>
                             `).join('')}
                         </div>
-                        <button class="carousel-btn prev" onclick="prevImage()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">❮</button>
-                        <button class="carousel-btn next" onclick="nextImage()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">❯</button>
+                        <button class="carousel-btn prev" onclick="prevImage()" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 10; transition: opacity 0.3s ease;">❮</button>
+                        <button class="carousel-btn next" onclick="nextImage()" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.9); border: none; width: 50px; height: 50px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 10px rgba(0,0,0,0.2); z-index: 10; transition: opacity 0.3s ease;">❯</button>
                         <div class="carousel-indicators" id="carousel-indicators" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;"></div>
                     </div>
                 </div>
@@ -684,38 +687,70 @@
         }
 
         function nextImage() {
-            currentImage = (currentImage + 1) % imagensParaExibir.length;
-            updateCarousel();
-            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            if (imagensParaExibir.length > 1) {
+                currentImage = (currentImage + 1) % imagensParaExibir.length;
+                updateCarousel();
+                pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            }
         }
 
         function prevImage() {
-            currentImage = (currentImage - 1 + imagensParaExibir.length) % imagensParaExibir.length;
-            updateCarousel();
-            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            if (imagensParaExibir.length > 1) {
+                currentImage = (currentImage - 1 + imagensParaExibir.length) % imagensParaExibir.length;
+                updateCarousel();
+                pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            }
         }
 
         function updateCarousel() {
             const carousel = document.getElementById('suite-carousel');
-            if (carousel) {
+            if (carousel && imagensParaExibir.length > 0) {
                 carousel.style.transform = `translateX(-${currentImage * 100}%)`;
             }
             updateIndicators();
+            updateButtons();
         }
 
         function updateIndicators() {
             const indicators = document.getElementById('carousel-indicators');
             if (indicators) {
-                indicators.innerHTML = imagensParaExibir.map((_, idx) => 
-                    `<span class="carousel-indicator ${idx === currentImage ? 'active' : ''}" onclick="goToImage(${idx})" style="width: 12px; height: 12px; border-radius: 50%; background: ${idx === currentImage ? '#0F1F4B' : '#ccc'}; cursor: pointer; transition: background 0.3s ease;"></span>`
-                ).join('');
+                if (imagensParaExibir.length > 1) {
+                    indicators.innerHTML = imagensParaExibir.map((_, idx) => 
+                        `<span class="carousel-indicator ${idx === currentImage ? 'active' : ''}" onclick="goToImage(${idx})" style="width: 12px; height: 12px; border-radius: 50%; background: ${idx === currentImage ? '#0F1F4B' : '#ccc'}; cursor: pointer; transition: background 0.3s ease;"></span>`
+                    ).join('');
+                    indicators.style.display = 'flex';
+                } else {
+                    indicators.style.display = 'none';
+                }
+            }
+        }
+
+        function updateButtons() {
+            const btnPrev = document.querySelector('.carousel-btn.prev');
+            const btnNext = document.querySelector('.carousel-btn.next');
+            
+            if (btnPrev && btnNext) {
+                if (imagensParaExibir.length > 1) {
+                    btnPrev.style.display = 'flex';
+                    btnNext.style.display = 'flex';
+                    btnPrev.style.opacity = '1';
+                    btnNext.style.opacity = '1';
+                } else {
+                    // Manter botões visíveis mas desabilitados visualmente
+                    btnPrev.style.opacity = '0.3';
+                    btnNext.style.opacity = '0.3';
+                    btnPrev.style.cursor = 'not-allowed';
+                    btnNext.style.cursor = 'not-allowed';
+                }
             }
         }
 
         function goToImage(idx) {
-            currentImage = idx;
-            updateCarousel();
-            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            if (idx >= 0 && idx < imagensParaExibir.length) {
+                currentImage = idx;
+                updateCarousel();
+                pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            }
         }
 
         renderSuite();
