@@ -15,19 +15,32 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflowX = 'hidden';
             document.body.style.height = 'auto';
             document.body.style.position = 'relative';
+            document.body.style.touchAction = 'pan-y';
             
             document.documentElement.style.overflowY = 'auto';
             document.documentElement.style.overflowX = 'hidden';
             document.documentElement.style.height = 'auto';
+            document.documentElement.style.touchAction = 'pan-y';
             
-            // Garantir que a seção mobile não bloqueie scroll
+            // Garantir que a seção mobile não bloqueie scroll - REDUZIR ALTURA
             const mobileSection = document.getElementById('scroll-expand-section-mobile');
             if (mobileSection) {
                 mobileSection.style.overflowY = 'visible';
                 mobileSection.style.overflowX = 'hidden';
                 mobileSection.style.position = 'relative';
                 mobileSection.style.height = 'auto';
-                mobileSection.style.minHeight = '60vh';
+                mobileSection.style.minHeight = '40vh';
+                mobileSection.style.maxHeight = 'none';
+                mobileSection.style.touchAction = 'pan-y';
+            }
+            
+            // Garantir que o hero não bloqueie
+            const mobileHero = document.querySelector('.scroll-expand-hero');
+            if (mobileHero) {
+                mobileHero.style.overflowY = 'visible';
+                mobileHero.style.height = 'auto';
+                mobileHero.style.minHeight = '40vh';
+                mobileHero.style.touchAction = 'pan-y';
             }
             
             // Garantir que o container não bloqueie
@@ -35,18 +48,36 @@ document.addEventListener('DOMContentLoaded', function() {
             if (mobileContainer) {
                 mobileContainer.style.overflowY = 'visible';
                 mobileContainer.style.height = 'auto';
+                mobileContainer.style.minHeight = '40vh';
+                mobileContainer.style.touchAction = 'pan-y';
+            }
+            
+            // Garantir que o bg não bloqueie
+            const mobileBg = document.getElementById('scroll-expand-bg-mobile');
+            if (mobileBg) {
+                mobileBg.style.height = '40vh';
+                mobileBg.style.touchAction = 'pan-y';
             }
         };
         
         // Aplicar imediatamente
         forceScroll();
         
-        // Aplicar novamente após um pequeno delay para garantir
+        // Aplicar novamente após delays para garantir
+        setTimeout(forceScroll, 50);
         setTimeout(forceScroll, 100);
+        setTimeout(forceScroll, 300);
         setTimeout(forceScroll, 500);
         
         // Aplicar quando a página carregar completamente
         window.addEventListener('load', forceScroll);
+        
+        // Aplicar quando a página estiver totalmente carregada
+        if (document.readyState === 'complete') {
+            forceScroll();
+        } else {
+            window.addEventListener('load', forceScroll);
+        }
         
         // Sair completamente - não executar mais nada
         return;

@@ -1164,32 +1164,54 @@ section {
     padding: 0;
 }
 
-/* Mobile: Reduzir altura do banner */
+/* Mobile: Reduzir altura do banner para permitir scroll */
 @media (max-width: 768px) {
     .scroll-expand-section {
-        min-height: 60vh;
+        min-height: 50vh !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
     }
     
     .scroll-expand-container {
-        min-height: 60vh;
+        min-height: 50vh !important;
+        height: auto !important;
+        overflow: visible !important;
     }
     
     .scroll-expand-bg {
-        height: 60vh;
+        height: 50vh !important;
+    }
+    
+    .scroll-expand-hero {
+        min-height: 50vh !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 }
 
 @media (max-width: 480px) {
     .scroll-expand-section {
-        min-height: 50vh;
+        min-height: 40vh !important;
+        height: auto !important;
+        overflow: visible !important;
+        position: relative !important;
     }
     
     .scroll-expand-container {
-        min-height: 50vh;
+        min-height: 40vh !important;
+        height: auto !important;
+        overflow: visible !important;
     }
     
     .scroll-expand-bg {
-        height: 50vh;
+        height: 40vh !important;
+    }
+    
+    .scroll-expand-hero {
+        min-height: 40vh !important;
+        height: auto !important;
+        overflow: visible !important;
     }
 }
 
