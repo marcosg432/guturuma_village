@@ -5,6 +5,17 @@ document.addEventListener('DOMContentLoaded', function() {
     let mediaFullyExpanded = false;
     let touchStartY = 0;
     let isMobile = window.innerWidth < 768;
+    
+    // NO MOBILE: Desabilitar completamente este script para permitir scroll natural
+    if (isMobile) {
+        // Apenas garantir que o body permita scroll
+        document.body.style.overflowY = 'auto';
+        document.documentElement.style.overflowY = 'auto';
+        document.body.style.overflowX = 'hidden';
+        document.documentElement.style.overflowX = 'hidden';
+        // Sair completamente - não executar mais nada
+        return;
+    }
 
     // Detectar qual versão está visível (desktop ou mobile)
     function getActiveElements() {
