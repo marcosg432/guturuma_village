@@ -157,13 +157,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // No mobile: NUNCA bloquear scroll - sempre permitir scroll natural
         if (isMobile) {
-            // Apenas atualizar progresso visualmente se necessário, mas nunca bloquear scroll
-            if (deltaY < 0 && scrollProgress < 1) {
-                // Atualizar progresso visualmente enquanto permite scroll natural
-                scrollProgress = Math.min(1, scrollProgress + 0.1);
-                updateUI();
-            }
             // NUNCA fazer preventDefault no mobile - permitir scroll natural sempre
+            // Não atualizar progresso para não alterar visual
             return;
         }
 
@@ -230,15 +225,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle window scroll
     function handleScroll() {
-        // No mobile: NUNCA bloquear scroll - apenas atualizar visual
+        // No mobile: NUNCA bloquear scroll - apenas permitir scroll natural
         if (isMobile) {
-            // Se detectou qualquer movimento de scroll, marcar como expandido imediatamente
-            if (window.scrollY > 0 && !mediaFullyExpanded) {
-                mediaFullyExpanded = true;
-                scrollProgress = 1;
-                updateUI();
-            }
-            return; // NUNCA fazer window.scrollTo ou qualquer bloqueio no mobile
+            // NUNCA fazer window.scrollTo ou qualquer bloqueio no mobile
+            // Não alterar scrollProgress para manter visual original
+            return;
         }
         
         // DESKTOP: lógica original
@@ -266,16 +257,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Garantir que o body permita scroll vertical
         document.body.style.overflowY = 'auto';
         document.documentElement.style.overflowY = 'auto';
-        
-        // Marcar como expandido após um pequeno delay para garantir que scroll funcione desde o início
-        // Mas apenas se ainda não foi expandido
-        setTimeout(() => {
-            if (!mediaFullyExpanded) {
-                mediaFullyExpanded = true;
-                scrollProgress = 1;
-                updateUI();
-            }
-        }, 100);
     }
 
     // Add event listeners
