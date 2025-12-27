@@ -6,13 +6,48 @@ document.addEventListener('DOMContentLoaded', function() {
     let touchStartY = 0;
     let isMobile = window.innerWidth < 768;
     
-    // NO MOBILE: Desabilitar completamente este script para permitir scroll natural
+    // NO MOBILE: Desabilitar completamente este script e FORÇAR scroll a funcionar
     if (isMobile) {
-        // Apenas garantir que o body permita scroll
-        document.body.style.overflowY = 'auto';
-        document.documentElement.style.overflowY = 'auto';
-        document.body.style.overflowX = 'hidden';
-        document.documentElement.style.overflowX = 'hidden';
+        // Forçar scroll a funcionar - aplicar estilos diretamente
+        const forceScroll = function() {
+            // Garantir que body e html permitam scroll
+            document.body.style.overflowY = 'auto';
+            document.body.style.overflowX = 'hidden';
+            document.body.style.height = 'auto';
+            document.body.style.position = 'relative';
+            
+            document.documentElement.style.overflowY = 'auto';
+            document.documentElement.style.overflowX = 'hidden';
+            document.documentElement.style.height = 'auto';
+            
+            // Garantir que a seção mobile não bloqueie scroll
+            const mobileSection = document.getElementById('scroll-expand-section-mobile');
+            if (mobileSection) {
+                mobileSection.style.overflowY = 'visible';
+                mobileSection.style.overflowX = 'hidden';
+                mobileSection.style.position = 'relative';
+                mobileSection.style.height = 'auto';
+                mobileSection.style.minHeight = '60vh';
+            }
+            
+            // Garantir que o container não bloqueie
+            const mobileContainer = document.querySelector('.scroll-expand-container');
+            if (mobileContainer) {
+                mobileContainer.style.overflowY = 'visible';
+                mobileContainer.style.height = 'auto';
+            }
+        };
+        
+        // Aplicar imediatamente
+        forceScroll();
+        
+        // Aplicar novamente após um pequeno delay para garantir
+        setTimeout(forceScroll, 100);
+        setTimeout(forceScroll, 500);
+        
+        // Aplicar quando a página carregar completamente
+        window.addEventListener('load', forceScroll);
+        
         // Sair completamente - não executar mais nada
         return;
     }
