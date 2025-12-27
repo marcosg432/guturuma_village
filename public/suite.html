@@ -688,17 +688,17 @@
 
         function nextImage() {
             if (imagensParaExibir.length > 1) {
-                currentImage = (currentImage + 1) % imagensParaExibir.length;
-                updateCarousel();
-                pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            currentImage = (currentImage + 1) % imagensParaExibir.length;
+            updateCarousel();
+            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
             }
         }
 
         function prevImage() {
             if (imagensParaExibir.length > 1) {
-                currentImage = (currentImage - 1 + imagensParaExibir.length) % imagensParaExibir.length;
-                updateCarousel();
-                pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            currentImage = (currentImage - 1 + imagensParaExibir.length) % imagensParaExibir.length;
+            updateCarousel();
+            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
             }
         }
 
@@ -715,9 +715,9 @@
             const indicators = document.getElementById('carousel-indicators');
             if (indicators) {
                 if (imagensParaExibir.length > 1) {
-                    indicators.innerHTML = imagensParaExibir.map((_, idx) => 
-                        `<span class="carousel-indicator ${idx === currentImage ? 'active' : ''}" onclick="goToImage(${idx})" style="width: 12px; height: 12px; border-radius: 50%; background: ${idx === currentImage ? '#0F1F4B' : '#ccc'}; cursor: pointer; transition: background 0.3s ease;"></span>`
-                    ).join('');
+                indicators.innerHTML = imagensParaExibir.map((_, idx) => 
+                    `<span class="carousel-indicator ${idx === currentImage ? 'active' : ''}" onclick="goToImage(${idx})" style="width: 12px; height: 12px; border-radius: 50%; background: ${idx === currentImage ? '#0F1F4B' : '#ccc'}; cursor: pointer; transition: background 0.3s ease;"></span>`
+                ).join('');
                     indicators.style.display = 'flex';
                 } else {
                     indicators.style.display = 'none';
@@ -747,9 +747,9 @@
 
         function goToImage(idx) {
             if (idx >= 0 && idx < imagensParaExibir.length) {
-                currentImage = idx;
-                updateCarousel();
-                pauseCarouselTemporarily(); // Pausar auto-play após interação manual
+            currentImage = idx;
+            updateCarousel();
+            pauseCarouselTemporarily(); // Pausar auto-play após interação manual
             }
         }
 

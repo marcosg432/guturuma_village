@@ -993,21 +993,21 @@ function initCarrosselReserva(card, suite) {
     
     function updateCarousel() {
         if (carouselTrack) {
-            carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        carouselTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
         }
     }
     
     function nextSlide() {
         if (totalSlides > 1) {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            updateCarousel();
+        currentSlide = (currentSlide + 1) % totalSlides;
+        updateCarousel();
         }
     }
     
     function prevSlide() {
         if (totalSlides > 1) {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            updateCarousel();
+        currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateCarousel();
         }
     }
     
@@ -1021,16 +1021,16 @@ function initCarrosselReserva(card, suite) {
     
     function stopAutoPlay() {
         if (autoPlayInterval) {
-            clearInterval(autoPlayInterval);
+        clearInterval(autoPlayInterval);
             autoPlayInterval = null;
         }
     }
     
     // Configurar botões de navegação
     if (btnNext) {
-        btnNext.addEventListener('click', (e) => {
-            e.stopPropagation();
-            nextSlide();
+    btnNext.addEventListener('click', (e) => {
+        e.stopPropagation();
+        nextSlide();
             stopAutoPlay();
             // Retomar após 5 segundos
             setTimeout(() => {
@@ -1042,9 +1042,9 @@ function initCarrosselReserva(card, suite) {
     }
     
     if (btnPrev) {
-        btnPrev.addEventListener('click', (e) => {
-            e.stopPropagation();
-            prevSlide();
+    btnPrev.addEventListener('click', (e) => {
+        e.stopPropagation();
+        prevSlide();
             stopAutoPlay();
             // Retomar após 5 segundos
             setTimeout(() => {
@@ -1052,7 +1052,7 @@ function initCarrosselReserva(card, suite) {
                     startAutoPlay();
                 }
             }, 5000);
-        });
+    });
     }
     
     // Abrir modal ao clicar na imagem
@@ -1072,7 +1072,7 @@ function initCarrosselReserva(card, suite) {
     
     // Pausar quando o mouse estiver sobre o carrossel
     if (carouselWrapper) {
-        carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
+    carouselWrapper.addEventListener('mouseenter', stopAutoPlay);
         carouselWrapper.addEventListener('mouseleave', () => {
             if (totalSlides > 1) {
                 startAutoPlay();
