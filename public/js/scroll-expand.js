@@ -92,8 +92,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Handle wheel scroll
+    // Handle wheel scroll (apenas desktop - mobile não usa wheel)
     function handleWheel(e) {
+        // No mobile: nunca interceptar wheel
+        if (isMobile) {
+            return;
+        }
+        
         elements = getActiveElements();
         const section = elements.section;
         if (!section) return;
@@ -225,20 +230,21 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle window scroll
     function handleScroll() {
-        // Se o banner já foi expandido, permitir scroll normal
-        if (mediaFullyExpanded) {
-            return;
-        }
-        
-        // No mobile: SEMPRE permitir scroll - nunca bloquear
+        // No mobile: NUNCA bloquear scroll - apenas atualizar visual
         if (isMobile) {
-            // Se detectou qualquer movimento de scroll, liberar imediatamente
-            if (window.scrollY > 0) {
+            // Se detectou qualquer movimento de scroll, marcar como expandido imediatamente
+            if (window.scrollY > 0 && !mediaFullyExpanded) {
                 mediaFullyExpanded = true;
                 scrollProgress = 1;
                 updateUI();
             }
-            return; // Nunca bloquear scroll no mobile
+            return; // NUNCA fazer window.scrollTo ou qualquer bloqueio no mobile
+        }
+        
+        // DESKTOP: lógica original
+        // Se o banner já foi expandido, permitir scroll normal
+        if (mediaFullyExpanded) {
+            return;
         }
         
         // Desktop: apenas bloquear scroll se ainda estiver na animação inicial e no topo
@@ -260,11 +266,33 @@ document.addEventListener('DOMContentLoaded', function() {
         // Garantir que o body permita scroll vertical
         document.body.style.overflowY = 'auto';
         document.documentElement.style.overflowY = 'auto';
+        
+        // Marcar como expandido após um pequeno delay para garantir que scroll funcione desde o início
+        // Mas apenas se ainda não foi expandido
+        setTimeout(() => {
+            if (!mediaFullyExpanded) {
+                mediaFullyExpanded = true;
+                scrollProgress = 1;
+                updateUI();
+            }
+        }, 100);
     }
 
     // Add event listeners
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('scroll', handleScroll);
+    // No mobile: NÃO adicionar listener de wheel (mobile não usa wheel)
+    // No desktop: adicionar wheel normalmente
+    if (!isMobile) {
+        window.addEventListener('wheel', handleWheel, { passive: false });
+    }
+    
+    // Scroll listener - sempre passivo no mobile para não bloquear
+    if (isMobile) {
+        window.addEventListener('scroll', handleScroll, { passive: true });
+    } else {
+        window.addEventListener('scroll', handleScroll);
+    }
+    
+    // Touch listeners
     // No mobile: usar listeners passivos para não bloquear scroll
     // No desktop: usar listeners não-passivos para interceptar scroll
     if (isMobile) {
