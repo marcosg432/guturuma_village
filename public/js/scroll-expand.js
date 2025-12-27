@@ -140,6 +140,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle touch start
     function handleTouchStart(e) {
+        // No mobile: não fazer nada, apenas permitir scroll natural
+        if (isMobile) {
+            return;
+        }
         touchStartY = e.touches[0].clientY;
     }
 
@@ -148,19 +152,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle touch move
     function handleTouchMove(e) {
+        // No mobile: NUNCA fazer nada - permitir scroll completamente natural
+        if (isMobile) {
+            return;
+        }
+        
         elements = getActiveElements();
         const section = elements.section;
         if (!touchStartY || !section) return;
 
         const touchY = e.touches[0].clientY;
         const deltaY = touchStartY - touchY;
-
-        // No mobile: NUNCA bloquear scroll - sempre permitir scroll natural
-        if (isMobile) {
-            // NUNCA fazer preventDefault no mobile - permitir scroll natural sempre
-            // Não atualizar progresso para não alterar visual
-            return;
-        }
 
         // DESKTOP: lógica original mantida
         // Se o banner já foi expandido, permitir scroll normal
@@ -204,15 +206,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Handle touch end
     function handleTouchEnd() {
+        // No mobile: não fazer nada, apenas permitir scroll natural
+        if (isMobile) {
+            return;
+        }
+        
         touchStartY = 0;
         // Se o progresso está alto, marcar como expandido para permitir scroll normal
         if (scrollProgress >= 0.5) {
-            mediaFullyExpanded = true;
-            scrollProgress = 1;
-            updateUI();
-        }
-        // No mobile: se houve tentativas de scroll, garantir que está liberado
-        if (isMobile && mobileScrollAttempts > 0) {
             mediaFullyExpanded = true;
             scrollProgress = 1;
             updateUI();
@@ -266,21 +267,17 @@ document.addEventListener('DOMContentLoaded', function() {
         window.addEventListener('wheel', handleWheel, { passive: false });
     }
     
-    // Scroll listener - sempre passivo no mobile para não bloquear
-    if (isMobile) {
-        window.addEventListener('scroll', handleScroll, { passive: true });
-    } else {
+    // Scroll listener
+    // No mobile: NÃO adicionar listener de scroll - deixar scroll completamente natural
+    // No desktop: adicionar listener normalmente
+    if (!isMobile) {
         window.addEventListener('scroll', handleScroll);
     }
     
     // Touch listeners
-    // No mobile: usar listeners passivos para não bloquear scroll
+    // No mobile: NÃO adicionar listeners de touch - deixar scroll completamente natural
     // No desktop: usar listeners não-passivos para interceptar scroll
-    if (isMobile) {
-        window.addEventListener('touchstart', handleTouchStart, { passive: true });
-        window.addEventListener('touchmove', handleTouchMove, { passive: true });
-        window.addEventListener('touchend', handleTouchEnd, { passive: true });
-    } else {
+    if (!isMobile) {
         window.addEventListener('touchstart', handleTouchStart, { passive: false });
         window.addEventListener('touchmove', handleTouchMove, { passive: false });
         window.addEventListener('touchend', handleTouchEnd);
