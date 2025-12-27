@@ -150,6 +150,19 @@ document.addEventListener('DOMContentLoaded', function() {
         const touchY = e.touches[0].clientY;
         const deltaY = touchStartY - touchY;
 
+        // No mobile: NUNCA bloquear scroll - sempre permitir scroll natural
+        if (isMobile) {
+            // Apenas atualizar progresso visualmente se necessário, mas nunca bloquear scroll
+            if (deltaY < 0 && scrollProgress < 1) {
+                // Atualizar progresso visualmente enquanto permite scroll natural
+                scrollProgress = Math.min(1, scrollProgress + 0.1);
+                updateUI();
+            }
+            // NUNCA fazer preventDefault no mobile - permitir scroll natural sempre
+            return;
+        }
+
+        // DESKTOP: lógica original mantida
         // Se o banner já foi expandido, permitir scroll normal
         if (mediaFullyExpanded) {
             // Se está tentando rolar para cima e está no topo, resetar
@@ -164,21 +177,6 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // No mobile: ser muito mais permissivo - liberar scroll rapidamente
-        if (isMobile) {
-            // Se está tentando rolar para baixo, liberar scroll imediatamente
-            if (deltaY < -5) {
-                mobileScrollAttempts++;
-                // Após 1 tentativa de rolar para baixo, liberar scroll automaticamente
-                if (mobileScrollAttempts >= 1) {
-                    mediaFullyExpanded = true;
-                    scrollProgress = 1;
-                    updateUI();
-                    return; // Permitir scroll normal - não fazer preventDefault
-                }
-            }
-        }
-
         // Se está tentando rolar para baixo (deltaY negativo) e o progresso já está alto, permitir scroll normal
         if (deltaY < 0 && scrollProgress > 0.5) {
             // Permitir scroll normal - não fazer preventDefault
@@ -188,27 +186,19 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Apenas interceptar scroll durante a animação inicial do banner (apenas no desktop ou se progresso muito baixo)
-        if (!mediaFullyExpanded && scrollProgress < 0.5 && !isMobile) {
+        // Apenas interceptar scroll durante a animação inicial do banner (apenas no desktop)
+        if (!mediaFullyExpanded && scrollProgress < 0.5) {
             e.preventDefault();
             const scrollFactor = deltaY < 0 ? 0.008 : 0.005;
             const scrollDelta = deltaY * scrollFactor;
             scrollProgress = Math.min(Math.max(scrollProgress + scrollDelta, 0), 1);
             updateUI();
             touchStartY = touchY;
-        } else if (!isMobile && scrollProgress >= 0.5) {
+        } else if (scrollProgress >= 0.5) {
             // Se chegou perto do final, permitir scroll normal
             mediaFullyExpanded = true;
             scrollProgress = 1;
             updateUI();
-        } else if (isMobile) {
-            // No mobile, sempre permitir scroll após primeira tentativa
-            if (mobileScrollAttempts > 0) {
-                mediaFullyExpanded = true;
-                scrollProgress = 1;
-                updateUI();
-                return; // Não fazer preventDefault
-            }
         }
     }
 
@@ -265,45 +255,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // No mobile, liberar scroll automaticamente após um tempo se o usuário não interagir
+    // No mobile: garantir que scroll funcione sempre
     if (isMobile) {
         // Garantir que o body permita scroll vertical
         document.body.style.overflowY = 'auto';
         document.documentElement.style.overflowY = 'auto';
-        
-        // Liberar scroll após 2 segundos se o usuário não interagir
-        setTimeout(() => {
-            if (!mediaFullyExpanded && scrollProgress < 0.7) {
-                mediaFullyExpanded = true;
-                scrollProgress = 1;
-                updateUI();
-            }
-        }, 2000);
-        
-        // Liberar scroll imediatamente se detectar qualquer movimento de scroll
-        let lastScrollY = window.scrollY;
-        const checkScroll = setInterval(() => {
-            if (window.scrollY !== lastScrollY && !mediaFullyExpanded) {
-                mediaFullyExpanded = true;
-                scrollProgress = 1;
-                updateUI();
-                clearInterval(checkScroll);
-            }
-            lastScrollY = window.scrollY;
-        }, 100);
-        
-        // Limpar intervalo após 5 segundos
-        setTimeout(() => {
-            clearInterval(checkScroll);
-        }, 5000);
     }
 
     // Add event listeners
     window.addEventListener('wheel', handleWheel, { passive: false });
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('touchstart', handleTouchStart, { passive: false });
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd);
+    // No mobile: usar listeners passivos para não bloquear scroll
+    // No desktop: usar listeners não-passivos para interceptar scroll
+    if (isMobile) {
+        window.addEventListener('touchstart', handleTouchStart, { passive: true });
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
+        window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    } else {
+        window.addEventListener('touchstart', handleTouchStart, { passive: false });
+        window.addEventListener('touchmove', handleTouchMove, { passive: false });
+        window.addEventListener('touchend', handleTouchEnd);
+    }
 
     // Initialize
     updateUI();
