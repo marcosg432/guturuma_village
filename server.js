@@ -42,7 +42,7 @@ const ChannelManager = require('./channel-manager');
 let channelManager;
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3005;
 const JWT_SECRET = process.env.JWT_SECRET || 'brisa_imperial_secret_key_2024_secure'; // ⚠️ USAR VARIÁVEL DE AMBIENTE EM PRODUÇÃO
 
 // Configuração SQLite - banco embutido

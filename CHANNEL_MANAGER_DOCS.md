@@ -295,3 +295,5 @@ Todos os eventos de sincronização são registrados na tabela `sync_logs`:
 
 
 
+
+

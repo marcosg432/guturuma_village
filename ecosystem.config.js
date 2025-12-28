@@ -12,11 +12,11 @@ module.exports = {
     merge_logs: true,
     env: {
       NODE_ENV: 'development',
-      PORT: 5000
+      PORT: 3005
     },
     env_production: {
       NODE_ENV: 'production',
-      PORT: 5000
+      PORT: 3005
     }
   }]
 };

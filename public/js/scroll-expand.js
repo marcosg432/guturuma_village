@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     let mediaFullyExpanded = false;
     let touchStartY = 0;
     let isMobile = window.innerWidth < 768;
-    
+
     // NO MOBILE: Desabilitar completamente este script e FORÇAR scroll a funcionar
     if (isMobile) {
         // Forçar scroll a funcionar - aplicar estilos diretamente
@@ -184,10 +184,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mediaFullyExpanded) {
             // Se está tentando rolar para cima e está no topo, resetar
             if (e.deltaY < 0 && window.scrollY <= 5) {
-                mediaFullyExpanded = false;
-                scrollProgress = 0;
-                e.preventDefault();
-                updateUI();
+            mediaFullyExpanded = false;
+            scrollProgress = 0;
+            e.preventDefault();
+            updateUI();
             }
             // Caso contrário, permitir scroll normal
             return;
@@ -246,10 +246,10 @@ document.addEventListener('DOMContentLoaded', function() {
         if (mediaFullyExpanded) {
             // Se está tentando rolar para cima e está no topo, resetar
             if (deltaY < -20 && window.scrollY <= 5) {
-                mediaFullyExpanded = false;
-                scrollProgress = 0;
+            mediaFullyExpanded = false;
+            scrollProgress = 0;
                 mobileScrollAttempts = 0;
-                e.preventDefault();
+            e.preventDefault();
                 updateUI();
             }
             // Caso contrário, permitir scroll normal (não fazer preventDefault)
@@ -341,23 +341,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // No mobile: NÃO adicionar listener de wheel (mobile não usa wheel)
     // No desktop: adicionar wheel normalmente
     if (!isMobile) {
-        window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('wheel', handleWheel, { passive: false });
     }
     
     // Scroll listener
     // No mobile: NÃO adicionar listener de scroll - deixar scroll completamente natural
     // No desktop: adicionar listener normalmente
     if (!isMobile) {
-        window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
     }
     
     // Touch listeners
     // No mobile: NÃO adicionar listeners de touch - deixar scroll completamente natural
     // No desktop: usar listeners não-passivos para interceptar scroll
     if (!isMobile) {
-        window.addEventListener('touchstart', handleTouchStart, { passive: false });
-        window.addEventListener('touchmove', handleTouchMove, { passive: false });
-        window.addEventListener('touchend', handleTouchEnd);
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
     }
 
     // Initialize
